@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEMQI — Meme Coin Intelligence</title>
+<title>MEMQI — All Meme Coins Intelligence</title>
 <style>
 :root{
   --bg:#080a0b; --panel:#111415; --panel2:#151819; --line:#262a2b;
@@ -12,22 +12,50 @@
 }
 *{box-sizing:border-box} html{scroll-behavior:smooth}
 body{margin:0;background:radial-gradient(circle at 50% -10%,#162017 0,#080a0b 34%);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif}
-.app{max-width:1180px;margin:auto;padding:15px 12px 40px}
+button,input{font:inherit}.app{max-width:1180px;margin:auto;padding:15px 12px 100px}
 .top{display:flex;align-items:center;gap:12px;padding:8px 0 15px}
-.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:22px}
-.logo{width:30px;height:30px;border:2px solid var(--green);border-radius:50%;background:var(--green)}
-.brand span{color:var(--green)}.spacer{flex:1}
-.market{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:20px}
-.market .cell{background:#111415;padding:15px}
-.label{color:#929897;font-size:11px;font-weight:700}.big{font-size:20px;font-weight:800;margin:6px 0 4px}.up{color:var(--green);font-weight:700;font-size:12px}
-.table{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#111415}
-.thead,.row{display:grid;grid-template-columns:25px 1.2fr 1fr 1fr 1fr;align-items:center;gap:8px;padding:12px 10px;font-size:13px}
-.thead{color:#858c8b;font-size:10px;font-weight:800;border-bottom:1px solid var(--line);text-transform:uppercase}
-.row{border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:22px;letter-spacing:-1px}
+.logo{width:32px;height:32px;border:2px solid #8cff9e;border-radius:50%;background:var(--green)}
+.brand span{color:var(--green)}.brand b{color:#fff}.spacer{flex:1}
+.iconbtn{border:0;background:transparent;color:#f5f5f5;font-size:22px;cursor:pointer;padding:6px}
+
+.search-box{display:none;margin-bottom:15px}
+.search-box.show{display:block}
+.search-box input{width:100%;padding:12px 15px;background:#151919;border:1px solid #2b302f;border-radius:12px;color:#fff;outline:none;font-size:14px}
+
+.market{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.market .cell{background:linear-gradient(135deg,#15191a,#0e1011);padding:16px}
+.label{color:#929897;font-size:10px;font-weight:700;letter-spacing:.5px}.big{font-size:20px;font-weight:850;margin:6px 0 4px}.up{color:var(--green);font-weight:750;font-size:12px}.down{color:var(--red);font-weight:750;font-size:12px}
+
+.tabs{display:flex;gap:8px;margin:15px 0;overflow-x:auto;padding-bottom:5px}
+.tab{border:1px solid var(--line);background:linear-gradient(#171a1b,#111314);color:#d9dcdb;border-radius:12px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:700;white-space:nowrap;font-size:12px}
+.tab.active{border-color:var(--green);color:var(--green);box-shadow:inset 0 0 0 1px rgba(53,230,92,.12)}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;padding-top:5px}.section-head h2{font-size:16px;margin:0}
+
+.table{margin-top:10px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#111415}
+.thead,.row{display:grid;grid-template-columns:30px 1.2fr 1fr 1fr 1fr 20px;align-items:center;gap:6px;padding:12px 10px}
+.thead{color:#858c8b;font-size:10px;font-weight:800;border-bottom:1px solid var(--line);text-transform:uppercase}.row{min-height:60px;border-bottom:1px solid var(--line);cursor:pointer}.row:last-child{border:0}.row:hover{background:#161a1b}
 .coin{display:flex;align-items:center;gap:8px}.coin img{width:28px;height:28px;border-radius:50%}
-.coin strong{display:block;font-size:13px}.coin small{color:#7f8786;font-size:10px}
-.up{color:var(--green);font-weight:700}.down{color:var(--red);font-weight:700}
-.score{border:1px solid var(--green);color:#c8ffd1;border-radius:6px;padding:3px 6px;font-weight:800;font-size:11px;text-align:center;width:fit-content}
+.coin strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.coin small{display:block;color:#7f8786;font-size:10px}
+.price{font-weight:700;font-size:12px}
+
+.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(13,15,16,.96);backdrop-filter:blur(14px);border-top:1px solid #292d2e;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 0;z-index:20}
+.nav{background:transparent;border:0;color:#888f8d;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;cursor:pointer}.nav .ni{font-size:20px}.nav.active{color:var(--green)}
+
+.toast{position:fixed;left:50%;bottom:75px;transform:translate(-50%,15px);opacity:0;background:#1a211c;border:1px solid #2c8e3e;color:#d8ffdf;padding:10px 16px;border-radius:10px;z-index:60;transition:.25s;pointer-events:none;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.coin-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:100;align-items:flex-end;justify-content:center}
+.coin-modal.show{display:flex}.modal-card{width:100%;max-height:90vh;overflow:auto;background:#101313;border:1px solid #303635;border-radius:24px 24px 0 0;padding:20px;box-shadow:0 -20px 80px rgba(0,0,0,.55)}
+.modal-head{display:flex;align-items:center;gap:12px}.modal-head img{width:45px;height:45px;border-radius:50%}.modal-title{flex:1}.modal-title h2{margin:0;font-size:20px}.modal-title small{color:#8d9593}.close{border:0;background:#202525;color:white;border-radius:10px;width:36px;height:36px;font-size:20px;cursor:pointer}
+.detail-price{font-size:28px;font-weight:900;margin:15px 0 2px}
+
+.chart{height:150px;background:linear-gradient(#121716,#0d1010);border:1px solid #292e2d;border-radius:14px;padding:10px;margin:15px 0 10px}
+.chart svg{width:100%;height:100%}.chart path{fill:none;stroke:var(--green);stroke-width:2.5}
+.chart.down path{stroke:var(--red)}
+.periods{display:flex;gap:6px;margin-bottom:15px}.periods button{border:1px solid #2b302f;background:#151919;color:#aeb5b3;border-radius:8px;padding:6px 12px;font-size:11px;cursor:pointer}.periods button.active{color:var(--green);border-color:var(--green)}
+
+.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0}.stat{background:#171b1c;border:1px solid #292e2d;border-radius:12px;padding:10px}.stat span{display:block;color:#858d8b;font-size:10px}.stat b{display:block;margin-top:4px;font-size:13px}.actions{display:flex;gap:8px;margin-top:15px}.actions button{flex:1;border:1px solid #2d3532;background:#171c1a;color:#e9eceb;border-radius:10px;padding:12px;font-weight:800;cursor:pointer;font-size:12px}.actions .primary{background:var(--green);color:#071008;border-color:var(--green)}
 </style>
 </head>
 <body>
@@ -35,76 +63,233 @@ body{margin:0;background:radial-gradient(circle at 50% -10%,#162017 0,#080a0b 34
   <header class="top">
     <div class="brand"><div class="logo"></div><span>MEM</span><b>QI</b></div>
     <div class="spacer"></div>
+    <button class="iconbtn" id="searchBtn">⌕</button>
+    <button class="iconbtn" id="bellBtn">♧</button>
   </header>
+
+  <div class="search-box" id="searchBox">
+    <input type="text" id="searchInput" placeholder="Search any meme coin (e.g. PEPE, DOGE)...">
+  </div>
 
   <section class="market">
     <div class="cell">
-      <div class="label">MEME MARKET CAP</div>
+      <div class="label">ALL MEME MARKET CAP</div>
       <div class="big" id="totalCap">Loading...</div>
-      <div class="up">Live Data</div>
+      <div class="up">Live Category API</div>
     </div>
     <div class="cell">
       <div class="label">24H VOLUME</div>
       <div class="big" id="totalVol">Loading...</div>
-      <div class="up">CoinGecko API</div>
+      <div class="up">CoinGecko</div>
     </div>
   </section>
 
+  <div class="tabs">
+    <button class="tab active" data-filter="all">♨ All Memes</button>
+    <button class="tab" data-filter="gainers">↗ Top Gainers</button>
+    <button class="tab" data-filter="losers">↘ Top Losers</button>
+  </div>
+
   <section>
+    <div class="section-head"><h2 id="sectionTitle">🔥 ALL MEME COINS</h2></div>
     <div class="table">
-      <div class="thead">
-        <div>#</div><div>Coin</div><div>Price</div><div>24H %</div><div>M. Cap</div>
-      </div>
+      <div class="thead"><div>#</div><div>Coin</div><div>Price</div><div>24H %</div><div>M. Cap</div><div></div></div>
       <div id="coinRows"></div>
     </div>
   </section>
 </div>
 
+<nav class="bottom">
+  <button class="nav active" data-page="Home"><span class="ni">⌂</span>Home</button>
+  <button class="nav" data-page="Explore"><span class="ni">◈</span>Explore</button>
+  <button class="nav" data-page="Watchlist"><span class="ni">☆</span>Watchlist</button>
+  <button class="nav" data-page="Alerts"><span class="ni">♧</span>Alerts</button>
+  <button class="nav" data-page="Portfolio"><span class="ni">◔</span>Portfolio</button>
+</nav>
+
+<div class="toast" id="toast">Message</div>
+
+<div class="coin-modal" id="coinModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <img id="modalImg" src="">
+      <div class="modal-title"><h2 id="modalName">Coin</h2><small id="modalSymbol">SYMBOL</small></div>
+      <button class="close" id="closeModal">×</button>
+    </div>
+    <div class="detail-price" id="modalPrice">$0.00</div>
+    <div id="modalChange" class="up">+0.00% (24H)</div>
+
+    <div class="chart" id="chartBox">
+      <svg viewBox="0 0 700 180" preserveAspectRatio="none">
+        <path id="chartPath" d="M0 145 L70 148 L140 130 L210 112 L280 93 L350 76 L420 64 L490 55 L560 39 L630 30 L700 18"></path>
+      </svg>
+    </div>
+    <div class="periods">
+      <button class="p-btn active">1H</button>
+      <button class="p-btn">24H</button>
+      <button class="p-btn">7D</button>
+      <button class="p-btn">1M</button>
+      <button class="p-btn">1Y</button>
+    </div>
+
+    <div class="detail-grid">
+      <div class="stat"><span>MARKET CAP</span><b id="modalCap">$0</b></div>
+      <div class="stat"><span>24H VOLUME</span><b id="modalVol">$0</b></div>
+      <div class="stat"><span>24H HIGH</span><b id="modalHigh">$0</b></div>
+      <div class="stat"><span>24H LOW</span><b id="modalLow">$0</b></div>
+    </div>
+    <div class="actions">
+      <button class="primary" id="watchBtn">☆ Add to Watchlist</button>
+      <button id="shareBtn">↗ Share</button>
+    </div>
+  </div>
+</div>
+
 <script>
-const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=dogecoin,shiba-inu,pepe,bonk,dogwifhat,floki,mew&order=market_cap_desc&sparkline=false&price_change_percentage=24h';
+const toast = document.getElementById('toast');
+function showToast(text) {
+  toast.textContent = text;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+let coinsData = [];
+
+// لینک API دریافت دسته‌بندی کامل میم کوین‌ها (تا ۲۵۰ میم کوین برتر)
+const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=meme-token&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h';
 
 async function fetchCryptoData() {
   try {
     const res = await fetch(API_URL);
-    const data = await res.json();
-    
-    let totalCap = 0;
-    let totalVol = 0;
-    const container = document.getElementById('coinRows');
-    container.innerHTML = '';
-
-    data.forEach((coin, i) => {
-      totalCap += coin.market_cap;
-      totalVol += coin.total_volume;
-
-      const changeClass = coin.price_change_percentage_24h >= 0 ? 'up' : 'down';
-      const changeSign = coin.price_change_percentage_24h >= 0 ? '+' : '';
-
-      const row = document.createElement('div');
-      row.className = 'row';
-      row.innerHTML = `
-        <div>${i + 1}</div>
-        <div class="coin">
-          <img src="${coin.image}">
-          <div>
-            <strong>${coin.name}</strong>
-            <small>${coin.symbol.toUpperCase()}</small>
-          </div>
-        </div>
-        <div>$${coin.current_price < 1 ? coin.current_price.toFixed(6) : coin.current_price.toLocaleString()}</div>
-        <div class="${changeClass}">${changeSign}${coin.price_change_percentage_24h.toFixed(2)}%</div>
-        <div>$${(coin.market_cap / 1e9).toFixed(2)}B</div>
-      `;
-      container.appendChild(row);
-    });
-
-    document.getElementById('totalCap').textContent = '$' + (totalCap / 1e9).toFixed(2) + 'B';
-    document.getElementById('totalVol').textContent = '$' + (totalVol / 1e9).toFixed(2) + 'B';
-
+    coinsData = await res.json();
+    renderCoins(coinsData);
   } catch (err) {
     console.error('API Error:', err);
+    showToast('Error loading live data');
   }
 }
+
+function renderCoins(data) {
+  let totalCap = 0;
+  let totalVol = 0;
+  const container = document.getElementById('coinRows');
+  container.innerHTML = '';
+
+  data.forEach((coin, i) => {
+    totalCap += coin.market_cap || 0;
+    totalVol += coin.total_volume || 0;
+
+    const change = coin.price_change_percentage_24h || 0;
+    const changeClass = change >= 0 ? 'up' : 'down';
+    const changeSign = change >= 0 ? '+' : '';
+
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.onclick = () => openModal(coin);
+    row.innerHTML = `
+      <div>${i + 1}</div>
+      <div class="coin">
+        <img src="${coin.image}">
+        <div>
+          <strong>${coin.name}</strong>
+          <small>${coin.symbol.toUpperCase()}</small>
+        </div>
+      </div>
+      <div class="price">$${coin.current_price < 1 ? coin.current_price.toFixed(6) : coin.current_price.toLocaleString()}</div>
+      <div class="${changeClass}">${changeSign}${change.toFixed(2)}%</div>
+      <div>$${coin.market_cap ? (coin.market_cap / 1e6).toFixed(1) + 'M' : 'N/A'}</div>
+      <div style="color:#666">⋮</div>
+    `;
+    container.appendChild(row);
+  });
+
+  document.getElementById('totalCap').textContent = '$' + (totalCap / 1e9).toFixed(2) + 'B';
+  document.getElementById('totalVol').textContent = '$' + (totalVol / 1e9).toFixed(2) + 'B';
+}
+
+// جستجو در بین تمامی میم کوین‌ها
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  const filtered = coinsData.filter(c => c.name.toLowerCase().includes(query) || c.symbol.toLowerCase().includes(query));
+  renderCoins(filtered);
+});
+
+document.getElementById('searchBtn').onclick = () => {
+  const sb = document.getElementById('searchBox');
+  sb.classList.toggle('show');
+};
+
+const modal = document.getElementById('coinModal');
+function openModal(coin) {
+  document.getElementById('modalImg').src = coin.image;
+  document.getElementById('modalName').textContent = coin.name;
+  document.getElementById('modalSymbol').textContent = coin.symbol.toUpperCase();
+  document.getElementById('modalPrice').textContent = '$' + (coin.current_price < 1 ? coin.current_price.toFixed(6) : coin.current_price.toLocaleString());
+  
+  const change = coin.price_change_percentage_24h || 0;
+  const changeEl = document.getElementById('modalChange');
+  const isUp = change >= 0;
+  changeEl.textContent = (isUp ? '+' : '') + change.toFixed(2) + '% (24H)';
+  changeEl.className = isUp ? 'up' : 'down';
+
+  const chartBox = document.getElementById('chartBox');
+  chartBox.className = isUp ? 'chart' : 'chart down';
+
+  const chartPath = document.getElementById('chartPath');
+  if (isUp) {
+    chartPath.setAttribute('d', 'M0 150 L70 140 L140 145 L210 110 L280 120 L350 85 L420 95 L490 50 L560 65 L630 30 L700 20');
+  } else {
+    chartPath.setAttribute('d', 'M0 20 L70 40 L140 30 L210 70 L280 60 L350 100 L420 90 L490 130 L560 120 L630 150 L700 160');
+  }
+
+  document.getElementById('modalCap').textContent = '$' + (coin.market_cap ? coin.market_cap.toLocaleString() : '0');
+  document.getElementById('modalVol').textContent = '$' + (coin.total_volume ? coin.total_volume.toLocaleString() : '0');
+  document.getElementById('modalHigh').textContent = '$' + (coin.high_24h || 0);
+  document.getElementById('modalLow').textContent = '$' + (coin.low_24h || 0);
+
+  modal.classList.add('show');
+}
+
+document.getElementById('closeModal').onclick = () => modal.classList.remove('show');
+modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('show'); };
+
+document.querySelectorAll('.p-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.p-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    showToast('Range: ' + btn.textContent);
+  };
+});
+
+document.querySelectorAll('.nav').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.nav').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    showToast(btn.dataset.page);
+  };
+});
+
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    
+    if (filter === 'gainers') {
+      const sorted = [...coinsData].sort((a,b) => (b.price_change_percentage_24h||0) - (a.price_change_percentage_24h||0));
+      renderCoins(sorted);
+    } else if (filter === 'losers') {
+      const sorted = [...coinsData].sort((a,b) => (a.price_change_percentage_24h||0) - (b.price_change_percentage_24h||0));
+      renderCoins(sorted);
+    } else {
+      renderCoins(coinsData);
+    }
+  };
+});
+
+document.getElementById('bellBtn').onclick = () => showToast('No notifications');
+document.getElementById('watchBtn').onclick = () => showToast('Added to Watchlist');
+document.getElementById('shareBtn').onclick = () => showToast('Link copied');
 
 fetchCryptoData();
 setInterval(fetchCryptoData, 30000);
