@@ -50,13 +50,10 @@ body.light-theme {
 html { scroll-behavior: smooth; }
 body { background: var(--bg-main); color: var(--text-main); transition: background 0.25s ease, color 0.25s ease; -webkit-font-smoothing: antialiased; }
 
-/* Dynamic Font Mono for Numbers */
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 600; letter-spacing: -0.5px; }
 
-/* Container */
 .app { max-width: 1280px; margin: 0 auto; padding: 16px 16px 120px; }
 
-/* Header Navbar */
 .top-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); backdrop-filter: blur(12px); margin-bottom: 20px; box-shadow: var(--shadow-sm); }
 .brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
 .brand-badge { width: 36px; height: 36px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--green); }
@@ -69,7 +66,6 @@ body { background: var(--bg-main); color: var(--text-main); transition: backgrou
 select.btn-action { appearance: none; padding-right: 24px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b949e' viewBox='0 0 16 16'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>"); background-repeat: no-repeat; background-position: right 8px center; }
 html[dir="rtl"] select.btn-action { background-position: left 8px center; padding-right: 12px; padding-left: 24px; }
 
-/* Grid Dashboard Stats */
 .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
 @media(max-width: 768px) { .stats-grid { grid-template-columns: 1fr; } }
 
@@ -80,26 +76,21 @@ html[dir="rtl"] select.btn-action { background-position: left 8px center; paddin
 .stat-sub.up { color: var(--green); }
 .stat-sub.down { color: var(--red); }
 
-/* Progress Bar */
 .progress-bar { height: 6px; background: var(--bg-input); border-radius: var(--radius-full); margin-top: 12px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--red), var(--yellow), var(--green)); transition: width 0.4s ease; }
 
-/* Filter & Search Toolbar */
 .toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
 .search-container { flex: 1; min-width: 260px; position: relative; }
 .search-container input { width: 100%; height: 42px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0 16px; color: var(--text-main); font-size: 13px; transition: border-color 0.2s; }
 .search-container input:focus { border-color: var(--green); }
 
-/* Navigation Tabs */
 .tabs-header { display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; overflow-x: auto; }
 .tab-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: var(--radius-md); font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
 .tab-btn.active { background: var(--green-glow); color: var(--green); border-color: rgba(34, 197, 94, 0.4); }
 
-/* View Panels */
 .view-panel { display: none; }
 .view-panel.active { display: block; }
 
-/* Pro Data Table */
 .table-wrapper { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-main); }
 .data-table { width: 100%; border-collapse: collapse; text-align: left; }
 html[dir="rtl"] .data-table { text-align: right; }
@@ -110,47 +101,39 @@ html[dir="rtl"] .data-table { text-align: right; }
 .data-table tbody tr:hover { background: var(--bg-card-hover); }
 .data-table tbody tr:last-child td { border-bottom: 0; }
 
-/* Coin Column */
 .coin-cell { display: flex; align-items: center; gap: 12px; }
 .coin-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-input); object-fit: cover; }
 .coin-info strong { display: block; font-size: 14px; color: var(--text-main); font-weight: 700; }
 .coin-info small { color: var(--text-muted); font-size: 11px; text-transform: uppercase; font-weight: 600; }
 
-/* Contract Tag */
 .contract-tag { font-size: 10px; color: var(--text-muted); background: var(--bg-input); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; margin-top: 3px; display: inline-block; cursor: pointer; transition: all 0.2s; }
 .contract-tag:hover { color: var(--green); border-color: var(--green); }
 
-/* Badges */
 .badge-score { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 26px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 800; border: 1px solid transparent; }
 .score-high { background: var(--green-glow); color: var(--green); border-color: rgba(34, 197, 94, 0.3); }
 .score-med { background: rgba(234, 179, 8, 0.12); color: var(--yellow); border-color: rgba(234, 179, 8, 0.3); }
 .score-low { background: var(--red-glow); color: var(--red); border-color: rgba(239, 68, 68, 0.3); }
 
-/* Star Favorite Button */
 .btn-star { background: none; border: 0; color: var(--text-muted); font-size: 16px; cursor: pointer; transition: transform 0.1s ease; }
 .btn-star.active { color: var(--yellow); }
 .btn-star:hover { transform: scale(1.2); }
 
-/* Whale Radar Feed */
 .radar-grid { display: flex; flex-direction: column; gap: 10px; }
 .radar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .radar-left { display: flex; align-items: center; gap: 12px; }
 .radar-icon-box { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--bg-input); display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid var(--border); }
 
-/* Floating Bottom Navigation for Mobile */
 .bottom-nav { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 500px; background: rgba(18, 20, 24, 0.92); border: 1px solid var(--border); backdrop-filter: blur(20px); border-radius: var(--radius-full); display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 100; }
 .nav-item { background: transparent; border: 0; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0; border-radius: var(--radius-full); cursor: pointer; font-size: 10px; font-weight: 700; transition: all 0.2s; }
 .nav-item .icon { font-size: 16px; }
 .nav-item.active { background: var(--green-glow); color: var(--green); border: 1px solid rgba(34, 197, 94, 0.3); }
 
-/* Custom Modal */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 16px; }
 .modal-overlay.show { display: flex; }
 .modal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: var(--shadow-main); }
 .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .modal-close { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; }
 
-/* Form Cards */
 .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-top: 16px; }
 .card-title { font-size: 14px; font-weight: 800; color: var(--green); margin-bottom: 14px; text-transform: uppercase; }
 .form-group { margin-bottom: 12px; }
@@ -159,13 +142,11 @@ html[dir="rtl"] .data-table { text-align: right; }
 .btn-primary { width: 100%; height: 42px; background: var(--green); color: #000; font-weight: 800; border: 0; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; transition: opacity 0.2s; }
 .btn-primary:hover { opacity: 0.9; }
 
-/* Sparkline Chart Container */
 .chart-box { height: 140px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 10px; margin: 16px 0; }
 .chart-box svg { width: 100%; height: 100%; }
 .chart-box path { fill: none; stroke: var(--green); stroke-width: 2; }
 .chart-box.down path { stroke: var(--red); }
 
-/* Toast */
 .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); opacity: 0; background: var(--bg-card); border: 1px solid var(--green); color: var(--text-main); padding: 10px 20px; border-radius: var(--radius-full); font-size: 12px; font-weight: 700; backdrop-filter: blur(10px); z-index: 300; transition: all 0.3s ease; pointer-events: none; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
@@ -193,12 +174,12 @@ html[dir="rtl"] .data-table { text-align: right; }
   <section class="stats-grid">
     <div class="stat-card">
       <div class="stat-title" data-i18n="lbl_market_cap">Market Cap</div>
-      <div class="stat-value mono" id="totalCap">Loading...</div>
-      <div class="stat-sub up" data-i18n="lbl_coingecko_api">Live CoinGecko Data</div>
+      <div class="stat-value mono" id="totalCap">$0.00</div>
+      <div class="stat-sub up" data-i18n="lbl_coingecko_api">Live Dex & Gecko Data</div>
     </div>
     <div class="stat-card">
       <div class="stat-title" data-i18n="lbl_volume">24H Volume</div>
-      <div class="stat-value mono" id="totalVol">Loading...</div>
+      <div class="stat-value mono" id="totalVol">$0.00</div>
       <div class="stat-sub up" data-i18n="lbl_last_24h">24 Hour Aggregate</div>
     </div>
     <div class="stat-card">
@@ -386,11 +367,10 @@ html[dir="rtl"] .data-table { text-align: right; }
 </div>
 
 <script>
-// Translations Object
 const i18n = {
   en: {
     lbl_market_cap: "MEME MARKET CAP",
-    lbl_coingecko_api: "Live CoinGecko Data",
+    lbl_coingecko_api: "Live Dex & Gecko Data",
     lbl_volume: "24H MEME VOLUME",
     lbl_last_24h: "24 Hour Aggregate",
     lbl_fear_greed: "MEME FEAR & GREED",
@@ -453,7 +433,7 @@ const i18n = {
   },
   fa: {
     lbl_market_cap: "ارزش کل بازار میم‌ها",
-    lbl_coingecko_api: "داده زنده CoinGecko",
+    lbl_coingecko_api: "داده زنده Dex و Gecko",
     lbl_volume: "حجم معاملات ۲۴ ساعت",
     lbl_last_24h: "مجموع ۲۴ ساعت اخیر",
     lbl_fear_greed: "شاخص ترس و طمع",
@@ -527,6 +507,8 @@ let currency = 'USD';
 const IRT_RATE = 92000;
 const EUR_RATE = 0.92;
 
+let isSearchingContract = false; // Flag to prevent auto-refresh overwriting searched contracts
+
 const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=meme-token&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h';
 
 const toast = document.getElementById('toast');
@@ -562,7 +544,7 @@ function setLanguage(lang) {
 document.getElementById('langToggleBtn').onclick = () => setLanguage(currentLang === 'en' ? 'fa' : 'en');
 
 function formatPrice(usdPrice) {
-  if (!usdPrice && usdPrice !== 0) return 'N/A';
+  if (usdPrice === undefined || usdPrice === null || isNaN(usdPrice)) return '$0.00';
   if (currency === 'IRT') {
     const irt = usdPrice * IRT_RATE;
     return (irt < 100 ? irt.toFixed(2) : Math.round(irt).toLocaleString(currentLang === 'fa' ? 'fa-IR' : 'en-US')) + ' ' + i18n[currentLang].toman;
@@ -579,28 +561,39 @@ function copyToClipboard(text) {
 }
 
 async function fetchCryptoData() {
+  if (isSearchingContract) return; // Skip background auto-update if user is searching contract
+
   try {
     const res = await fetch(API_URL);
-    coinsData = await res.json();
+    if (!res.ok) throw new Error('API limit');
+    const rawData = await res.json();
     
-    coinsData = coinsData.map(coin => ({
-      ...coin,
-      safetyScore: Math.floor(Math.random() * 40) + 60,
-      chain: coin.chain || ['solana', 'ethereum', 'base', 'bsc'][Math.floor(Math.random() * 4)],
-      contractAddress: coin.contractAddress || '',
-      shortContract: coin.contractAddress ? (coin.contractAddress.substring(0, 6) + '...' + coin.contractAddress.substring(coin.contractAddress.length - 4)) : ''
-    }));
+    if (Array.isArray(rawData) && rawData.length > 0) {
+      coinsData = rawData.map(coin => ({
+        ...coin,
+        current_price: coin.current_price || 0,
+        price_change_percentage_24h: coin.price_change_percentage_24h || 0,
+        market_cap: coin.market_cap || 0,
+        total_volume: coin.total_volume || 0,
+        safetyScore: Math.floor(Math.random() * 40) + 60,
+        chain: coin.chain || 'multi',
+        contractAddress: coin.contractAddress || '',
+        shortContract: coin.contractAddress ? (coin.contractAddress.substring(0, 6) + '...' + coin.contractAddress.substring(coin.contractAddress.length - 4)) : ''
+      }));
+    }
 
     renderAll();
     checkAlerts();
     generateWhaleRadar();
   } catch (err) {
-    showToast('Failed to fetch live data');
+    if (coinsData.length > 0) renderAll();
   }
 }
 
 function renderAll() {
-  renderHomeTable(coinsData);
+  if (!isSearchingContract) {
+    renderHomeTable(coinsData);
+  }
   renderWatchlist();
   renderPortfolio();
   renderAlerts();
@@ -611,6 +604,11 @@ function renderHomeTable(data) {
   let totalCap = 0, totalVol = 0;
   const container = document.getElementById('coinRows');
   container.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    container.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:30px;">No asset found.</td></tr>`;
+    return;
+  }
 
   data.forEach((coin, i) => {
     totalCap += coin.market_cap || 0;
@@ -639,10 +637,10 @@ function createRow(coin, index) {
     <td style="color:var(--text-muted);font-size:11px">${index}</td>
     <td>
       <div class="coin-cell">
-        <img class="coin-icon" src="${coin.image || 'https://via.placeholder.com/36'}" loading="lazy">
+        <img class="coin-icon" src="${coin.image || 'https://via.placeholder.com/36'}" loading="lazy" onerror="this.src='https://via.placeholder.com/36'">
         <div class="coin-info">
           <strong>${coin.name}</strong>
-          <small>${coin.symbol.toUpperCase()} • ${coin.chain}</small>
+          <small>${(coin.symbol || '').toUpperCase()} • ${coin.chain}</small>
           ${contractHTML}
         </div>
       </div>
@@ -650,7 +648,7 @@ function createRow(coin, index) {
     <td class="mono">${formatPrice(coin.current_price)}</td>
     <td class="mono ${change >= 0 ? 'stat-sub up' : 'stat-sub down'}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</td>
     <td class="mono">${formatPrice(coin.market_cap)}</td>
-    <td><span class="badge-score ${scoreClass}">${coin.safetyScore}</span></td>
+    <td><span class="badge-score ${scoreClass}">${coin.safetyScore || 70}</span></td>
     <td><button class="btn-star ${isWatched ? 'active' : ''}" onclick="event.stopPropagation(); toggleWatchlist('${coin.id}')">★</button></td>
   `;
   tr.onclick = () => openModal(coin);
@@ -702,8 +700,8 @@ function generateWhaleRadar() {
         <div class="radar-left">
           <div class="radar-icon-box">${action.icon}</div>
           <div>
-            <strong style="font-size:13px;display:block;">${action.label} — ${coin.name} (${coin.symbol.toUpperCase()})</strong>
-            <span style="font-size:11px;color:var(--text-muted);">${coin.chain.toUpperCase()} • ${i18n[currentLang].just_now}</span>
+            <strong style="font-size:13px;display:block;">${action.label} — ${coin.name} (${(coin.symbol || '').toUpperCase()})</strong>
+            <span style="font-size:11px;color:var(--text-muted);">${(coin.chain || 'MULTI').toUpperCase()} • ${i18n[currentLang].just_now}</span>
           </div>
         </div>
         <div style="text-align:right;">
@@ -725,14 +723,14 @@ function renderPortfolio() {
     const coin = coinsData.find(c => c.id === coinId);
     const amount = portfolio[coinId];
     if (coin && amount > 0) {
-      const val = amount * coin.current_price;
+      const val = amount * (coin.current_price || 0);
       totalVal += val;
 
       const item = document.createElement('div');
       item.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);";
       item.innerHTML = `
         <div>
-          <strong>${coin.name} (${coin.symbol.toUpperCase()})</strong>
+          <strong>${coin.name} (${(coin.symbol || '').toUpperCase()})</strong>
           <div style="font-size:11px;color:var(--text-muted);">${amount.toLocaleString()} tokens</div>
         </div>
         <div style="text-align:right">
@@ -823,9 +821,9 @@ function populateDropdowns() {
   const portSelect = document.getElementById('portCoinSelect');
   const alertSelect = document.getElementById('alertCoinSelect');
 
-  if(portSelect.children.length === 0) {
+  if(portSelect.children.length === 0 && coinsData.length > 0) {
     coinsData.forEach(coin => {
-      const opt = `<option value="${coin.id}">${coin.name} (${coin.symbol.toUpperCase()})</option>`;
+      const opt = `<option value="${coin.id}">${coin.name} (${(coin.symbol || '').toUpperCase()})</option>`;
       portSelect.innerHTML += opt;
       alertSelect.innerHTML += opt;
     });
@@ -850,7 +848,7 @@ function openModal(coin) {
   activeCoin = coin;
   document.getElementById('modalImg').src = coin.image || 'https://via.placeholder.com/36';
   document.getElementById('modalName').textContent = coin.name;
-  document.getElementById('modalSymbol').textContent = coin.symbol.toUpperCase();
+  document.getElementById('modalSymbol').textContent = (coin.symbol || '').toUpperCase();
   document.getElementById('modalPrice').textContent = formatPrice(coin.current_price);
   
   const modalContract = document.getElementById('modalContract');
@@ -879,7 +877,7 @@ function openModal(coin) {
 
   document.getElementById('modalCap').textContent = formatPrice(coin.market_cap);
   document.getElementById('modalVol').textContent = formatPrice(coin.total_volume);
-  document.getElementById('modalSafety').textContent = `${coin.safetyScore}/100`;
+  document.getElementById('modalSafety').textContent = `${coin.safetyScore || 70}/100`;
   document.getElementById('modalHigh').textContent = formatPrice(coin.high_24h || coin.current_price);
 
   modal.classList.add('show');
@@ -916,7 +914,6 @@ document.querySelectorAll('.nav-item').forEach(btn => {
   };
 });
 
-// Real Multi-Chain DEX Contract Search via DexScreener API
 let searchDebounceTimer = null;
 
 async function fetchContractFromDexScreener(address) {
@@ -929,15 +926,15 @@ async function fetchContractFromDexScreener(address) {
       const pair = data.pairs[0];
       const searchedToken = {
         id: pair.baseToken.address.toLowerCase(),
-        name: pair.baseToken.name,
-        symbol: pair.baseToken.symbol,
+        name: pair.baseToken.name || 'Unknown',
+        symbol: pair.baseToken.symbol || 'TOKEN',
         image: pair.info && pair.info.imageUrl ? pair.info.imageUrl : 'https://via.placeholder.com/36',
         current_price: parseFloat(pair.priceUsd) || 0,
-        price_change_percentage_24h: pair.priceChange ? (pair.priceChange.h24 || 0) : 0,
+        price_change_percentage_24h: pair.priceChange ? (parseFloat(pair.priceChange.h24) || 0) : 0,
         market_cap: pair.marketCap || pair.fdv || 0,
-        total_volume: pair.volume ? (pair.volume.h24 || 0) : 0,
-        safetyScore: Math.floor(Math.random() * 30) + 70,
-        chain: pair.chainId,
+        total_volume: pair.volume ? (parseFloat(pair.volume.h24) || 0) : 0,
+        safetyScore: 85,
+        chain: pair.chainId || 'unknown',
         contractAddress: pair.baseToken.address,
         shortContract: pair.baseToken.address.substring(0, 6) + '...' + pair.baseToken.address.substring(pair.baseToken.address.length - 4),
         url: pair.url
@@ -950,6 +947,7 @@ async function fetchContractFromDexScreener(address) {
     }
   } catch (err) {
     showToast(i18n[currentLang].msg_contract_not_found);
+    renderHomeTable([]);
   }
 }
 
@@ -959,24 +957,25 @@ function applyFilters() {
 
   clearTimeout(searchDebounceTimer);
 
-  // Check if input looks like a Blockchain Contract Address (e.g. 0x... or Solana Base58 32-44 chars)
   const isContractAddress = (query.startsWith('0x') && query.length >= 30) || query.length >= 32;
 
   if (isContractAddress) {
+    isSearchingContract = true; // Lock auto-refresh
     searchDebounceTimer = setTimeout(() => {
       fetchContractFromDexScreener(query);
     }, 400);
     return;
   }
 
-  // Normal Search (Name, Symbol)
+  isSearchingContract = false; // Unlock auto-refresh for normal search
+
   const filtered = coinsData.filter(coin => {
     const matchesSearch = 
       coin.name.toLowerCase().includes(query) || 
       coin.symbol.toLowerCase().includes(query) ||
       (coin.contractAddress && coin.contractAddress.toLowerCase().includes(query));
 
-    const matchesChain = selectedChain === 'all' || coin.chain.toLowerCase() === selectedChain.toLowerCase();
+    const matchesChain = selectedChain === 'all' || (coin.chain && coin.chain.toLowerCase() === selectedChain.toLowerCase());
     return matchesSearch && matchesChain;
   });
 
@@ -1017,6 +1016,8 @@ document.getElementById('currencySelect').onchange = (e) => {
 };
 
 document.getElementById('refreshBtn').onclick = () => {
+  isSearchingContract = false;
+  document.getElementById('searchInput').value = '';
   showToast(i18n[currentLang].msg_refreshing);
   fetchCryptoData();
 };
