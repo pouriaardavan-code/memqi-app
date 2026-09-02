@@ -149,6 +149,9 @@ html[dir="rtl"] .data-table { text-align: right; }
 
 .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); opacity: 0; background: var(--bg-card); border: 1px solid var(--green); color: var(--text-main); padding: 10px 20px; border-radius: var(--radius-full); font-size: 12px; font-weight: 700; backdrop-filter: blur(10px); z-index: 300; transition: all 0.3s ease; pointer-events: none; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Banner Style */
+.guest-banner { background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 </style>
 </head>
 <body>
@@ -160,6 +163,8 @@ html[dir="rtl"] .data-table { text-align: right; }
       <div>MEM<span>QI</span> <small style="font-size:10px;color:var(--text-muted);font-weight:700">PRO</small></div>
     </div>
     <div class="nav-actions">
+      <!-- Added Login Button Here -->
+      <button class="btn-action" id="authNavBtn" style="border-color: rgba(34, 197, 94, 0.4); color: var(--green);">👤 <span data-i18n="btn_login">Login</span></button>
       <button class="btn-action" id="langToggleBtn">🌐 FA</button>
       <select id="currencySelect" class="btn-action">
         <option value="USD">USD ($)</option>
@@ -260,6 +265,13 @@ html[dir="rtl"] .data-table { text-align: right; }
 
   <div class="view-panel" id="view-portfolio">
     <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_portfolio">💼 Portfolio Tracker</h2>
+    
+    <!-- Guest Info Banner -->
+    <div class="guest-banner" id="guestBanner">
+      <span style="font-size:12px;" data-i18n="banner_guest_msg">💡 You are in Guest mode. Login to backup portfolio to cloud.</span>
+      <button class="btn-action" onclick="openAuthModal()" style="height:28px;font-size:11px;" data-i18n="btn_login">Login</button>
+    </div>
+
     <div class="stat-card">
       <div class="stat-title" data-i18n="title_total_port">Total Balance Value</div>
       <div class="stat-value mono" style="font-size:28px;color:var(--green)" id="portTotalValue">$0.00</div>
@@ -313,6 +325,31 @@ html[dir="rtl"] .data-table { text-align: right; }
 
 <div class="toast" id="toast">Notification</div>
 
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal-box" style="max-width:400px;">
+    <div class="modal-header">
+      <h3 style="font-size:16px;" data-i18n="title_auth_modal">Account Access</h3>
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    </div>
+    <form id="authForm" onsubmit="handleAuthSubmit(event)">
+      <div class="form-group">
+        <label data-i18n="lbl_email">Email Address</label>
+        <input type="email" id="authEmail" required placeholder="user@example.com">
+      </div>
+      <div class="form-group">
+        <label data-i18n="lbl_password">Password</label>
+        <input type="password" id="authPassword" required placeholder="••••••••">
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top:10px;" data-i18n="btn_login_submit">Login / Register</button>
+    </form>
+    <div style="text-align:center;margin-top:14px;">
+      <button style="background:none;border:0;color:var(--text-muted);font-size:12px;cursor:pointer;" onclick="closeAuthModal()" data-i18n="btn_continue_guest">Continue as Guest</button>
+    </div>
+  </div>
+</div>
+
+<!-- COIN DETAILS MODAL -->
 <div class="modal-overlay" id="coinModal">
   <div class="modal-box">
     <div class="modal-header">
@@ -330,7 +367,6 @@ html[dir="rtl"] .data-table { text-align: right; }
       <div class="mono" style="font-size:28px;font-weight:800" id="modalPrice">$0.00</div>
       <div id="modalChange" class="stat-sub up">+0.00%</div>
       
-      <!-- Contract Box Section inside Modal -->
       <div style="margin-top:12px;background:var(--bg-input);padding:12px;border-radius:var(--radius-md);border:1px solid var(--border);" id="contractContainer">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <span style="font-size:11px;color:var(--text-muted);font-weight:700;" data-i18n="lbl_contract">Contract Address</span>
@@ -448,7 +484,17 @@ const i18n = {
     confirmed_tx: "Confirmed TX",
     lbl_contract: "Contract Address",
     btn_copy: "📋 Copy Address",
-    toman: "تومان"
+    toman: "تومان",
+    btn_login: "Login",
+    btn_logout: "Logout",
+    title_auth_modal: "Account Access",
+    lbl_email: "Email Address",
+    lbl_password: "Password",
+    btn_login_submit: "Login / Register",
+    btn_continue_guest: "Continue as Guest",
+    banner_guest_msg: "💡 You are in Guest mode. Login to backup portfolio to cloud.",
+    msg_logged_in: "Successfully logged in!",
+    msg_logged_out: "Logged out"
   },
   fa: {
     lbl_market_cap: "ارزش کل بازار میم‌ها",
@@ -513,11 +559,23 @@ const i18n = {
     confirmed_tx: "تراکنش تأیید شده",
     lbl_contract: "آدرس قرارداد (کانترکت)",
     btn_copy: "📋 کپی آدرس کانترکت",
-    toman: "تومان"
+    toman: "تومان",
+    btn_login: "ورود",
+    btn_logout: "خروج",
+    title_auth_modal: "ورود به حساب کاربری",
+    lbl_email: "پست الکترونیک (ایمیل)",
+    lbl_password: "رمز عبور",
+    btn_login_submit: "ورود / ثبت‌نام",
+    btn_continue_guest: "ادامه به عنوان مهمان",
+    banner_guest_msg: "💡 شما در حالت مهمان هستید. برای ذخیره ابری وارد شوید.",
+    msg_logged_in: "ورود با موفقیت انجام شد!",
+    msg_logged_out: "از حساب کاربری خارج شدید"
   }
 };
 
 let currentLang = localStorage.getItem('memqi_lang') || 'en';
+let currentUser = localStorage.getItem('memqi_user') || null;
+
 let coinsData = [];
 let watchlist = JSON.parse(localStorage.getItem('memqi_watchlist') || '[]');
 let portfolio = JSON.parse(localStorage.getItem('memqi_portfolio') || '{}');
@@ -540,6 +598,51 @@ function showToast(text) {
   setTimeout(() => toast.classList.remove('show'), 2400);
 }
 
+// User Auth Management
+function updateAuthUI() {
+  const authBtn = document.getElementById('authNavBtn');
+  const banner = document.getElementById('guestBanner');
+
+  if (currentUser) {
+    authBtn.innerHTML = `👤 ${currentUser.split('@')[0]} (${i18n[currentLang].btn_logout})`;
+    if(banner) banner.style.display = 'none';
+  } else {
+    authBtn.innerHTML = `👤 <span data-i18n="btn_login">${i18n[currentLang].btn_login}</span>`;
+    if(banner) banner.style.display = 'flex';
+  }
+}
+
+function openAuthModal() {
+  document.getElementById('authModal').classList.add('show');
+}
+
+function closeAuthModal() {
+  document.getElementById('authModal').classList.remove('show');
+}
+
+function handleAuthSubmit(e) {
+  e.preventDefault();
+  const email = document.getElementById('authEmail').value;
+  if(email) {
+    currentUser = email;
+    localStorage.setItem('memqi_user', currentUser);
+    updateAuthUI();
+    closeAuthModal();
+    showToast(i18n[currentLang].msg_logged_in);
+  }
+}
+
+document.getElementById('authNavBtn').onclick = () => {
+  if (currentUser) {
+    currentUser = null;
+    localStorage.removeItem('memqi_user');
+    updateAuthUI();
+    showToast(i18n[currentLang].msg_logged_out);
+  } else {
+    openAuthModal();
+  }
+};
+
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('memqi_lang', lang);
@@ -559,6 +662,7 @@ function setLanguage(lang) {
     if (i18n[lang][key]) el.placeholder = i18n[lang][key];
   });
 
+  updateAuthUI();
   renderAll();
   generateWhaleRadar();
 }
@@ -873,7 +977,6 @@ async function openModal(coin) {
   document.getElementById('modalSymbol').textContent = (coin.symbol || '').toUpperCase();
   document.getElementById('modalPrice').textContent = formatPrice(coin.current_price);
   
-  // Show contract section in modal
   document.getElementById('modalContract').textContent = 'Loading Contract...';
   document.getElementById('modalChain').textContent = coin.chain || 'DEX';
   selectedModalContract = coin.contractAddress || CONTRACT_DB[coin.id] || '';
