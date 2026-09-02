@@ -25,9 +25,7 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
 .logo{width:34px;height:34px;border:2px solid #8cff9e;border-radius:50%;background:var(--green);box-shadow:0 0 15px rgba(53,230,92,.4);display:flex;align-items:center;justify-content:center;font-size:16px}
 .brand span{color:var(--green)}.brand b{color:var(--text)}.spacer{flex:1}
 .top-actions{display:flex;gap:8px;align-items:center}
-.iconbtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:16px;cursor:pointer;padding:8px 12px;border-radius:10px;position:relative;display:flex;align-items:center;gap:4px}
-.badge{position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--red);border-radius:50%;display:none}
-.badge.show{display:block}
+.iconbtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:13px;font-weight:700;cursor:pointer;padding:8px 12px;border-radius:10px;position:relative;display:flex;align-items:center;gap:4px}
 
 /* Market Metrics & Fear/Greed */
 .market{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px;margin-bottom:15px}
@@ -56,7 +54,10 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
 
 /* Coin Table */
 .table{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
-.thead,.row{display:grid;grid-template-columns:35px 1.4fr 1fr 1fr 1fr 0.8fr 35px;align-items:center;gap:6px;padding:12px 10px;text-align:left}
+.thead,.row{display:grid;grid-template-columns:35px 1.4fr 1fr 1fr 1fr 0.8fr 35px;align-items:center;gap:6px;padding:12px 10px}
+html[dir="ltr"] .thead, html[dir="ltr"] .row { text-align: left; }
+html[dir="rtl"] .thead, html[dir="rtl"] .row { text-align: right; }
+
 .thead{color:var(--muted);font-size:10px;font-weight:800;border-bottom:1px solid var(--line);text-transform:uppercase}
 .row{min-height:60px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
 .row:last-child{border:0}.row:hover{background:var(--panel2)}
@@ -118,6 +119,7 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
     <div class="brand"><div class="logo">🚀</div><span>MEM</span><b>QI Pro</b></div>
     <div class="spacer"></div>
     <div class="top-actions">
+      <button class="iconbtn" id="langToggleBtn">🌐 FA</button>
       <select id="currencySelect" class="select-filter">
         <option value="USD">USD ($)</option>
         <option value="IRT">IRT (Toman)</option>
@@ -131,17 +133,17 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
   <!-- Market Stats Banner -->
   <section class="market">
     <div class="cell">
-      <div class="label">MEME MARKET CAP</div>
+      <div class="label" data-i18n="lbl_market_cap">MEME MARKET CAP</div>
       <div class="big" id="totalCap">Loading...</div>
-      <div class="up">Live CoinGecko API</div>
+      <div class="up" data-i18n="lbl_coingecko_api">Live CoinGecko API</div>
     </div>
     <div class="cell">
-      <div class="label">24H MEME VOLUME</div>
+      <div class="label" data-i18n="lbl_volume">24H MEME VOLUME</div>
       <div class="big" id="totalVol">Loading...</div>
-      <div class="up">Last 24 Hours</div>
+      <div class="up" data-i18n="lbl_last_24h">Last 24 Hours</div>
     </div>
     <div class="cell">
-      <div class="label">MEME FEAR & GREED INDEX</div>
+      <div class="label" data-i18n="lbl_fear_greed">MEME FEAR & GREED INDEX</div>
       <div class="big" id="fgScore">68 - Extreme Greed</div>
       <div class="fg-bar-bg"><div class="fg-bar-fill" id="fgFill" style="width: 68%;"></div></div>
     </div>
@@ -150,10 +152,10 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
   <!-- Search and Chain Filters -->
   <div class="filter-section">
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search meme coins (DOGE, PEPE, BONK, SHIB...)...">
+      <input type="text" id="searchInput" placeholder="Search meme coins (DOGE, PEPE, BONK, SHIB...)..." data-i18n-ph="ph_search">
     </div>
     <select id="chainFilter" class="select-filter">
-      <option value="all">All Chains</option>
+      <option value="all" data-i18n="opt_all_chains">All Chains</option>
       <option value="solana">Solana</option>
       <option value="ethereum">Ethereum</option>
       <option value="base">Base</option>
@@ -164,20 +166,20 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
   <!-- Main View: Home / Market -->
   <div class="view-panel active" id="view-home">
     <div class="tabs">
-      <button class="tab active" data-filter="all">🔥 All Memes</button>
-      <button class="tab" data-filter="gainers">↗ Top Gainers</button>
-      <button class="tab" data-filter="losers">↘ Top Losers</button>
-      <button class="tab" data-filter="safe">🛡️ Safe Tokens</button>
+      <button class="tab active" data-filter="all" data-i18n="tab_all">🔥 All Memes</button>
+      <button class="tab" data-filter="gainers" data-i18n="tab_gainers">↗ Top Gainers</button>
+      <button class="tab" data-filter="losers" data-i18n="tab_losers">↘ Top Losers</button>
+      <button class="tab" data-filter="safe" data-i18n="tab_safe">🛡️ Safe Tokens</button>
     </div>
 
     <div class="table">
       <div class="thead">
         <div>#</div>
-        <div>Coin</div>
-        <div>Price</div>
+        <div data-i18n="th_coin">Coin</div>
+        <div data-i18n="th_price">Price</div>
         <div>24H %</div>
-        <div>M. Cap</div>
-        <div>Safety</div>
+        <div data-i18n="th_mcap">M. Cap</div>
+        <div data-i18n="th_safety">Safety</div>
         <div>★</div>
       </div>
       <div id="coinRows"></div>
@@ -186,22 +188,22 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
 
   <!-- Whale Radar View -->
   <div class="view-panel" id="view-radar">
-    <h2 style="font-size:18px;margin-top:10px;">🐋 Whale & Pump Radar</h2>
-    <p style="font-size:12px;color:var(--muted);">Live monitoring of large transactions and liquidity injections</p>
+    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_radar">🐋 Whale & Pump Radar</h2>
+    <p style="font-size:12px;color:var(--muted);" data-i18n="desc_radar">Live monitoring of large transactions and liquidity injections</p>
     <div class="radar-feed" id="radarFeed"></div>
   </div>
 
   <!-- Watchlist View -->
   <div class="view-panel" id="view-watchlist">
-    <h2 style="font-size:18px;margin-top:10px;">⭐ My Watchlist</h2>
+    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_watchlist">⭐ My Watchlist</h2>
     <div class="table">
       <div class="thead">
         <div>#</div>
-        <div>Coin</div>
-        <div>Price</div>
+        <div data-i18n="th_coin">Coin</div>
+        <div data-i18n="th_price">Price</div>
         <div>24H %</div>
-        <div>M. Cap</div>
-        <div>Safety</div>
+        <div data-i18n="th_mcap">M. Cap</div>
+        <div data-i18n="th_safety">Safety</div>
         <div>★</div>
       </div>
       <div id="watchlistRows"></div>
@@ -210,46 +212,46 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
 
   <!-- Portfolio View -->
   <div class="view-panel" id="view-portfolio">
-    <h2 style="font-size:18px;margin-top:10px;">💼 Portfolio Tracker</h2>
+    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_portfolio">💼 Portfolio Tracker</h2>
     <div class="card">
-      <h3>Total Portfolio Value</h3>
+      <h3 data-i18n="title_total_port">Total Portfolio Value</h3>
       <div style="font-size:26px;font-weight:900;" id="portTotalValue">$0.00</div>
     </div>
     <div class="card">
-      <h3>Add Transaction</h3>
+      <h3 data-i18n="title_add_asset">Add Transaction</h3>
       <div class="form-group">
-        <label>Select Coin</label>
+        <label data-i18n="lbl_select_coin">Select Coin</label>
         <select id="portCoinSelect"></select>
       </div>
       <div class="form-group">
-        <label>Hold Amount</label>
-        <input type="number" id="portAmountInput" placeholder="e.g. 500000">
+        <label data-i18n="lbl_hold_amount">Hold Amount</label>
+        <input type="number" id="portAmountInput" placeholder="e.g. 500000" data-i18n-ph="ph_amount">
       </div>
-      <button class="btn" id="addPortBtn">Add Asset</button>
+      <button class="btn" id="addPortBtn" data-i18n="btn_add_asset">Add Asset</button>
     </div>
     <div class="card">
-      <h3>Your Holdings</h3>
+      <h3 data-i18n="title_your_holdings">Your Holdings</h3>
       <div id="portfolioList"></div>
     </div>
   </div>
 
   <!-- Alerts View -->
   <div class="view-panel" id="view-alerts">
-    <h2 style="font-size:18px;margin-top:10px;">🔔 Price Alerts</h2>
+    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_alerts">🔔 Price Alerts</h2>
     <div class="card">
-      <h3>Set New Alert</h3>
+      <h3 data-i18n="title_set_alert">Set New Alert</h3>
       <div class="form-group">
-        <label>Select Coin</label>
+        <label data-i18n="lbl_select_coin">Select Coin</label>
         <select id="alertCoinSelect"></select>
       </div>
       <div class="form-group">
-        <label>Target Price ($)</label>
-        <input type="number" id="alertPriceInput" step="any" placeholder="e.g. 0.000015">
+        <label data-i18n="lbl_target_price">Target Price ($)</label>
+        <input type="number" id="alertPriceInput" step="any" placeholder="e.g. 0.000015" data-i18n-ph="ph_target_price">
       </div>
-      <button class="btn" id="addAlertBtn">Set Price Alert</button>
+      <button class="btn" id="addAlertBtn" data-i18n="btn_set_alert">Set Price Alert</button>
     </div>
     <div class="card">
-      <h3>Active Alerts</h3>
+      <h3 data-i18n="title_active_alerts">Active Alerts</h3>
       <div id="alertsList"></div>
     </div>
   </div>
@@ -257,11 +259,11 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
 
 <!-- Bottom Navigation Bar -->
 <nav class="bottom">
-  <button class="nav active" data-page="home"><span class="ni">🏠</span>Market</button>
-  <button class="nav" data-page="radar"><span class="ni">🐋</span>Whale Radar</button>
-  <button class="nav" data-page="watchlist"><span class="ni">⭐</span>Watchlist</button>
-  <button class="nav" data-page="portfolio"><span class="ni">💼</span>Portfolio</button>
-  <button class="nav" data-page="alerts"><span class="ni">🔔</span>Alerts</button>
+  <button class="nav active" data-page="home"><span class="ni">🏠</span><span data-i18n="nav_market">Market</span></button>
+  <button class="nav" data-page="radar"><span class="ni">🐋</span><span data-i18n="nav_radar">Whale Radar</span></button>
+  <button class="nav" data-page="watchlist"><span class="ni">⭐</span><span data-i18n="nav_watchlist">Watchlist</span></button>
+  <button class="nav" data-page="portfolio"><span class="ni">💼</span><span data-i18n="nav_portfolio">Portfolio</span></button>
+  <button class="nav" data-page="alerts"><span class="ni">🔔</span><span data-i18n="nav_alerts">Alerts</span></button>
 </nav>
 
 <div class="toast" id="toast">Message</div>
@@ -285,20 +287,146 @@ button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 
     </div>
 
     <div class="detail-grid">
-      <div class="stat"><span>MARKET CAP</span><b id="modalCap">$0</b></div>
-      <div class="stat"><span>24H VOLUME</span><b id="modalVol">$0</b></div>
-      <div class="stat"><span>SAFETY SCORE</span><b id="modalSafety">90/100</b></div>
-      <div class="stat"><span>24H HIGH</span><b id="modalHigh">$0</b></div>
+      <div class="stat"><span data-i18n="stat_mcap">MARKET CAP</span><b id="modalCap">$0</b></div>
+      <div class="stat"><span data-i18n="stat_volume">24H VOLUME</span><b id="modalVol">$0</b></div>
+      <div class="stat"><span data-i18n="stat_safety">SAFETY SCORE</span><b id="modalSafety">90/100</b></div>
+      <div class="stat"><span data-i18n="stat_high">24H HIGH</span><b id="modalHigh">$0</b></div>
     </div>
 
     <div class="actions">
-      <button class="primary" id="buyDexBtn">⚡ Swap on DEX</button>
-      <button id="modalWatchBtn">⭐ Add to Watchlist</button>
+      <button class="primary" id="buyDexBtn" data-i18n="btn_swap_dex">⚡ Swap on DEX</button>
+      <button id="modalWatchBtn" data-i18n="btn_add_watchlist">⭐ Add to Watchlist</button>
     </div>
   </div>
 </div>
 
 <script>
+// Translations Dictionary
+const i18n = {
+  en: {
+    lbl_market_cap: "MEME MARKET CAP",
+    lbl_coingecko_api: "Live CoinGecko API",
+    lbl_volume: "24H MEME VOLUME",
+    lbl_last_24h: "Last 24 Hours",
+    lbl_fear_greed: "MEME FEAR & GREED INDEX",
+    ph_search: "Search meme coins (DOGE, PEPE, BONK, SHIB...)...",
+    opt_all_chains: "All Chains",
+    tab_all: "🔥 All Memes",
+    tab_gainers: "↗ Top Gainers",
+    tab_losers: "↘ Top Losers",
+    tab_safe: "🛡️ Safe Tokens",
+    th_coin: "Coin",
+    th_price: "Price",
+    th_mcap: "M. Cap",
+    th_safety: "Safety",
+    title_radar: "🐋 Whale & Pump Radar",
+    desc_radar: "Live monitoring of large transactions and liquidity injections",
+    title_watchlist: "⭐ My Watchlist",
+    title_portfolio: "💼 Portfolio Tracker",
+    title_total_port: "Total Portfolio Value",
+    title_add_asset: "Add Transaction",
+    lbl_select_coin: "Select Coin",
+    lbl_hold_amount: "Hold Amount",
+    ph_amount: "e.g. 500000",
+    btn_add_asset: "Add Asset",
+    title_your_holdings: "Your Holdings",
+    title_alerts: "🔔 Price Alerts",
+    title_set_alert: "Set New Alert",
+    lbl_target_price: "Target Price ($)",
+    ph_target_price: "e.g. 0.000015",
+    btn_set_alert: "Set Price Alert",
+    title_active_alerts: "Active Alerts",
+    nav_market: "Market",
+    nav_radar: "Whale Radar",
+    nav_watchlist: "Watchlist",
+    nav_portfolio: "Portfolio",
+    nav_alerts: "Alerts",
+    stat_mcap: "MARKET CAP",
+    stat_volume: "24H VOLUME",
+    stat_safety: "SAFETY SCORE",
+    stat_high: "24H HIGH",
+    btn_swap_dex: "⚡ Swap on DEX",
+    btn_add_watchlist: "⭐ Add to Watchlist",
+    msg_no_watchlist: "No coins added to watchlist yet.",
+    msg_no_alerts: "No active alerts.",
+    msg_removed_watchlist: "Removed from Watchlist",
+    msg_added_watchlist: "Added to Watchlist",
+    msg_asset_removed: "Asset removed",
+    msg_port_updated: "Portfolio updated",
+    msg_alert_set: "Alert set successfully",
+    msg_bg_currency: "Base currency set to",
+    msg_refreshing: "Refreshing live prices...",
+    whale_buy: "Whale Buy Alert",
+    whale_sell: "Massive Sell-off",
+    whale_liq: "Liquidity Injected",
+    just_now: "Just now",
+    confirmed_tx: "Confirmed Tx",
+    toman: "Toman"
+  },
+  fa: {
+    lbl_market_cap: "ارزش کل بازار میم‌ها",
+    lbl_coingecko_api: "زنده از CoinGecko API",
+    lbl_volume: "حجم معاملات ۲۴ ساعت",
+    lbl_last_24h: "۲۴ ساعت اخیر",
+    lbl_fear_greed: "شاخص ترس و طمع میم‌ها",
+    ph_search: "جستجوی میم کوین (DOGE, PEPE, BONK, SHIB...)...",
+    opt_all_chains: "همه شبکه‌ها",
+    tab_all: "🔥 همه میم‌ها",
+    tab_gainers: "↗ بیشترین رشد",
+    tab_losers: "↘ بیشترین ریزش",
+    tab_safe: "🛡️ توکن‌های ایمن‌تر",
+    th_coin: "کوین",
+    th_price: "قیمت",
+    th_mcap: "ارزش بازار",
+    th_safety: "امنیت",
+    title_radar: "🐋 رادار نهنگ‌ها و پمپ‌های مشکوک",
+    desc_radar: "رصد لحظه‌ای تراکنش‌های بزرگ و خریدهای سنگین میم‌کوین‌ها",
+    title_watchlist: "⭐ لیست زیرنظر من",
+    title_portfolio: "💼 مدیریت دارایی (پرتفوی)",
+    title_total_port: "ارزش کل سبد شما",
+    title_add_asset: "افزودن دارایی جدید",
+    lbl_select_coin: "انتخاب میم‌کوین",
+    lbl_hold_amount: "تعداد دارایی",
+    ph_amount: "مثلا 500000",
+    btn_add_asset: "ثبت در سبد",
+    title_your_holdings: "دارایی‌های شما",
+    title_alerts: "🔔 هشدار قیمت",
+    title_set_alert: "تنظیم هشدار جدید",
+    lbl_target_price: "قیمت هدف ($)",
+    ph_target_price: "مثلا 0.000015",
+    btn_set_alert: "فعال‌سازی هشدار",
+    title_active_alerts: "هشدارهای فعال",
+    nav_market: "بازار",
+    nav_radar: "رادار نهنگ",
+    nav_watchlist: "زیرنظر",
+    nav_portfolio: "پرتفوی",
+    nav_alerts: "هشدارها",
+    stat_mcap: "ارزش بازار",
+    stat_volume: "حجم معاملات ۲۴H",
+    stat_safety: "امتیاز امنیت",
+    stat_high: "بیشترین قیمت ۲۴H",
+    btn_swap_dex: "⚡ معامله سریع روی DEX",
+    btn_add_watchlist: "⭐ افزودن به زیرنظر",
+    msg_no_watchlist: "هیچ میم‌کوینی در لیست زیرنظر شما قرار ندارد.",
+    msg_no_alerts: "هیچ هشداری تنظیم نشده است.",
+    msg_removed_watchlist: "از لیست زیرنظر حذف شد",
+    msg_added_watchlist: "به لیست زیرنظر اضافه شد",
+    msg_asset_removed: "دارایی حذف شد",
+    msg_port_updated: "پرتفوی به‌روزرسانی شد",
+    msg_alert_set: "هشدار با موفقیت ثبت شد",
+    msg_bg_currency: "ارزش پایه تغییر یافت به",
+    msg_refreshing: "در حال دریافت آخرین قیمت‌ها...",
+    whale_buy: "خرید سنگین نهنگ",
+    whale_sell: "فروش ناگهانی",
+    whale_liq: "تزریق سیالیت جدید",
+    just_now: "چند لحظه پیش",
+    confirmed_tx: "تراکنش تأیید شد",
+    toman: "تومان"
+  }
+};
+
+let currentLang = localStorage.getItem('memqi_lang') || 'en';
+
 // State Management
 let coinsData = [];
 let watchlist = JSON.parse(localStorage.getItem('memqi_watchlist') || '[]');
@@ -319,12 +447,42 @@ function showToast(text) {
   setTimeout(() => toast.classList.remove('show'), 2400);
 }
 
+// Switch Language
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('memqi_lang', lang);
+  
+  const isFarsi = lang === 'fa';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isFarsi ? 'rtl' : 'ltr';
+  document.getElementById('langToggleBtn').textContent = isFarsi ? '🌐 EN' : '🌐 FA';
+
+  // Translate static text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+
+  // Translate placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (i18n[lang][key]) el.placeholder = i18n[lang][key];
+  });
+
+  renderAll();
+  generateWhaleRadar();
+}
+
+document.getElementById('langToggleBtn').onclick = () => {
+  setLanguage(currentLang === 'en' ? 'fa' : 'en');
+};
+
 // Format Price Multi-currency
 function formatPrice(usdPrice) {
   if (!usdPrice && usdPrice !== 0) return 'N/A';
   if (currency === 'IRT') {
     const irt = usdPrice * IRT_RATE;
-    return irt < 100 ? irt.toFixed(2) + ' Toman' : Math.round(irt).toLocaleString() + ' Toman';
+    return irt < 100 ? irt.toFixed(2) + ' ' + i18n[currentLang].toman : Math.round(irt).toLocaleString(currentLang === 'fa' ? 'fa-IR' : 'en-US') + ' ' + i18n[currentLang].toman;
   } else if (currency === 'EUR') {
     return '€' + (usdPrice * EUR_RATE).toLocaleString(undefined, {minimumFractionDigits: usdPrice < 1 ? 6 : 2});
   }
@@ -409,10 +567,10 @@ function createRow(coin, index) {
 function toggleWatchlist(coinId) {
   if (watchlist.includes(coinId)) {
     watchlist = watchlist.filter(id => id !== coinId);
-    showToast('Removed from Watchlist');
+    showToast(i18n[currentLang].msg_removed_watchlist);
   } else {
     watchlist.push(coinId);
-    showToast('Added to Watchlist');
+    showToast(i18n[currentLang].msg_added_watchlist);
   }
   localStorage.setItem('memqi_watchlist', JSON.stringify(watchlist));
   renderAll();
@@ -424,7 +582,7 @@ function renderWatchlist() {
   const watchedCoins = coinsData.filter(c => watchlist.includes(c.id));
   
   if(watchedCoins.length === 0) {
-    container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);">No coins added to watchlist yet.</div>';
+    container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--muted);">${i18n[currentLang].msg_no_watchlist}</div>`;
     return;
   }
   watchedCoins.forEach((coin, i) => {
@@ -438,9 +596,9 @@ function generateWhaleRadar() {
   if (coinsData.length === 0) return;
 
   const mockActions = [
-    { type: 'BUY', icon: '🟢', label: 'Whale Buy Alert', class: 'up' },
-    { type: 'SELL', icon: '🔴', label: 'Massive Sell-off', class: 'down' },
-    { type: 'LIQUIDITY', icon: '💧', label: 'Liquidity Injected', class: 'up' }
+    { type: 'BUY', icon: '🟢', label: i18n[currentLang].whale_buy, class: 'up' },
+    { type: 'SELL', icon: '🔴', label: i18n[currentLang].whale_sell, class: 'down' },
+    { type: 'LIQUIDITY', icon: '💧', label: i18n[currentLang].whale_liq, class: 'up' }
   ];
 
   let html = '';
@@ -454,13 +612,13 @@ function generateWhaleRadar() {
         <div class="radar-type">
           <div class="radar-icon">${action.icon}</div>
           <div>
-            <strong>${action.label} on ${coin.name} (${coin.symbol.toUpperCase()})</strong>
-            <div style="font-size:11px;color:var(--muted);">${coin.chain.toUpperCase()} Network • Just now</div>
+            <strong>${action.label} — ${coin.name} (${coin.symbol.toUpperCase()})</strong>
+            <div style="font-size:11px;color:var(--muted);">${coin.chain.toUpperCase()} • ${i18n[currentLang].just_now}</div>
           </div>
         </div>
-        <div style="text-align:right;">
+        <div>
           <b class="${action.class}">$${parseInt(amount).toLocaleString()}</b>
-          <div style="font-size:10px;color:var(--muted);">Confirmed Tx</div>
+          <div style="font-size:10px;color:var(--muted);">${i18n[currentLang].confirmed_tx}</div>
         </div>
       </div>
     `;
@@ -488,9 +646,9 @@ function renderPortfolio() {
           <strong>${coin.name} (${coin.symbol.toUpperCase()})</strong>
           <div style="font-size:11px;color:var(--muted);">${amount.toLocaleString()} coins</div>
         </div>
-        <div style="text-align:right;">
+        <div>
           <b>${formatPrice(val)}</b>
-          <button style="background:none;border:0;color:var(--red);cursor:pointer;display:block;margin-left:auto;font-size:11px;" onclick="removePortfolio('${coinId}')">Remove</button>
+          <button style="background:none;border:0;color:var(--red);cursor:pointer;display:block;margin-left:auto;font-size:11px;" onclick="removePortfolio('${coinId}')">✕</button>
         </div>
       `;
       container.appendChild(item);
@@ -504,7 +662,7 @@ function removePortfolio(coinId) {
   delete portfolio[coinId];
   localStorage.setItem('memqi_portfolio', JSON.stringify(portfolio));
   renderPortfolio();
-  showToast('Asset removed');
+  showToast(i18n[currentLang].msg_asset_removed);
 }
 
 document.getElementById('addPortBtn').onclick = () => {
@@ -516,7 +674,7 @@ document.getElementById('addPortBtn').onclick = () => {
     localStorage.setItem('memqi_portfolio', JSON.stringify(portfolio));
     renderPortfolio();
     document.getElementById('portAmountInput').value = '';
-    showToast('Portfolio updated');
+    showToast(i18n[currentLang].msg_port_updated);
   }
 };
 
@@ -526,7 +684,7 @@ function renderAlerts() {
   container.innerHTML = '';
 
   if (alerts.length === 0) {
-    container.innerHTML = '<div style="font-size:12px;color:var(--muted);">No active alerts.</div>';
+    container.innerHTML = `<div style="font-size:12px;color:var(--muted);">${i18n[currentLang].msg_no_alerts}</div>`;
     return;
   }
 
@@ -554,7 +712,7 @@ document.getElementById('addAlertBtn').onclick = () => {
     localStorage.setItem('memqi_alerts', JSON.stringify(alerts));
     renderAlerts();
     document.getElementById('alertPriceInput').value = '';
-    showToast('Alert set successfully');
+    showToast(i18n[currentLang].msg_alert_set);
   }
 };
 
@@ -707,15 +865,16 @@ document.getElementById('themeToggleBtn').onclick = () => {
 document.getElementById('currencySelect').onchange = (e) => {
   currency = e.target.value;
   renderAll();
-  showToast(`Base currency set to ${currency}`);
+  showToast(`${i18n[currentLang].msg_bg_currency} ${currency}`);
 };
 
 document.getElementById('refreshBtn').onclick = () => {
-  showToast('Refreshing live prices...');
+  showToast(i18n[currentLang].msg_refreshing);
   fetchCryptoData();
 };
 
 // Init
+setLanguage(currentLang);
 fetchCryptoData();
 setInterval(fetchCryptoData, 30000);
 </script>
