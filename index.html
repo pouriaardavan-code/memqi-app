@@ -2,160 +2,217 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEMQI Pro — Ultimate Meme Coin Intelligence & Whale Radar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MEMQI Pro — Ultimate Crypto Intelligence</title>
 <style>
-:root{
-  --bg:#080a0b; --panel:#111415; --panel2:#161a1b; --line:#232728;
-  --text:#f4f6f5; --muted:#8a9290; --green:#35e65c; --red:#ff4f5f;
-  --yellow:#f4c84b; --purple:#a855f7; --blue:#3b82f6; --shadow:0 18px 50px rgba(0,0,0,.35);
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-main: #0a0d0f;
+  --bg-card: rgba(18, 22, 25, 0.85);
+  --bg-card-hover: #161b20;
+  --bg-input: #121619;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: #10b981;
+  
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  
+  --green: #10b981;
+  --green-glow: rgba(16, 185, 129, 0.15);
+  --red: #f43f5e;
+  --red-glow: rgba(244, 63, 94, 0.15);
+  --yellow: #f59e0b;
+  --blue: #3b82f6;
+  --accent: #6366f1;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-main: 0 12px 32px rgba(0,0,0,0.4);
 }
+
 body.light-theme {
-  --bg:#f4f6f5; --panel:#ffffff; --panel2:#e8eceb; --line:#d3d8d6;
-  --text:#0d1110; --muted:#636c6a; --shadow:0 18px 50px rgba(0,0,0,.08);
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #f1f5f9;
+  --border: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --shadow-main: 0 12px 32px rgba(0,0,0,0.05);
 }
-*{box-sizing:border-box; outline:none; font-family: Inter, system-ui, -apple-system, sans-serif;} 
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text); -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s;}
-button,input,select{font:inherit}.app{max-width:1200px;margin:auto;padding:15px 12px 100px}
 
-/* Top Bar */
-.top{display:flex;align-items:center;gap:12px;padding:8px 0 15px}
-.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:22px;letter-spacing:-1px}
-.logo{width:34px;height:34px;border:2px solid #8cff9e;border-radius:50%;background:var(--green);box-shadow:0 0 15px rgba(53,230,92,.4);display:flex;align-items:center;justify-content:center;font-size:16px}
-.brand span{color:var(--green)}.brand b{color:var(--text)}.spacer{flex:1}
-.top-actions{display:flex;gap:8px;align-items:center}
-.iconbtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:13px;font-weight:700;cursor:pointer;padding:8px 12px;border-radius:10px;position:relative;display:flex;align-items:center;gap:4px}
+* { box-sizing: border-box; margin: 0; padding: 0; outline: none; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg-main); color: var(--text-main); transition: background 0.25s ease, color 0.25s ease; -webkit-font-smoothing: antialiased; }
 
-/* Market Metrics & Fear/Greed */
-.market{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px;margin-bottom:15px}
-.market .cell{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
-.label{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.5px}.big{font-size:18px;font-weight:850;margin:6px 0 4px}.up{color:var(--green);font-weight:750;font-size:12px}.down{color:var(--red);font-weight:750;font-size:12px}
+/* Dynamic Font Mono for Numbers */
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 600; letter-spacing: -0.5px; }
 
-/* Fear Greed Bar */
-.fg-bar-bg{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden;position:relative}
-.fg-bar-fill{height:100%;width:50%;background:linear-gradient(90deg, var(--red), var(--yellow), var(--green));transition: width 0.5s}
+/* Container */
+.app { max-width: 1280px; margin: 0 auto; padding: 16px 16px 120px; }
 
-/* Search and Filters */
-.filter-section{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:15px}
-.search-box{flex:1;min-width:240px}
-.search-box input{width:100%;padding:12px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;color:var(--text);font-size:13px}
-.search-box input:focus{border-color:var(--green)}
-.select-filter{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:0 12px;font-size:12px;cursor:pointer}
+/* Header Navbar */
+.top-nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); backdrop-filter: blur(12px); margin-bottom: 20px; box-shadow: var(--shadow-sm); }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+.brand-badge { width: 36px; height: 36px; background: linear-gradient(135deg, var(--green), #047857); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
+.brand span { color: var(--green); }
 
-/* Tabs */
-.tabs{display:flex;gap:8px;margin-bottom:15px;overflow-x:auto;padding-bottom:5px}
-.tab{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:700;white-space:nowrap;font-size:12px}
-.tab.active{border-color:var(--green);color:var(--green);background:var(--panel)}
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.btn-action { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); height: 38px; padding: 0 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease; }
+.btn-action:hover { border-color: var(--border-focus); background: var(--bg-card-hover); }
 
-/* Views Container */
-.view-panel{display:none}
-.view-panel.active{display:block}
+select.btn-action { appearance: none; padding-right: 24px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3af' viewBox='0 0 16 16'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>"); background-repeat: no-repeat; background-position: right 8px center; }
+html[dir="rtl"] select.btn-action { background-position: left 8px center; padding-right: 12px; padding-left: 24px; }
 
-/* Coin Table */
-.table{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
-.thead,.row{display:grid;grid-template-columns:35px 1.4fr 1fr 1fr 1fr 0.8fr 35px;align-items:center;gap:6px;padding:12px 10px}
-html[dir="ltr"] .thead, html[dir="ltr"] .row { text-align: left; }
-html[dir="rtl"] .thead, html[dir="rtl"] .row { text-align: right; }
+/* Grid Dashboard Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+@media(max-width: 768px) { .stats-grid { grid-template-columns: 1fr; } }
 
-.thead{color:var(--muted);font-size:10px;font-weight:800;border-bottom:1px solid var(--line);text-transform:uppercase}
-.row{min-height:60px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
-.row:last-child{border:0}.row:hover{background:var(--panel2)}
-.coin{display:flex;align-items:center;gap:8px}.coin img{width:28px;height:28px;border-radius:50%}
-.coin strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.coin small{display:block;color:var(--muted);font-size:10px}
-.price{font-weight:700;font-size:12px}
-.score-badge{display:inline-block;padding:2px 6px;border-radius:6px;font-size:10px;font-weight:800}
-.score-high{background:rgba(53,230,92,0.15);color:var(--green)}
-.score-med{background:rgba(244,200,75,0.15);color:var(--yellow)}
-.score-low{background:rgba(255,79,95,0.15);color:var(--red)}
-.star-btn{background:transparent;border:0;color:var(--muted);font-size:16px;cursor:pointer;padding:4px}
-.star-btn.active{color:var(--yellow)}
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; box-shadow: var(--shadow-sm); }
+.stat-title { color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.stat-value { font-size: 20px; font-weight: 800; }
+.stat-sub { font-size: 11px; font-weight: 600; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+.stat-sub.up { color: var(--green); }
+.stat-sub.down { color: var(--red); }
+
+/* Progress Bar */
+.progress-bar { height: 6px; background: var(--bg-input); border-radius: var(--radius-full); margin-top: 10px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--red), var(--yellow), var(--green)); transition: width 0.4s ease; }
+
+/* Filter & Search Toolbar */
+.toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.search-container { flex: 1; min-width: 260px; position: relative; }
+.search-container input { width: 100%; height: 42px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0 16px; color: var(--text-main); font-size: 13px; transition: border-color 0.2s; }
+.search-container input:focus { border-color: var(--green); }
+
+/* Navigation Tabs */
+.tabs-header { display: flex; gap: 6px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px; overflow-x: auto; }
+.tab-btn { background: transparent; border: 0; color: var(--text-muted); padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+.tab-btn.active { background: var(--bg-card); color: var(--green); border: 1px solid var(--border); }
+
+/* View Panels */
+.view-panel { display: none; }
+.view-panel.active { display: block; }
+
+/* Pro Data Table */
+.table-wrapper { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-main); }
+.data-table { width: 100%; border-collapse: collapse; text-align: left; }
+html[dir="rtl"] .data-table { text-align: right; }
+
+.data-table th { background: rgba(0,0,0,0.15); color: var(--text-muted); font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+.data-table tbody tr { transition: background 0.15s ease; cursor: pointer; }
+.data-table tbody tr:hover { background: var(--bg-card-hover); }
+.data-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Coin Column */
+.coin-cell { display: flex; align-items: center; gap: 12px; }
+.coin-icon { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-input); }
+.coin-info strong { display: block; font-size: 13px; color: var(--text-main); }
+.coin-info small { color: var(--text-muted); font-size: 11px; text-transform: uppercase; }
+
+/* Badges */
+.badge-score { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 800; }
+.score-high { background: var(--green-glow); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+.score-med { background: rgba(245, 158, 11, 0.15); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+.score-low { background: var(--red-glow); color: var(--red); border: 1px solid rgba(244, 63, 94, 0.3); }
+
+/* Star Favorite Button */
+.btn-star { background: none; border: 0; color: var(--text-muted); font-size: 16px; cursor: pointer; transition: transform 0.1s ease; }
+.btn-star.active { color: var(--yellow); }
+.btn-star:hover { transform: scale(1.2); }
 
 /* Whale Radar Feed */
-.radar-feed{display:flex;flex-direction:column;gap:10px}
-.radar-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:space-between}
-.radar-type{display:flex;align-items:center;gap:10px}
-.radar-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--panel2)}
+.radar-grid { display: flex; flex-direction: column; gap: 10px; }
+.radar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.radar-left { display: flex; align-items: center; gap: 12px; }
+.radar-icon-box { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--bg-input); display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid var(--border); }
 
-/* Bottom Navigation */
-.bottom{position:fixed;left:0;right:0;bottom:0;background:var(--panel);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 0;z-index:20}
-.nav{background:transparent;border:0;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;cursor:pointer}.nav .ni{font-size:18px}.nav.active{color:var(--green)}
+/* Floating Bottom Navigation for Mobile */
+.bottom-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 500px; background: rgba(18, 22, 25, 0.9); border: 1px solid var(--border); backdrop-filter: blur(20px); border-radius: var(--radius-full); display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); z-index: 100; }
+.nav-item { background: transparent; border: 0; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 8px 0; border-radius: var(--radius-full); cursor: pointer; font-size: 10px; font-weight: 700; transition: all 0.2s; }
+.nav-item .icon { font-size: 16px; }
+.nav-item.active { background: var(--green); color: #000; }
 
-/* Toast Popup */
-.toast{position:fixed;left:50%;bottom:75px;transform:translate(-50%,15px);opacity:0;background:var(--panel2);border:1px solid var(--green);color:var(--text);padding:10px 16px;border-radius:10px;z-index:60;transition:.25s;pointer-events:none;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+/* Custom Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 16px; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: var(--shadow-main); }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.modal-close { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; }
 
-/* Coin Modal */
-.coin-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:100;align-items:flex-end;justify-content:center}
-.coin-modal.show{display:flex}.modal-card{width:100%;max-width:600px;max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:24px 24px 0 0;padding:20px;box-shadow:0 -20px 80px rgba(0,0,0,.55)}
-.modal-head{display:flex;align-items:center;gap:12px}.modal-head img{width:45px;height:45px;border-radius:50%}.modal-title{flex:1}.modal-title h2{margin:0;font-size:20px}.modal-title small{color:var(--muted)}.close{border:0;background:var(--panel2);color:var(--text);border-radius:10px;width:36px;height:36px;font-size:20px;cursor:pointer}
-.detail-price{font-size:28px;font-weight:900;margin:15px 0 2px}
+/* Form Cards */
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-top: 16px; }
+.card-title { font-size: 14px; font-weight: 800; color: var(--green); margin-bottom: 14px; text-transform: uppercase; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 700; margin-bottom: 6px; }
+.form-group input, .form-group select { width: 100%; height: 40px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px; color: var(--text-main); font-size: 13px; }
+.btn-primary { width: 100%; height: 42px; background: var(--green); color: #000; font-weight: 800; border: 0; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; transition: opacity 0.2s; }
+.btn-primary:hover { opacity: 0.9; }
 
-/* SVG Sparkline Chart */
-.chart{height:160px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:10px;margin:15px 0 10px}
-.chart svg{width:100%;height:100%}.chart path{fill:none;stroke:var(--green);stroke-width:2.5}
-.chart.down path{stroke:var(--red)}
+/* Sparkline Chart Container */
+.chart-box { height: 140px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 10px; margin: 16px 0; }
+.chart-box svg { width: 100%; height: 100%; }
+.chart-box path { fill: none; stroke: var(--green); stroke-width: 2; }
+.chart-box.down path { stroke: var(--red); }
 
-.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0}
-.stat{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px}.stat span{display:block;color:var(--muted);font-size:10px}.stat b{display:block;margin-top:4px;font-size:13px}
-.actions{display:flex;gap:8px;margin-top:15px}
-.actions button{flex:1;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:12px;font-weight:800;cursor:pointer;font-size:12px}
-.actions .primary{background:var(--green);color:#071008;border-color:var(--green)}
-
-/* Cards & Forms */
-.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
-.card h3{margin:0 0 10px 0;font-size:15px;color:var(--green)}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
-.form-group input, .form-group select{width:100%;padding:10px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:13px}
-.btn{width:100%;padding:12px;background:var(--green);color:#000;border:0;border-radius:10px;font-weight:800;cursor:pointer;margin-top:5px}
-.portfolio-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+/* Toast */
+.toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); opacity: 0; background: var(--bg-card); border: 1px solid var(--green); color: var(--text-main); padding: 10px 20px; border-radius: var(--radius-full); font-size: 12px; font-weight: 700; backdrop-filter: blur(10px); z-index: 300; transition: all 0.3s ease; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
 <div class="app">
-  <!-- Top Bar -->
-  <header class="top">
-    <div class="brand"><div class="logo">🚀</div><span>MEM</span><b>QI Pro</b></div>
-    <div class="spacer"></div>
-    <div class="top-actions">
-      <button class="iconbtn" id="langToggleBtn">🌐 FA</button>
-      <select id="currencySelect" class="select-filter">
+  <!-- Top Bar Navbar -->
+  <header class="top-nav">
+    <div class="brand">
+      <div class="brand-badge">🚀</div>
+      <div>MEM<span>QI</span> <small style="font-size:10px;color:var(--text-muted);font-weight:700">PRO</small></div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-action" id="langToggleBtn">🌐 FA</button>
+      <select id="currencySelect" class="btn-action">
         <option value="USD">USD ($)</option>
-        <option value="IRT">IRT (Toman)</option>
+        <option value="IRT">IRT (تومان)</option>
         <option value="EUR">EUR (€)</option>
       </select>
-      <button class="iconbtn" id="themeToggleBtn">🌙</button>
-      <button class="iconbtn" id="refreshBtn">🔄</button>
+      <button class="btn-action" id="themeToggleBtn">🌙</button>
+      <button class="btn-action" id="refreshBtn">🔄</button>
     </div>
   </header>
 
-  <!-- Market Stats Banner -->
-  <section class="market">
-    <div class="cell">
-      <div class="label" data-i18n="lbl_market_cap">MEME MARKET CAP</div>
-      <div class="big" id="totalCap">Loading...</div>
-      <div class="up" data-i18n="lbl_coingecko_api">Live CoinGecko API</div>
+  <!-- Market Grid Stats Header -->
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-title" data-i18n="lbl_market_cap">Market Cap</div>
+      <div class="stat-value mono" id="totalCap">Loading...</div>
+      <div class="stat-sub up" data-i18n="lbl_coingecko_api">Live CoinGecko Data</div>
     </div>
-    <div class="cell">
-      <div class="label" data-i18n="lbl_volume">24H MEME VOLUME</div>
-      <div class="big" id="totalVol">Loading...</div>
-      <div class="up" data-i18n="lbl_last_24h">Last 24 Hours</div>
+    <div class="stat-card">
+      <div class="stat-title" data-i18n="lbl_volume">24H Volume</div>
+      <div class="stat-value mono" id="totalVol">Loading...</div>
+      <div class="stat-sub up" data-i18n="lbl_last_24h">24 Hour Aggregate</div>
     </div>
-    <div class="cell">
-      <div class="label" data-i18n="lbl_fear_greed">MEME FEAR & GREED INDEX</div>
-      <div class="big" id="fgScore">68 - Extreme Greed</div>
-      <div class="fg-bar-bg"><div class="fg-bar-fill" id="fgFill" style="width: 68%;"></div></div>
+    <div class="stat-card">
+      <div class="stat-title" data-i18n="lbl_fear_greed">Fear & Greed</div>
+      <div class="stat-value" id="fgScore">68 — Greed</div>
+      <div class="progress-bar"><div class="progress-fill" id="fgFill" style="width:68%"></div></div>
     </div>
   </section>
 
-  <!-- Search and Chain Filters -->
-  <div class="filter-section">
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search meme coins (DOGE, PEPE, BONK, SHIB...)..." data-i18n-ph="ph_search">
+  <!-- Toolbar Filters -->
+  <div class="toolbar">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search by coin name or symbol (PEPE, DOGE, BONK)..." data-i18n-ph="ph_search">
     </div>
-    <select id="chainFilter" class="select-filter">
-      <option value="all" data-i18n="opt_all_chains">All Chains</option>
+    <select id="chainFilter" class="btn-action" style="height:42px;">
+      <option value="all" data-i18n="opt_all_chains">All Networks</option>
       <option value="solana">Solana</option>
       <option value="ethereum">Ethereum</option>
       <option value="base">Base</option>
@@ -163,271 +220,299 @@ html[dir="rtl"] .thead, html[dir="rtl"] .row { text-align: right; }
     </select>
   </div>
 
-  <!-- Main View: Home / Market -->
+  <!-- Main View Panel: Market -->
   <div class="view-panel active" id="view-home">
-    <div class="tabs">
-      <button class="tab active" data-filter="all" data-i18n="tab_all">🔥 All Memes</button>
-      <button class="tab" data-filter="gainers" data-i18n="tab_gainers">↗ Top Gainers</button>
-      <button class="tab" data-filter="losers" data-i18n="tab_losers">↘ Top Losers</button>
-      <button class="tab" data-filter="safe" data-i18n="tab_safe">🛡️ Safe Tokens</button>
+    <div class="tabs-header">
+      <button class="tab-btn active" data-filter="all" data-i18n="tab_all">🔥 All Memes</button>
+      <button class="tab-btn" data-filter="gainers" data-i18n="tab_gainers">↗ Top Gainers</button>
+      <button class="tab-btn" data-filter="losers" data-i18n="tab_losers">↘ Top Losers</button>
+      <button class="tab-btn" data-filter="safe" data-i18n="tab_safe">🛡️ Highest Safety</button>
     </div>
 
-    <div class="table">
-      <div class="thead">
-        <div>#</div>
-        <div data-i18n="th_coin">Coin</div>
-        <div data-i18n="th_price">Price</div>
-        <div>24H %</div>
-        <div data-i18n="th_mcap">M. Cap</div>
-        <div data-i18n="th_safety">Safety</div>
-        <div>★</div>
-      </div>
-      <div id="coinRows"></div>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th data-i18n="th_coin">Asset</th>
+            <th data-i18n="th_price">Price</th>
+            <th>24h %</th>
+            <th data-i18n="th_mcap">Market Cap</th>
+            <th data-i18n="th_safety">Safety Score</th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="coinRows"></tbody>
+      </table>
     </div>
   </div>
 
-  <!-- Whale Radar View -->
+  <!-- View Panel: Whale Radar -->
   <div class="view-panel" id="view-radar">
-    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_radar">🐋 Whale & Pump Radar</h2>
-    <p style="font-size:12px;color:var(--muted);" data-i18n="desc_radar">Live monitoring of large transactions and liquidity injections</p>
-    <div class="radar-feed" id="radarFeed"></div>
+    <div style="margin-bottom:16px;">
+      <h2 style="font-size:18px;font-weight:800;" data-i18n="title_radar">🐋 Whale & Pump Radar</h2>
+      <p style="font-size:12px;color:var(--text-muted);" data-i18n="desc_radar">Real-time tracker for high volume DEX liquidity & large transactions</p>
+    </div>
+    <div class="radar-grid" id="radarFeed"></div>
   </div>
 
-  <!-- Watchlist View -->
+  <!-- View Panel: Watchlist -->
   <div class="view-panel" id="view-watchlist">
-    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_watchlist">⭐ My Watchlist</h2>
-    <div class="table">
-      <div class="thead">
-        <div>#</div>
-        <div data-i18n="th_coin">Coin</div>
-        <div data-i18n="th_price">Price</div>
-        <div>24H %</div>
-        <div data-i18n="th_mcap">M. Cap</div>
-        <div data-i18n="th_safety">Safety</div>
-        <div>★</div>
-      </div>
-      <div id="watchlistRows"></div>
+    <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_watchlist">⭐ Watchlist</h2>
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th data-i18n="th_coin">Asset</th>
+            <th data-i18n="th_price">Price</th>
+            <th>24h %</th>
+            <th data-i18n="th_mcap">Market Cap</th>
+            <th data-i18n="th_safety">Safety Score</th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="watchlistRows"></tbody>
+      </table>
     </div>
   </div>
 
-  <!-- Portfolio View -->
+  <!-- View Panel: Portfolio Tracker -->
   <div class="view-panel" id="view-portfolio">
-    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_portfolio">💼 Portfolio Tracker</h2>
-    <div class="card">
-      <h3 data-i18n="title_total_port">Total Portfolio Value</h3>
-      <div style="font-size:26px;font-weight:900;" id="portTotalValue">$0.00</div>
+    <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_portfolio">💼 Portfolio Tracker</h2>
+    <div class="stat-card">
+      <div class="stat-title" data-i18n="title_total_port">Total Balance Value</div>
+      <div class="stat-value mono" style="font-size:28px;color:var(--green)" id="portTotalValue">$0.00</div>
     </div>
     <div class="card">
-      <h3 data-i18n="title_add_asset">Add Transaction</h3>
+      <div class="card-title" data-i18n="title_add_asset">Add Transaction</div>
       <div class="form-group">
-        <label data-i18n="lbl_select_coin">Select Coin</label>
+        <label data-i18n="lbl_select_coin">Select Token</label>
         <select id="portCoinSelect"></select>
       </div>
       <div class="form-group">
-        <label data-i18n="lbl_hold_amount">Hold Amount</label>
+        <label data-i18n="lbl_hold_amount">Quantity</label>
         <input type="number" id="portAmountInput" placeholder="e.g. 500000" data-i18n-ph="ph_amount">
       </div>
-      <button class="btn" id="addPortBtn" data-i18n="btn_add_asset">Add Asset</button>
+      <button class="btn-primary" id="addPortBtn" data-i18n="btn_add_asset">Add to Holdings</button>
     </div>
     <div class="card">
-      <h3 data-i18n="title_your_holdings">Your Holdings</h3>
+      <div class="card-title" data-i18n="title_your_holdings">Current Assets</div>
       <div id="portfolioList"></div>
     </div>
   </div>
 
-  <!-- Alerts View -->
+  <!-- View Panel: Price Alerts -->
   <div class="view-panel" id="view-alerts">
-    <h2 style="font-size:18px;margin-top:10px;" data-i18n="title_alerts">🔔 Price Alerts</h2>
+    <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_alerts">🔔 Price Alerts</h2>
     <div class="card">
-      <h3 data-i18n="title_set_alert">Set New Alert</h3>
+      <div class="card-title" data-i18n="title_set_alert">Create Target Alert</div>
       <div class="form-group">
-        <label data-i18n="lbl_select_coin">Select Coin</label>
+        <label data-i18n="lbl_select_coin">Select Token</label>
         <select id="alertCoinSelect"></select>
       </div>
       <div class="form-group">
         <label data-i18n="lbl_target_price">Target Price ($)</label>
         <input type="number" id="alertPriceInput" step="any" placeholder="e.g. 0.000015" data-i18n-ph="ph_target_price">
       </div>
-      <button class="btn" id="addAlertBtn" data-i18n="btn_set_alert">Set Price Alert</button>
+      <button class="btn-primary" id="addAlertBtn" data-i18n="btn_set_alert">Create Alert</button>
     </div>
     <div class="card">
-      <h3 data-i18n="title_active_alerts">Active Alerts</h3>
+      <div class="card-title" data-i18n="title_active_alerts">Active Alerts</div>
       <div id="alertsList"></div>
     </div>
   </div>
 </div>
 
-<!-- Bottom Navigation Bar -->
-<nav class="bottom">
-  <button class="nav active" data-page="home"><span class="ni">🏠</span><span data-i18n="nav_market">Market</span></button>
-  <button class="nav" data-page="radar"><span class="ni">🐋</span><span data-i18n="nav_radar">Whale Radar</span></button>
-  <button class="nav" data-page="watchlist"><span class="ni">⭐</span><span data-i18n="nav_watchlist">Watchlist</span></button>
-  <button class="nav" data-page="portfolio"><span class="ni">💼</span><span data-i18n="nav_portfolio">Portfolio</span></button>
-  <button class="nav" data-page="alerts"><span class="ni">🔔</span><span data-i18n="nav_alerts">Alerts</span></button>
+<!-- Floating Navigation Bar -->
+<nav class="bottom-nav">
+  <button class="nav-item active" data-page="home"><span class="icon">📈</span><span data-i18n="nav_market">Market</span></button>
+  <button class="nav-item" data-page="radar"><span class="icon">🐋</span><span data-i18n="nav_radar">Radar</span></button>
+  <button class="nav-item" data-page="watchlist"><span class="icon">⭐</span><span data-i18n="nav_watchlist">Watchlist</span></button>
+  <button class="nav-item" data-page="portfolio"><span class="icon">💼</span><span data-i18n="nav_portfolio">Portfolio</span></button>
+  <button class="nav-item" data-page="alerts"><span class="icon">🔔</span><span data-i18n="nav_alerts">Alerts</span></button>
 </nav>
 
-<div class="toast" id="toast">Message</div>
+<!-- Toast Popup -->
+<div class="toast" id="toast">Notification</div>
 
-<!-- Coin Details Modal -->
-<div class="coin-modal" id="coinModal">
-  <div class="modal-card">
-    <div class="modal-head">
-      <img id="modalImg" src="" alt="logo">
-      <div class="modal-title"><h2 id="modalName">Coin</h2><small id="modalSymbol">SYMBOL</small></div>
-      <button class="close" id="closeModal">×</button>
+<!-- Detailed Modal View -->
+<div class="modal-overlay" id="coinModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img id="modalImg" src="" style="width:36px;height:36px;border-radius:50%">
+        <div>
+          <h3 id="modalName" style="font-size:16px;">Token</h3>
+          <small id="modalSymbol" style="color:var(--text-muted);font-weight:700">SYMBOL</small>
+        </div>
+      </div>
+      <button class="modal-close" id="closeModal">✕</button>
     </div>
-    <div class="detail-price" id="modalPrice">$0.00</div>
-    <div id="modalChange" class="up">+0.00% (24H)</div>
+    
+    <div style="margin:12px 0;">
+      <div class="mono" style="font-size:28px;font-weight:800" id="modalPrice">$0.00</div>
+      <div id="modalChange" class="stat-sub up">+0.00%</div>
+    </div>
 
-    <!-- Live SVG Sparkline Chart -->
-    <div class="chart" id="chartBox">
+    <div class="chart-box" id="chartBox">
       <svg viewBox="0 0 500 150" preserveAspectRatio="none">
         <path id="chartPath" d="M0 150 L500 150"></path>
       </svg>
     </div>
 
-    <div class="detail-grid">
-      <div class="stat"><span data-i18n="stat_mcap">MARKET CAP</span><b id="modalCap">$0</b></div>
-      <div class="stat"><span data-i18n="stat_volume">24H VOLUME</span><b id="modalVol">$0</b></div>
-      <div class="stat"><span data-i18n="stat_safety">SAFETY SCORE</span><b id="modalSafety">90/100</b></div>
-      <div class="stat"><span data-i18n="stat_high">24H HIGH</span><b id="modalHigh">$0</b></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+        <span style="font-size:10px;color:var(--text-muted);" data-i18n="stat_mcap">Market Cap</span>
+        <b style="display:block;margin-top:2px;" class="mono" id="modalCap">$0</b>
+      </div>
+      <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+        <span style="font-size:10px;color:var(--text-muted);" data-i18n="stat_volume">24H Volume</span>
+        <b style="display:block;margin-top:2px;" class="mono" id="modalVol">$0</b>
+      </div>
+      <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+        <span style="font-size:10px;color:var(--text-muted);" data-i18n="stat_safety">Safety Score</span>
+        <b style="display:block;margin-top:2px;" id="modalSafety">0/100</b>
+      </div>
+      <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+        <span style="font-size:10px;color:var(--text-muted);" data-i18n="stat_high">24H High</span>
+        <b style="display:block;margin-top:2px;" class="mono" id="modalHigh">$0</b>
+      </div>
     </div>
 
-    <div class="actions">
-      <button class="primary" id="buyDexBtn" data-i18n="btn_swap_dex">⚡ Swap on DEX</button>
-      <button id="modalWatchBtn" data-i18n="btn_add_watchlist">⭐ Add to Watchlist</button>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-primary" style="flex:1;" id="buyDexBtn" data-i18n="btn_swap_dex">⚡ Swap on DEX</button>
+      <button class="btn-action" style="height:42px;" id="modalWatchBtn" data-i18n="btn_add_watchlist">⭐ Watchlist</button>
     </div>
   </div>
 </div>
 
 <script>
-// Translations Dictionary
+// Translations Object
 const i18n = {
   en: {
     lbl_market_cap: "MEME MARKET CAP",
-    lbl_coingecko_api: "Live CoinGecko API",
+    lbl_coingecko_api: "Live CoinGecko Data",
     lbl_volume: "24H MEME VOLUME",
-    lbl_last_24h: "Last 24 Hours",
-    lbl_fear_greed: "MEME FEAR & GREED INDEX",
-    ph_search: "Search meme coins (DOGE, PEPE, BONK, SHIB...)...",
-    opt_all_chains: "All Chains",
+    lbl_last_24h: "24 Hour Aggregate",
+    lbl_fear_greed: "MEME FEAR & GREED",
+    ph_search: "Search by token name or symbol (PEPE, DOGE, BONK)...",
+    opt_all_chains: "All Networks",
     tab_all: "🔥 All Memes",
     tab_gainers: "↗ Top Gainers",
     tab_losers: "↘ Top Losers",
-    tab_safe: "🛡️ Safe Tokens",
-    th_coin: "Coin",
+    tab_safe: "🛡️ Highest Safety",
+    th_coin: "Asset",
     th_price: "Price",
-    th_mcap: "M. Cap",
-    th_safety: "Safety",
+    th_mcap: "Market Cap",
+    th_safety: "Safety Score",
     title_radar: "🐋 Whale & Pump Radar",
-    desc_radar: "Live monitoring of large transactions and liquidity injections",
-    title_watchlist: "⭐ My Watchlist",
+    desc_radar: "Real-time tracker for high volume DEX liquidity & large transactions",
+    title_watchlist: "⭐ Watchlist",
     title_portfolio: "💼 Portfolio Tracker",
-    title_total_port: "Total Portfolio Value",
+    title_total_port: "Total Balance Value",
     title_add_asset: "Add Transaction",
-    lbl_select_coin: "Select Coin",
-    lbl_hold_amount: "Hold Amount",
+    lbl_select_coin: "Select Token",
+    lbl_hold_amount: "Quantity",
     ph_amount: "e.g. 500000",
-    btn_add_asset: "Add Asset",
-    title_your_holdings: "Your Holdings",
+    btn_add_asset: "Add to Holdings",
+    title_your_holdings: "Current Assets",
     title_alerts: "🔔 Price Alerts",
-    title_set_alert: "Set New Alert",
+    title_set_alert: "Create Target Alert",
     lbl_target_price: "Target Price ($)",
     ph_target_price: "e.g. 0.000015",
-    btn_set_alert: "Set Price Alert",
+    btn_set_alert: "Create Alert",
     title_active_alerts: "Active Alerts",
     nav_market: "Market",
-    nav_radar: "Whale Radar",
+    nav_radar: "Radar",
     nav_watchlist: "Watchlist",
     nav_portfolio: "Portfolio",
     nav_alerts: "Alerts",
-    stat_mcap: "MARKET CAP",
-    stat_volume: "24H VOLUME",
-    stat_safety: "SAFETY SCORE",
-    stat_high: "24H HIGH",
+    stat_mcap: "Market Cap",
+    stat_volume: "24H Volume",
+    stat_safety: "Safety Score",
+    stat_high: "24H High",
     btn_swap_dex: "⚡ Swap on DEX",
-    btn_add_watchlist: "⭐ Add to Watchlist",
+    btn_add_watchlist: "⭐ Watchlist",
     msg_no_watchlist: "No coins added to watchlist yet.",
-    msg_no_alerts: "No active alerts.",
+    msg_no_alerts: "No active price alerts.",
     msg_removed_watchlist: "Removed from Watchlist",
     msg_added_watchlist: "Added to Watchlist",
-    msg_asset_removed: "Asset removed",
-    msg_port_updated: "Portfolio updated",
-    msg_alert_set: "Alert set successfully",
-    msg_bg_currency: "Base currency set to",
-    msg_refreshing: "Refreshing live prices...",
-    whale_buy: "Whale Buy Alert",
-    whale_sell: "Massive Sell-off",
-    whale_liq: "Liquidity Injected",
+    msg_asset_removed: "Asset removed from portfolio",
+    msg_port_updated: "Portfolio successfully updated",
+    msg_alert_set: "Price alert saved successfully",
+    msg_bg_currency: "Base currency changed to",
+    msg_refreshing: "Updating market prices...",
+    whale_buy: "Whale Buy Order",
+    whale_sell: "Massive Liquidation",
+    whale_liq: "Liquidity Injection",
     just_now: "Just now",
-    confirmed_tx: "Confirmed Tx",
-    toman: "Toman"
+    confirmed_tx: "Confirmed TX",
+    toman: "تومان"
   },
   fa: {
     lbl_market_cap: "ارزش کل بازار میم‌ها",
-    lbl_coingecko_api: "زنده از CoinGecko API",
+    lbl_coingecko_api: "داده زنده CoinGecko",
     lbl_volume: "حجم معاملات ۲۴ ساعت",
-    lbl_last_24h: "۲۴ ساعت اخیر",
-    lbl_fear_greed: "شاخص ترس و طمع میم‌ها",
-    ph_search: "جستجوی میم کوین (DOGE, PEPE, BONK, SHIB...)...",
+    lbl_last_24h: "مجموع ۲۴ ساعت اخیر",
+    lbl_fear_greed: "شاخص ترس و طمع",
+    ph_search: "جستجوی نماد یا نام توکن (PEPE, DOGE, BONK)...",
     opt_all_chains: "همه شبکه‌ها",
     tab_all: "🔥 همه میم‌ها",
     tab_gainers: "↗ بیشترین رشد",
     tab_losers: "↘ بیشترین ریزش",
-    tab_safe: "🛡️ توکن‌های ایمن‌تر",
-    th_coin: "کوین",
+    tab_safe: "🛡️ بالاترین امنیت",
+    th_coin: "دارایی",
     th_price: "قیمت",
     th_mcap: "ارزش بازار",
-    th_safety: "امنیت",
+    th_safety: "امتیاز امنیت",
     title_radar: "🐋 رادار نهنگ‌ها و پمپ‌های مشکوک",
-    desc_radar: "رصد لحظه‌ای تراکنش‌های بزرگ و خریدهای سنگین میم‌کوین‌ها",
-    title_watchlist: "⭐ لیست زیرنظر من",
+    desc_radar: "رصد لحظه‌ای تراکنش‌های بزرگ و خریدهای سنگین در صرافی‌های غیرمتمرکز",
+    title_watchlist: "⭐ لیست زیرنظر",
     title_portfolio: "💼 مدیریت دارایی (پرتفوی)",
-    title_total_port: "ارزش کل سبد شما",
-    title_add_asset: "افزودن دارایی جدید",
+    title_total_port: "ارزش کل دارایی‌ها",
+    title_add_asset: "ثبت دارایی جدید",
     lbl_select_coin: "انتخاب میم‌کوین",
-    lbl_hold_amount: "تعداد دارایی",
-    ph_amount: "مثلا 500000",
-    btn_add_asset: "ثبت در سبد",
-    title_your_holdings: "دارایی‌های شما",
-    title_alerts: "🔔 هشدار قیمت",
+    lbl_hold_amount: "تعداد",
+    ph_amount: "مثلاً 500000",
+    btn_add_asset: "افزودن به سبد",
+    title_your_holdings: "دارایی‌های ثبت شده",
+    title_alerts: "🔔 هشدارهای قیمت",
     title_set_alert: "تنظیم هشدار جدید",
     lbl_target_price: "قیمت هدف ($)",
-    ph_target_price: "مثلا 0.000015",
+    ph_target_price: "مثلاً 0.000015",
     btn_set_alert: "فعال‌سازی هشدار",
     title_active_alerts: "هشدارهای فعال",
     nav_market: "بازار",
-    nav_radar: "رادار نهنگ",
+    nav_radar: "رادار",
     nav_watchlist: "زیرنظر",
     nav_portfolio: "پرتفوی",
     nav_alerts: "هشدارها",
     stat_mcap: "ارزش بازار",
-    stat_volume: "حجم معاملات ۲۴H",
+    stat_volume: "حجم ۲۴ ساعت",
     stat_safety: "امتیاز امنیت",
-    stat_high: "بیشترین قیمت ۲۴H",
+    stat_high: "سقف ۲۴ ساعت",
     btn_swap_dex: "⚡ معامله سریع روی DEX",
-    btn_add_watchlist: "⭐ افزودن به زیرنظر",
-    msg_no_watchlist: "هیچ میم‌کوینی در لیست زیرنظر شما قرار ندارد.",
-    msg_no_alerts: "هیچ هشداری تنظیم نشده است.",
+    btn_add_watchlist: "⭐ زیرنظر",
+    msg_no_watchlist: "هیچ توکنی در لیست زیرنظر قرار ندارد.",
+    msg_no_alerts: "هیچ هشدار قیمتی فعال نیست.",
     msg_removed_watchlist: "از لیست زیرنظر حذف شد",
     msg_added_watchlist: "به لیست زیرنظر اضافه شد",
-    msg_asset_removed: "دارایی حذف شد",
+    msg_asset_removed: "دارایی از پرتفوی حذف شد",
     msg_port_updated: "پرتفوی به‌روزرسانی شد",
-    msg_alert_set: "هشدار با موفقیت ثبت شد",
+    msg_alert_set: "هشدار قیمت با موفقیت ثبت شد",
     msg_bg_currency: "ارزش پایه تغییر یافت به",
     msg_refreshing: "در حال دریافت آخرین قیمت‌ها...",
     whale_buy: "خرید سنگین نهنگ",
     whale_sell: "فروش ناگهانی",
-    whale_liq: "تزریق سیالیت جدید",
+    whale_liq: "تزریق نقدینگی",
     just_now: "چند لحظه پیش",
-    confirmed_tx: "تراکنش تأیید شد",
+    confirmed_tx: "تراکنش تأیید شده",
     toman: "تومان"
   }
 };
 
 let currentLang = localStorage.getItem('memqi_lang') || 'en';
-
-// State Management
 let coinsData = [];
 let watchlist = JSON.parse(localStorage.getItem('memqi_watchlist') || '[]');
 let portfolio = JSON.parse(localStorage.getItem('memqi_portfolio') || '{}');
@@ -447,7 +532,6 @@ function showToast(text) {
   setTimeout(() => toast.classList.remove('show'), 2400);
 }
 
-// Switch Language
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('memqi_lang', lang);
@@ -457,13 +541,11 @@ function setLanguage(lang) {
   document.documentElement.dir = isFarsi ? 'rtl' : 'ltr';
   document.getElementById('langToggleBtn').textContent = isFarsi ? '🌐 EN' : '🌐 FA';
 
-  // Translate static text elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (i18n[lang][key]) el.textContent = i18n[lang][key];
   });
 
-  // Translate placeholders
   document.querySelectorAll('[data-i18n-ph]').forEach(el => {
     const key = el.getAttribute('data-i18n-ph');
     if (i18n[lang][key]) el.placeholder = i18n[lang][key];
@@ -473,29 +555,24 @@ function setLanguage(lang) {
   generateWhaleRadar();
 }
 
-document.getElementById('langToggleBtn').onclick = () => {
-  setLanguage(currentLang === 'en' ? 'fa' : 'en');
-};
+document.getElementById('langToggleBtn').onclick = () => setLanguage(currentLang === 'en' ? 'fa' : 'en');
 
-// Format Price Multi-currency
 function formatPrice(usdPrice) {
   if (!usdPrice && usdPrice !== 0) return 'N/A';
   if (currency === 'IRT') {
     const irt = usdPrice * IRT_RATE;
-    return irt < 100 ? irt.toFixed(2) + ' ' + i18n[currentLang].toman : Math.round(irt).toLocaleString(currentLang === 'fa' ? 'fa-IR' : 'en-US') + ' ' + i18n[currentLang].toman;
+    return (irt < 100 ? irt.toFixed(2) : Math.round(irt).toLocaleString(currentLang === 'fa' ? 'fa-IR' : 'en-US')) + ' ' + i18n[currentLang].toman;
   } else if (currency === 'EUR') {
     return '€' + (usdPrice * EUR_RATE).toLocaleString(undefined, {minimumFractionDigits: usdPrice < 1 ? 6 : 2});
   }
-  return '$' + (usdPrice < 1 ? usdPrice.toFixed(6) : usdPrice.toLocaleString());
+  return '$' + (usdPrice < 1 ? usdPrice.toFixed(6) : usdPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 }
 
-// Fetch Market Data
 async function fetchCryptoData() {
   try {
     const res = await fetch(API_URL);
     coinsData = await res.json();
     
-    // Add mock Safety Scores & Chains to data
     coinsData = coinsData.map(coin => ({
       ...coin,
       safetyScore: Math.floor(Math.random() * 40) + 60,
@@ -506,8 +583,7 @@ async function fetchCryptoData() {
     checkAlerts();
     generateWhaleRadar();
   } catch (err) {
-    console.error(err);
-    showToast('Failed to fetch live market data');
+    showToast('Failed to fetch live data');
   }
 }
 
@@ -542,28 +618,28 @@ function createRow(coin, index) {
   if (coin.safetyScore >= 80) scoreClass = 'score-high';
   else if (coin.safetyScore >= 70) scoreClass = 'score-med';
 
-  const row = document.createElement('div');
-  row.className = 'row';
-  row.innerHTML = `
-    <div style="font-size:11px;color:var(--muted)">${index}</div>
-    <div class="coin">
-      <img src="${coin.image}" loading="lazy">
-      <div>
-        <strong>${coin.name}</strong>
-        <small>${coin.symbol.toUpperCase()} • <span style="text-transform:uppercase">${coin.chain}</span></small>
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td style="color:var(--text-muted);font-size:11px">${index}</td>
+    <td>
+      <div class="coin-cell">
+        <img class="coin-icon" src="${coin.image}" loading="lazy">
+        <div class="coin-info">
+          <strong>${coin.name}</strong>
+          <small>${coin.symbol.toUpperCase()} • ${coin.chain}</small>
+        </div>
       </div>
-    </div>
-    <div class="price">${formatPrice(coin.current_price)}</div>
-    <div class="${change >= 0 ? 'up' : 'down'}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</div>
-    <div>${formatPrice(coin.market_cap)}</div>
-    <div><span class="score-badge ${scoreClass}">${coin.safetyScore}/100</span></div>
-    <button class="star-btn ${isWatched ? 'active' : ''}" onclick="event.stopPropagation(); toggleWatchlist('${coin.id}')">★</button>
+    </td>
+    <td class="mono">${formatPrice(coin.current_price)}</td>
+    <td class="mono ${change >= 0 ? 'stat-sub up' : 'stat-sub down'}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</td>
+    <td class="mono">${formatPrice(coin.market_cap)}</td>
+    <td><span class="badge-score ${scoreClass}">${coin.safetyScore}/100</span></td>
+    <td><button class="btn-star ${isWatched ? 'active' : ''}" onclick="event.stopPropagation(); toggleWatchlist('${coin.id}')">★</button></td>
   `;
-  row.onclick = () => openModal(coin);
-  return row;
+  tr.onclick = () => openModal(coin);
+  return tr;
 }
 
-// Watchlist Logic
 function toggleWatchlist(coinId) {
   if (watchlist.includes(coinId)) {
     watchlist = watchlist.filter(id => id !== coinId);
@@ -582,15 +658,12 @@ function renderWatchlist() {
   const watchedCoins = coinsData.filter(c => watchlist.includes(c.id));
   
   if(watchedCoins.length === 0) {
-    container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--muted);">${i18n[currentLang].msg_no_watchlist}</div>`;
+    container.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:30px;">${i18n[currentLang].msg_no_watchlist}</td></tr>`;
     return;
   }
-  watchedCoins.forEach((coin, i) => {
-    container.appendChild(createRow(coin, i + 1));
-  });
+  watchedCoins.forEach((coin, i) => container.appendChild(createRow(coin, i + 1)));
 }
 
-// Whale Radar Generator
 function generateWhaleRadar() {
   const container = document.getElementById('radarFeed');
   if (coinsData.length === 0) return;
@@ -609,16 +682,16 @@ function generateWhaleRadar() {
 
     html += `
       <div class="radar-card">
-        <div class="radar-type">
-          <div class="radar-icon">${action.icon}</div>
+        <div class="radar-left">
+          <div class="radar-icon-box">${action.icon}</div>
           <div>
-            <strong>${action.label} — ${coin.name} (${coin.symbol.toUpperCase()})</strong>
-            <div style="font-size:11px;color:var(--muted);">${coin.chain.toUpperCase()} • ${i18n[currentLang].just_now}</div>
+            <strong style="font-size:13px;display:block;">${action.label} — ${coin.name} (${coin.symbol.toUpperCase()})</strong>
+            <span style="font-size:11px;color:var(--text-muted);">${coin.chain.toUpperCase()} • ${i18n[currentLang].just_now}</span>
           </div>
         </div>
-        <div>
-          <b class="${action.class}">$${parseInt(amount).toLocaleString()}</b>
-          <div style="font-size:10px;color:var(--muted);">${i18n[currentLang].confirmed_tx}</div>
+        <div style="text-align:right;">
+          <div class="mono stat-sub ${action.class}" style="font-size:14px;">$${parseInt(amount).toLocaleString()}</div>
+          <span style="font-size:10px;color:var(--text-muted);">${i18n[currentLang].confirmed_tx}</span>
         </div>
       </div>
     `;
@@ -626,7 +699,6 @@ function generateWhaleRadar() {
   container.innerHTML = html;
 }
 
-// Portfolio Logic
 function renderPortfolio() {
   const container = document.getElementById('portfolioList');
   container.innerHTML = '';
@@ -640,15 +712,15 @@ function renderPortfolio() {
       totalVal += val;
 
       const item = document.createElement('div');
-      item.className = 'portfolio-item';
+      item.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);";
       item.innerHTML = `
         <div>
           <strong>${coin.name} (${coin.symbol.toUpperCase()})</strong>
-          <div style="font-size:11px;color:var(--muted);">${amount.toLocaleString()} coins</div>
+          <div style="font-size:11px;color:var(--text-muted);">${amount.toLocaleString()} tokens</div>
         </div>
-        <div>
-          <b>${formatPrice(val)}</b>
-          <button style="background:none;border:0;color:var(--red);cursor:pointer;display:block;margin-left:auto;font-size:11px;" onclick="removePortfolio('${coinId}')">✕</button>
+        <div style="text-align:right">
+          <b class="mono">${formatPrice(val)}</b>
+          <button style="background:none;border:0;color:var(--red);cursor:pointer;display:block;margin-left:auto;margin-top:2px;font-size:11px;" onclick="removePortfolio('${coinId}')">✕</button>
         </div>
       `;
       container.appendChild(item);
@@ -678,24 +750,23 @@ document.getElementById('addPortBtn').onclick = () => {
   }
 };
 
-// Alerts System
 function renderAlerts() {
   const container = document.getElementById('alertsList');
   container.innerHTML = '';
 
   if (alerts.length === 0) {
-    container.innerHTML = `<div style="font-size:12px;color:var(--muted);">${i18n[currentLang].msg_no_alerts}</div>`;
+    container.innerHTML = `<div style="font-size:12px;color:var(--text-muted);padding:10px 0;">${i18n[currentLang].msg_no_alerts}</div>`;
     return;
   }
 
   alerts.forEach((alert, index) => {
     const coin = coinsData.find(c => c.id === alert.coinId);
     const item = document.createElement('div');
-    item.className = 'portfolio-item';
+    item.style.cssText = "display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);";
     item.innerHTML = `
       <div>
         <strong>${coin ? coin.name : alert.coinId}</strong>
-        <div style="font-size:11px;color:var(--muted);">Target: $${alert.targetPrice}</div>
+        <div style="font-size:11px;color:var(--text-muted);" class="mono">Target: $${alert.targetPrice}</div>
       </div>
       <button style="background:none;border:0;color:var(--red);cursor:pointer;" onclick="removeAlert(${index})">✕</button>
     `;
@@ -726,7 +797,7 @@ function checkAlerts() {
   alerts.forEach(alert => {
     const coin = coinsData.find(c => c.id === alert.coinId);
     if (coin && coin.current_price >= alert.targetPrice) {
-      showToast(`🚨 ALERT: ${coin.name} hit $${coin.current_price}`);
+      showToast(`🚨 ALERT: ${coin.name} hit target $${coin.current_price}`);
     }
   });
 }
@@ -744,13 +815,11 @@ function populateDropdowns() {
   }
 }
 
-// Draw Sparkline Path
 function generateSparklineSVG(sparklinePrices) {
   if (!sparklinePrices || sparklinePrices.length === 0) return "M0 150 L500 150";
   const min = Math.min(...sparklinePrices);
   const max = Math.max(...sparklinePrices);
-  const width = 500;
-  const height = 150;
+  const width = 500, height = 150;
   
   return sparklinePrices.map((price, i) => {
     const x = (i / (sparklinePrices.length - 1)) * width;
@@ -759,7 +828,6 @@ function generateSparklineSVG(sparklinePrices) {
   }).join(' ');
 }
 
-// Modal Manager
 const modal = document.getElementById('coinModal');
 function openModal(coin) {
   activeCoin = coin;
@@ -772,10 +840,10 @@ function openModal(coin) {
   const changeEl = document.getElementById('modalChange');
   const isUp = change >= 0;
   changeEl.textContent = (isUp ? '+' : '') + change.toFixed(2) + '% (24H)';
-  changeEl.className = isUp ? 'up' : 'down';
+  changeEl.className = isUp ? 'stat-sub up' : 'stat-sub down';
 
   const chartBox = document.getElementById('chartBox');
-  chartBox.className = isUp ? 'chart' : 'chart down';
+  chartBox.className = isUp ? 'chart-box' : 'chart-box down';
 
   if (coin.sparkline_in_7d && coin.sparkline_in_7d.price) {
     document.getElementById('chartPath').setAttribute('d', generateSparklineSVG(coin.sparkline_in_7d.price));
@@ -805,10 +873,9 @@ document.getElementById('modalWatchBtn').onclick = () => {
   if (activeCoin) toggleWatchlist(activeCoin.id);
 };
 
-// Routing & Tabs
-document.querySelectorAll('.nav').forEach(btn => {
+document.querySelectorAll('.nav-item').forEach(btn => {
   btn.onclick = () => {
-    document.querySelectorAll('.nav').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.view-panel').forEach(v => v.classList.remove('active'));
 
     btn.classList.add('active');
@@ -817,7 +884,6 @@ document.querySelectorAll('.nav').forEach(btn => {
   };
 });
 
-// Search & Filter Listeners
 function applyFilters() {
   const query = document.getElementById('searchInput').value.toLowerCase();
   const selectedChain = document.getElementById('chainFilter').value;
@@ -834,28 +900,24 @@ function applyFilters() {
 document.getElementById('searchInput').addEventListener('input', applyFilters);
 document.getElementById('chainFilter').addEventListener('change', applyFilters);
 
-document.querySelectorAll('.tab').forEach(btn => {
+document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.onclick = () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     const filter = btn.dataset.filter;
     
     if (filter === 'gainers') {
-      const sorted = [...coinsData].sort((a,b) => (b.price_change_percentage_24h||0) - (a.price_change_percentage_24h||0));
-      renderHomeTable(sorted);
+      renderHomeTable([...coinsData].sort((a,b) => (b.price_change_percentage_24h||0) - (a.price_change_percentage_24h||0)));
     } else if (filter === 'losers') {
-      const sorted = [...coinsData].sort((a,b) => (a.price_change_percentage_24h||0) - (b.price_change_percentage_24h||0));
-      renderHomeTable(sorted);
+      renderHomeTable([...coinsData].sort((a,b) => (a.price_change_percentage_24h||0) - (b.price_change_percentage_24h||0)));
     } else if (filter === 'safe') {
-      const sorted = [...coinsData].sort((a,b) => b.safetyScore - a.safetyScore);
-      renderHomeTable(sorted);
+      renderHomeTable([...coinsData].sort((a,b) => b.safetyScore - a.safetyScore));
     } else {
       renderHomeTable(coinsData);
     }
   };
 });
 
-// Theme & Currency Toggles
 document.getElementById('themeToggleBtn').onclick = () => {
   document.body.classList.toggle('light-theme');
   const isLight = document.body.classList.contains('light-theme');
@@ -873,7 +935,6 @@ document.getElementById('refreshBtn').onclick = () => {
   fetchCryptoData();
 };
 
-// Init
 setLanguage(currentLang);
 fetchCryptoData();
 setInterval(fetchCryptoData, 30000);
