@@ -173,7 +173,6 @@ html[dir="rtl"] .data-table { text-align: right; }
 <body>
 
 <div class="app">
-  <!-- Top Bar Navbar -->
   <header class="top-nav">
     <div class="brand">
       <div class="brand-badge">📡</div>
@@ -191,7 +190,6 @@ html[dir="rtl"] .data-table { text-align: right; }
     </div>
   </header>
 
-  <!-- Market Grid Stats Header -->
   <section class="stats-grid">
     <div class="stat-card">
       <div class="stat-title" data-i18n="lbl_market_cap">Market Cap</div>
@@ -210,10 +208,9 @@ html[dir="rtl"] .data-table { text-align: right; }
     </div>
   </section>
 
-  <!-- Toolbar Filters -->
   <div class="toolbar">
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search by name, symbol, or contract address..." data-i18n-ph="ph_search">
+      <input type="text" id="searchInput" placeholder="Search by name, symbol, or Contract Address (Any Network)..." data-i18n-ph="ph_search">
     </div>
     <select id="chainFilter" class="btn-action" style="height:42px;">
       <option value="all" data-i18n="opt_all_chains">All Networks</option>
@@ -221,10 +218,11 @@ html[dir="rtl"] .data-table { text-align: right; }
       <option value="ethereum">Ethereum</option>
       <option value="base">Base</option>
       <option value="bsc">BNB Chain</option>
+      <option value="polygon">Polygon</option>
+      <option value="arbitrum">Arbitrum</option>
     </select>
   </div>
 
-  <!-- Main View Panel: Market -->
   <div class="view-panel active" id="view-home">
     <div class="tabs-header">
       <button class="tab-btn active" data-filter="all" data-i18n="tab_all">🔥 All Memes</button>
@@ -251,7 +249,6 @@ html[dir="rtl"] .data-table { text-align: right; }
     </div>
   </div>
 
-  <!-- View Panel: Whale Radar -->
   <div class="view-panel" id="view-radar">
     <div style="margin-bottom:16px;">
       <h2 style="font-size:18px;font-weight:800;" data-i18n="title_radar">🐋 Whale & Pump Radar</h2>
@@ -260,7 +257,6 @@ html[dir="rtl"] .data-table { text-align: right; }
     <div class="radar-grid" id="radarFeed"></div>
   </div>
 
-  <!-- View Panel: Watchlist -->
   <div class="view-panel" id="view-watchlist">
     <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_watchlist">⭐ Watchlist</h2>
     <div class="table-wrapper">
@@ -281,7 +277,6 @@ html[dir="rtl"] .data-table { text-align: right; }
     </div>
   </div>
 
-  <!-- View Panel: Portfolio Tracker -->
   <div class="view-panel" id="view-portfolio">
     <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_portfolio">💼 Portfolio Tracker</h2>
     <div class="stat-card">
@@ -306,7 +301,6 @@ html[dir="rtl"] .data-table { text-align: right; }
     </div>
   </div>
 
-  <!-- View Panel: Price Alerts -->
   <div class="view-panel" id="view-alerts">
     <h2 style="font-size:18px;font-weight:800;margin-bottom:16px;" data-i18n="title_alerts">🔔 Price Alerts</h2>
     <div class="card">
@@ -328,7 +322,6 @@ html[dir="rtl"] .data-table { text-align: right; }
   </div>
 </div>
 
-<!-- Floating Navigation Bar -->
 <nav class="bottom-nav">
   <button class="nav-item active" data-page="home"><span class="icon">📈</span><span data-i18n="nav_market">Market</span></button>
   <button class="nav-item" data-page="radar"><span class="icon">🐋</span><span data-i18n="nav_radar">Radar</span></button>
@@ -337,10 +330,8 @@ html[dir="rtl"] .data-table { text-align: right; }
   <button class="nav-item" data-page="alerts"><span class="icon">🔔</span><span data-i18n="nav_alerts">Alerts</span></button>
 </nav>
 
-<!-- Toast Popup -->
 <div class="toast" id="toast">Notification</div>
 
-<!-- Detailed Modal View -->
 <div class="modal-overlay" id="coinModal">
   <div class="modal-box">
     <div class="modal-header">
@@ -357,7 +348,7 @@ html[dir="rtl"] .data-table { text-align: right; }
     <div style="margin:12px 0;">
       <div class="mono" style="font-size:28px;font-weight:800" id="modalPrice">$0.00</div>
       <div id="modalChange" class="stat-sub up">+0.00%</div>
-      <div style="margin-top:6px;font-size:11px;color:var(--text-muted);">
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted);" id="contractContainer">
         Contract: <span id="modalContract" class="mono contract-tag"></span>
       </div>
     </div>
@@ -403,7 +394,7 @@ const i18n = {
     lbl_volume: "24H MEME VOLUME",
     lbl_last_24h: "24 Hour Aggregate",
     lbl_fear_greed: "MEME FEAR & GREED",
-    ph_search: "Search by name, symbol, or contract address...",
+    ph_search: "Search by name, symbol, or Contract Address (Any Network)...",
     opt_all_chains: "All Networks",
     tab_all: "🔥 All Memes",
     tab_gainers: "↗ Top Gainers",
@@ -451,6 +442,8 @@ const i18n = {
     msg_bg_currency: "Base currency changed to",
     msg_refreshing: "Updating market prices...",
     msg_copied: "Contract Address Copied!",
+    msg_searching_contract: "Searching multi-chain DexScreener...",
+    msg_contract_not_found: "Token contract not found on DEXes",
     whale_buy: "Whale Buy Order",
     whale_sell: "Massive Liquidation",
     whale_liq: "Liquidity Injection",
@@ -464,7 +457,7 @@ const i18n = {
     lbl_volume: "حجم معاملات ۲۴ ساعت",
     lbl_last_24h: "مجموع ۲۴ ساعت اخیر",
     lbl_fear_greed: "شاخص ترس و طمع",
-    ph_search: "جستجو بر اساس نام، نماد یا آدرس قرارداد...",
+    ph_search: "جستجو با نام، نماد یا کانترکت (همه شبکه‌ها)...",
     opt_all_chains: "همه شبکه‌ها",
     tab_all: "🔥 همه میم‌ها",
     tab_gainers: "↗ بیشترین رشد",
@@ -512,6 +505,8 @@ const i18n = {
     msg_bg_currency: "ارزش پایه تغییر یافت به",
     msg_refreshing: "در حال دریافت آخرین قیمت‌ها...",
     msg_copied: "آدرس قرارداد کپی شد!",
+    msg_searching_contract: "در حال جستجوی کانترکت در شبکه‌ها...",
+    msg_contract_not_found: "توکن با این آدرس پیدا نشد",
     whale_buy: "خرید سنگین نهنگ",
     whale_sell: "فروش ناگهانی",
     whale_liq: "تزریق نقدینگی",
@@ -577,17 +572,8 @@ function formatPrice(usdPrice) {
   return '$' + (usdPrice < 1 ? usdPrice.toFixed(6) : usdPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 }
 
-// Helper to generate a realistic mock contract address
-function generateMockContract(coinId) {
-  const chars = '0123456789abcdefABCDEF';
-  let hash = '0x';
-  for (let i = 0; i < 40; i++) {
-    hash += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return hash;
-}
-
 function copyToClipboard(text) {
+  if(!text) return;
   navigator.clipboard.writeText(text);
   showToast(i18n[currentLang].msg_copied);
 }
@@ -597,16 +583,13 @@ async function fetchCryptoData() {
     const res = await fetch(API_URL);
     coinsData = await res.json();
     
-    coinsData = coinsData.map(coin => {
-      const contract = generateMockContract(coin.id);
-      return {
-        ...coin,
-        safetyScore: Math.floor(Math.random() * 40) + 60,
-        chain: ['solana', 'ethereum', 'base', 'bsc'][Math.floor(Math.random() * 4)],
-        contractAddress: contract,
-        shortContract: contract.substring(0, 6) + '...' + contract.substring(contract.length - 4)
-      };
-    });
+    coinsData = coinsData.map(coin => ({
+      ...coin,
+      safetyScore: Math.floor(Math.random() * 40) + 60,
+      chain: coin.chain || ['solana', 'ethereum', 'base', 'bsc'][Math.floor(Math.random() * 4)],
+      contractAddress: coin.contractAddress || '',
+      shortContract: coin.contractAddress ? (coin.contractAddress.substring(0, 6) + '...' + coin.contractAddress.substring(coin.contractAddress.length - 4)) : ''
+    }));
 
     renderAll();
     checkAlerts();
@@ -647,16 +630,20 @@ function createRow(coin, index) {
   if (coin.safetyScore >= 80) scoreClass = 'score-high';
   else if (coin.safetyScore >= 70) scoreClass = 'score-med';
 
+  const contractHTML = coin.contractAddress 
+    ? `<span class="contract-tag mono" title="${coin.contractAddress}" onclick="event.stopPropagation(); copyToClipboard('${coin.contractAddress}')">📋 ${coin.shortContract}</span>`
+    : '';
+
   const tr = document.createElement('tr');
   tr.innerHTML = `
     <td style="color:var(--text-muted);font-size:11px">${index}</td>
     <td>
       <div class="coin-cell">
-        <img class="coin-icon" src="${coin.image}" loading="lazy">
+        <img class="coin-icon" src="${coin.image || 'https://via.placeholder.com/36'}" loading="lazy">
         <div class="coin-info">
           <strong>${coin.name}</strong>
           <small>${coin.symbol.toUpperCase()} • ${coin.chain}</small>
-          <span class="contract-tag mono" title="${coin.contractAddress}" onclick="event.stopPropagation(); copyToClipboard('${coin.contractAddress}')">📋 ${coin.shortContract}</span>
+          ${contractHTML}
         </div>
       </div>
     </td>
@@ -861,14 +848,19 @@ function generateSparklineSVG(sparklinePrices) {
 const modal = document.getElementById('coinModal');
 function openModal(coin) {
   activeCoin = coin;
-  document.getElementById('modalImg').src = coin.image;
+  document.getElementById('modalImg').src = coin.image || 'https://via.placeholder.com/36';
   document.getElementById('modalName').textContent = coin.name;
   document.getElementById('modalSymbol').textContent = coin.symbol.toUpperCase();
   document.getElementById('modalPrice').textContent = formatPrice(coin.current_price);
   
   const modalContract = document.getElementById('modalContract');
-  modalContract.textContent = coin.contractAddress;
-  modalContract.onclick = () => copyToClipboard(coin.contractAddress);
+  if(coin.contractAddress) {
+    document.getElementById('contractContainer').style.display = 'block';
+    modalContract.textContent = coin.contractAddress;
+    modalContract.onclick = () => copyToClipboard(coin.contractAddress);
+  } else {
+    document.getElementById('contractContainer').style.display = 'none';
+  }
 
   const change = coin.price_change_percentage_24h || 0;
   const changeEl = document.getElementById('modalChange');
@@ -881,12 +873,14 @@ function openModal(coin) {
 
   if (coin.sparkline_in_7d && coin.sparkline_in_7d.price) {
     document.getElementById('chartPath').setAttribute('d', generateSparklineSVG(coin.sparkline_in_7d.price));
+  } else {
+    document.getElementById('chartPath').setAttribute('d', "M0 150 L500 150");
   }
 
   document.getElementById('modalCap').textContent = formatPrice(coin.market_cap);
   document.getElementById('modalVol').textContent = formatPrice(coin.total_volume);
   document.getElementById('modalSafety').textContent = `${coin.safetyScore}/100`;
-  document.getElementById('modalHigh').textContent = formatPrice(coin.high_24h);
+  document.getElementById('modalHigh').textContent = formatPrice(coin.high_24h || coin.current_price);
 
   modal.classList.add('show');
 }
@@ -896,10 +890,14 @@ modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('show');
 
 document.getElementById('buyDexBtn').onclick = () => {
   if (activeCoin) {
-    const dexUrl = activeCoin.chain === 'solana' 
-      ? `https://raydium.io/swap/?outputCurrency=${activeCoin.contractAddress}` 
-      : `https://uniswap.org/`;
-    window.open(dexUrl, '_blank');
+    if(activeCoin.url) {
+      window.open(activeCoin.url, '_blank');
+    } else {
+      const dexUrl = activeCoin.chain === 'solana' 
+        ? `https://raydium.io/swap/?outputCurrency=${activeCoin.contractAddress || activeCoin.id}` 
+        : `https://uniswap.org/`;
+      window.open(dexUrl, '_blank');
+    }
   }
 };
 
@@ -918,18 +916,67 @@ document.querySelectorAll('.nav-item').forEach(btn => {
   };
 });
 
-// Updated search function to include Contract Address
+// Real Multi-Chain DEX Contract Search via DexScreener API
+let searchDebounceTimer = null;
+
+async function fetchContractFromDexScreener(address) {
+  showToast(i18n[currentLang].msg_searching_contract);
+  try {
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${address}`);
+    const data = await res.json();
+    
+    if (data.pairs && data.pairs.length > 0) {
+      const pair = data.pairs[0];
+      const searchedToken = {
+        id: pair.baseToken.address.toLowerCase(),
+        name: pair.baseToken.name,
+        symbol: pair.baseToken.symbol,
+        image: pair.info && pair.info.imageUrl ? pair.info.imageUrl : 'https://via.placeholder.com/36',
+        current_price: parseFloat(pair.priceUsd) || 0,
+        price_change_percentage_24h: pair.priceChange ? (pair.priceChange.h24 || 0) : 0,
+        market_cap: pair.marketCap || pair.fdv || 0,
+        total_volume: pair.volume ? (pair.volume.h24 || 0) : 0,
+        safetyScore: Math.floor(Math.random() * 30) + 70,
+        chain: pair.chainId,
+        contractAddress: pair.baseToken.address,
+        shortContract: pair.baseToken.address.substring(0, 6) + '...' + pair.baseToken.address.substring(pair.baseToken.address.length - 4),
+        url: pair.url
+      };
+      
+      renderHomeTable([searchedToken]);
+    } else {
+      showToast(i18n[currentLang].msg_contract_not_found);
+      renderHomeTable([]);
+    }
+  } catch (err) {
+    showToast(i18n[currentLang].msg_contract_not_found);
+  }
+}
+
 function applyFilters() {
   const query = document.getElementById('searchInput').value.toLowerCase().trim();
   const selectedChain = document.getElementById('chainFilter').value;
 
+  clearTimeout(searchDebounceTimer);
+
+  // Check if input looks like a Blockchain Contract Address (e.g. 0x... or Solana Base58 32-44 chars)
+  const isContractAddress = (query.startsWith('0x') && query.length >= 30) || query.length >= 32;
+
+  if (isContractAddress) {
+    searchDebounceTimer = setTimeout(() => {
+      fetchContractFromDexScreener(query);
+    }, 400);
+    return;
+  }
+
+  // Normal Search (Name, Symbol)
   const filtered = coinsData.filter(coin => {
     const matchesSearch = 
       coin.name.toLowerCase().includes(query) || 
       coin.symbol.toLowerCase().includes(query) ||
       (coin.contractAddress && coin.contractAddress.toLowerCase().includes(query));
 
-    const matchesChain = selectedChain === 'all' || coin.chain === selectedChain;
+    const matchesChain = selectedChain === 'all' || coin.chain.toLowerCase() === selectedChain.toLowerCase();
     return matchesSearch && matchesChain;
   });
 
