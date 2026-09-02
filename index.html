@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 *{box-sizing:border-box; outline:none;} 
 html{scroll-behavior:smooth}
 body{margin:0;background:radial-gradient(circle at 50% -10%,#162017 0,#080a0b 34%);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif; -webkit-tap-highlight-color: transparent;}
-button,input{font:inherit}.app{max-width:1180px;margin:auto;padding:15px 12px 100px}
+button,input,select{font:inherit}.app{max-width:1180px;margin:auto;padding:15px 12px 100px}
 
 /* Top Bar */
 .top{display:flex;align-items:center;gap:12px;padding:8px 0 15px}
@@ -201,7 +201,7 @@ button,input{font:inherit}.app{max-width:1180px;margin:auto;padding:15px 12px 10
 <div class="coin-modal" id="coinModal">
   <div class="modal-card">
     <div class="modal-head">
-      <img id="modalImg" src="">
+      <img id="modalImg" src="" alt="Coin Logo">
       <div class="modal-title"><h2 id="modalName">Coin</h2><small id="modalSymbol">SYMBOL</small></div>
       <button class="close" id="closeModal">×</button>
     </div>
@@ -290,7 +290,7 @@ function createRow(coin, index) {
   row.innerHTML = `
     <div>${index}</div>
     <div class="coin">
-      <img src="${coin.image}" loading="lazy">
+      <img src="${coin.image}" loading="lazy" alt="${coin.name}">
       <div>
         <strong>${coin.name}</strong>
         <small>${coin.symbol.toUpperCase()}</small>
