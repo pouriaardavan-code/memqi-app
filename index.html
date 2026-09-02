@@ -116,6 +116,10 @@ html[dir="rtl"] .data-table { text-align: right; }
 .coin-info strong { display: block; font-size: 14px; color: var(--text-main); font-weight: 700; }
 .coin-info small { color: var(--text-muted); font-size: 11px; text-transform: uppercase; font-weight: 600; }
 
+/* Contract Tag */
+.contract-tag { font-size: 10px; color: var(--text-muted); background: var(--bg-input); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; margin-top: 3px; display: inline-block; cursor: pointer; transition: all 0.2s; }
+.contract-tag:hover { color: var(--green); border-color: var(--green); }
+
 /* Badges */
 .badge-score { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 26px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 800; border: 1px solid transparent; }
 .score-high { background: var(--green-glow); color: var(--green); border-color: rgba(34, 197, 94, 0.3); }
@@ -209,7 +213,7 @@ html[dir="rtl"] .data-table { text-align: right; }
   <!-- Toolbar Filters -->
   <div class="toolbar">
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search by coin name or symbol (PEPE, DOGE, BONK)..." data-i18n-ph="ph_search">
+      <input type="text" id="searchInput" placeholder="Search by name, symbol, or contract address..." data-i18n-ph="ph_search">
     </div>
     <select id="chainFilter" class="btn-action" style="height:42px;">
       <option value="all" data-i18n="opt_all_chains">All Networks</option>
@@ -353,6 +357,9 @@ html[dir="rtl"] .data-table { text-align: right; }
     <div style="margin:12px 0;">
       <div class="mono" style="font-size:28px;font-weight:800" id="modalPrice">$0.00</div>
       <div id="modalChange" class="stat-sub up">+0.00%</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-muted);">
+        Contract: <span id="modalContract" class="mono contract-tag"></span>
+      </div>
     </div>
 
     <div class="chart-box" id="chartBox">
@@ -396,7 +403,7 @@ const i18n = {
     lbl_volume: "24H MEME VOLUME",
     lbl_last_24h: "24 Hour Aggregate",
     lbl_fear_greed: "MEME FEAR & GREED",
-    ph_search: "Search by token name or symbol (PEPE, DOGE, BONK)...",
+    ph_search: "Search by name, symbol, or contract address...",
     opt_all_chains: "All Networks",
     tab_all: "🔥 All Memes",
     tab_gainers: "↗ Top Gainers",
@@ -443,6 +450,7 @@ const i18n = {
     msg_alert_set: "Price alert saved successfully",
     msg_bg_currency: "Base currency changed to",
     msg_refreshing: "Updating market prices...",
+    msg_copied: "Contract Address Copied!",
     whale_buy: "Whale Buy Order",
     whale_sell: "Massive Liquidation",
     whale_liq: "Liquidity Injection",
@@ -456,7 +464,7 @@ const i18n = {
     lbl_volume: "حجم معاملات ۲۴ ساعت",
     lbl_last_24h: "مجموع ۲۴ ساعت اخیر",
     lbl_fear_greed: "شاخص ترس و طمع",
-    ph_search: "جستجوی نماد یا نام توکن (PEPE, DOGE, BONK)...",
+    ph_search: "جستجو بر اساس نام، نماد یا آدرس قرارداد...",
     opt_all_chains: "همه شبکه‌ها",
     tab_all: "🔥 همه میم‌ها",
     tab_gainers: "↗ بیشترین رشد",
@@ -503,6 +511,7 @@ const i18n = {
     msg_alert_set: "هشدار قیمت با موفقیت ثبت شد",
     msg_bg_currency: "ارزش پایه تغییر یافت به",
     msg_refreshing: "در حال دریافت آخرین قیمت‌ها...",
+    msg_copied: "آدرس قرارداد کپی شد!",
     whale_buy: "خرید سنگین نهنگ",
     whale_sell: "فروش ناگهانی",
     whale_liq: "تزریق نقدینگی",
@@ -568,16 +577,36 @@ function formatPrice(usdPrice) {
   return '$' + (usdPrice < 1 ? usdPrice.toFixed(6) : usdPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 }
 
+// Helper to generate a realistic mock contract address
+function generateMockContract(coinId) {
+  const chars = '0123456789abcdefABCDEF';
+  let hash = '0x';
+  for (let i = 0; i < 40; i++) {
+    hash += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return hash;
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text);
+  showToast(i18n[currentLang].msg_copied);
+}
+
 async function fetchCryptoData() {
   try {
     const res = await fetch(API_URL);
     coinsData = await res.json();
     
-    coinsData = coinsData.map(coin => ({
-      ...coin,
-      safetyScore: Math.floor(Math.random() * 40) + 60,
-      chain: ['solana', 'ethereum', 'base', 'bsc'][Math.floor(Math.random() * 4)]
-    }));
+    coinsData = coinsData.map(coin => {
+      const contract = generateMockContract(coin.id);
+      return {
+        ...coin,
+        safetyScore: Math.floor(Math.random() * 40) + 60,
+        chain: ['solana', 'ethereum', 'base', 'bsc'][Math.floor(Math.random() * 4)],
+        contractAddress: contract,
+        shortContract: contract.substring(0, 6) + '...' + contract.substring(contract.length - 4)
+      };
+    });
 
     renderAll();
     checkAlerts();
@@ -627,6 +656,7 @@ function createRow(coin, index) {
         <div class="coin-info">
           <strong>${coin.name}</strong>
           <small>${coin.symbol.toUpperCase()} • ${coin.chain}</small>
+          <span class="contract-tag mono" title="${coin.contractAddress}" onclick="event.stopPropagation(); copyToClipboard('${coin.contractAddress}')">📋 ${coin.shortContract}</span>
         </div>
       </div>
     </td>
@@ -836,6 +866,10 @@ function openModal(coin) {
   document.getElementById('modalSymbol').textContent = coin.symbol.toUpperCase();
   document.getElementById('modalPrice').textContent = formatPrice(coin.current_price);
   
+  const modalContract = document.getElementById('modalContract');
+  modalContract.textContent = coin.contractAddress;
+  modalContract.onclick = () => copyToClipboard(coin.contractAddress);
+
   const change = coin.price_change_percentage_24h || 0;
   const changeEl = document.getElementById('modalChange');
   const isUp = change >= 0;
@@ -863,7 +897,7 @@ modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('show');
 document.getElementById('buyDexBtn').onclick = () => {
   if (activeCoin) {
     const dexUrl = activeCoin.chain === 'solana' 
-      ? `https://raydium.io/swap/?outputCurrency=${activeCoin.id}` 
+      ? `https://raydium.io/swap/?outputCurrency=${activeCoin.contractAddress}` 
       : `https://uniswap.org/`;
     window.open(dexUrl, '_blank');
   }
@@ -884,12 +918,17 @@ document.querySelectorAll('.nav-item').forEach(btn => {
   };
 });
 
+// Updated search function to include Contract Address
 function applyFilters() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
   const selectedChain = document.getElementById('chainFilter').value;
 
   const filtered = coinsData.filter(coin => {
-    const matchesSearch = coin.name.toLowerCase().includes(query) || coin.symbol.toLowerCase().includes(query);
+    const matchesSearch = 
+      coin.name.toLowerCase().includes(query) || 
+      coin.symbol.toLowerCase().includes(query) ||
+      (coin.contractAddress && coin.contractAddress.toLowerCase().includes(query));
+
     const matchesChain = selectedChain === 'all' || coin.chain === selectedChain;
     return matchesSearch && matchesChain;
   });
