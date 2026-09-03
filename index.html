@@ -2,1008 +2,836 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#07090d">
-<title>MEMQI — Multi-Chain Meme Intelligence</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090a0f">
+<meta name="description" content="MEMQI — Meme Coin Intelligence">
+<title>MEMQI — Meme Coin Intelligence</title>
 
 <style>
 :root{
---bg:#07090d;
---bg2:#0c1017;
---card:rgba(18,22,30,.82);
---card2:rgba(25,30,40,.94);
---input:rgba(10,13,19,.9);
---border:rgba(255,255,255,.085);
---text:#f4f7fb;
---muted:#8993a5;
---green:#22c55e;
---red:#ef4444;
---yellow:#eab308;
---blue:#3b82f6;
---purple:#8b5cf6;
---cyan:#06b6d4;
---orange:#f97316;
---radius:16px;
---shadow:0 25px 70px rgba(0,0,0,.35)
+  --bg:#090a0f;
+  --bg2:#0d0f16;
+  --card:#11131b;
+  --card2:#151823;
+  --line:#252936;
+  --text:#f4f6fb;
+  --muted:#8d94a7;
+  --accent:#8b5cf6;
+  --accent2:#22d3ee;
+  --green:#20d49a;
+  --red:#ff5575;
+  --yellow:#f5c451;
+  --orange:#ff914d;
+  --shadow:0 16px 45px rgba(0,0,0,.28);
+  --radius:18px;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+[data-theme="light"]{
+  --bg:#f5f7fb;
+  --bg2:#ffffff;
+  --card:#ffffff;
+  --card2:#f1f3f8;
+  --line:#dfe3ec;
+  --text:#121522;
+  --muted:#697185;
+  --shadow:0 12px 35px rgba(30,40,70,.10);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-font-family:"Plus Jakarta Sans",sans-serif;
-color:var(--text);
-background:
-radial-gradient(circle at 10% 0%,rgba(34,197,94,.09),transparent 27%),
-radial-gradient(circle at 90% 5%,rgba(59,130,246,.08),transparent 25%),
-radial-gradient(circle at 50% 100%,rgba(139,92,246,.07),transparent 30%),
-var(--bg);
-min-height:100vh
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(139,92,246,.12),transparent 30%),
+    radial-gradient(circle at 85% 10%,rgba(34,211,238,.08),transparent 28%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
 }
 
-body.light{
---bg:#f3f6fa;
---bg2:#fff;
---card:rgba(255,255,255,.92);
---card2:#fff;
---input:#f1f4f8;
---border:rgba(0,0,0,.08);
---text:#10141c;
---muted:#687386
+button,
+input,
+select{
+  font:inherit;
 }
 
-button,input,select{font:inherit}
-button{cursor:pointer}
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.hidden{
+  display:none!important;
+}
 
 .app{
-max-width:1400px;
-margin:auto;
-padding:20px 17px 120px
+  width:min(1500px,100%);
+  margin:auto;
+  padding:16px 16px 90px;
 }
 
-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px;
-margin-bottom:17px
+/* HEADER */
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
 }
 
 .brand{
-display:flex;
-align-items:center;
-gap:11px
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
 .logo{
-width:45px;
-height:45px;
-border-radius:14px;
-display:grid;
-place-items:center;
-font-size:21px;
-font-weight:800;
-color:#031008;
-background:linear-gradient(135deg,#22c55e,#86efac);
-box-shadow:0 0 35px rgba(34,197,94,.25)
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  font-size:15px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 8px 25px rgba(139,92,246,.25);
 }
 
-.brand h1{font-size:20px;font-weight:800}
-.brand span{
-display:block;
-font-size:9px;
-letter-spacing:1.5px;
-color:var(--green);
-margin-top:2px
+.brand-title{
+  font-weight:900;
+  letter-spacing:.5px;
+  font-size:20px;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:2px;
 }
 
 .header-actions{
-display:flex;
-gap:7px
+  display:flex;
+  gap:8px;
 }
 
-.icon-btn,.lang-btn{
-height:39px;
-padding:0 11px;
-border:1px solid var(--border);
-border-radius:10px;
-color:var(--text);
-background:var(--card)
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:var(--card);
+  color:var(--text);
+  display:grid;
+  place-items:center;
 }
+
+/* STATUS */
 
 .status-row{
-display:flex;
-flex-wrap:wrap;
-gap:7px;
-margin-bottom:17px
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding-bottom:4px;
+  margin-bottom:16px;
 }
 
 .status{
-font-size:9px;
-color:var(--muted);
-border:1px solid var(--border);
-background:var(--card);
-padding:7px 10px;
-border-radius:999px
+  white-space:nowrap;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--muted);
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:11px;
 }
 
-.status i{
-display:inline-block;
-width:6px;
-height:6px;
-border-radius:50%;
-background:var(--green);
-margin-right:5px
+.status.ok{
+  color:var(--green);
 }
+
+.status.warn{
+  color:var(--yellow);
+}
+
+.status.bad{
+  color:var(--red);
+}
+
+/* HERO */
 
 .hero{
-position:relative;
-overflow:hidden;
-border:1px solid var(--border);
-border-radius:23px;
-padding:27px;
-background:
-radial-gradient(circle at 90% 0%,rgba(34,197,94,.13),transparent 30%),
-radial-gradient(circle at 0% 100%,rgba(59,130,246,.1),transparent 30%),
-var(--card);
-box-shadow:var(--shadow);
-margin-bottom:17px
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 80% 20%,rgba(34,211,238,.10),transparent 30%),
+    radial-gradient(circle at 10% 80%,rgba(139,92,246,.12),transparent 35%),
+    var(--card);
+  border-radius:26px;
+  padding:26px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
 }
 
-.hero h2{
-font-size:clamp(25px,4vw,41px);
-line-height:1.08;
-max-width:760px;
-margin-bottom:10px
+.hero h1{
+  font-size:clamp(28px,5vw,50px);
+  line-height:1.02;
+  letter-spacing:-1.5px;
+  max-width:760px;
 }
-
-.hero h2 span{color:var(--green)}
 
 .hero p{
-max-width:750px;
-font-size:12px;
-line-height:1.8;
-color:var(--muted)
+  color:var(--muted);
+  max-width:700px;
+  line-height:1.7;
+  margin-top:13px;
 }
 
-.hero-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:9px;
-margin-top:23px
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:22px;
 }
 
 .stat{
-padding:14px;
-border:1px solid var(--border);
-border-radius:14px;
-background:rgba(0,0,0,.12)
+  background:var(--card2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
 }
 
-.stat small{
-display:block;
-font-size:9px;
-color:var(--muted);
-margin-bottom:7px
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
 }
 
-.stat strong{font-size:18px}
+.stat-value{
+  font-size:21px;
+  font-weight:850;
+  margin-top:5px;
+}
+
+/* SEARCH */
 
 .search-wrap{
-display:flex;
-gap:9px;
-margin-bottom:20px
+  display:flex;
+  gap:8px;
+  margin:16px 0;
 }
 
-.search{flex:1}
-
-.search input{
-width:100%;
-height:49px;
-padding:0 15px;
-outline:none;
-border:1px solid var(--border);
-border-radius:13px;
-background:var(--input);
-color:var(--text)
+.search{
+  flex:1;
+  height:50px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:0 16px;
+  color:var(--text);
+  outline:none;
 }
 
-.search input:focus{
-border-color:rgba(34,197,94,.5);
-box-shadow:0 0 0 3px rgba(34,197,94,.08)
+.search:focus{
+  border-color:var(--accent);
 }
 
-.primary{
-border:0;
-padding:0 18px;
-border-radius:12px;
-font-weight:800;
-color:#031008;
-background:linear-gradient(135deg,#22c55e,#4ade80)
+.primary-btn{
+  border:0;
+  border-radius:15px;
+  padding:0 20px;
+  background:linear-gradient(135deg,var(--accent),#6d5dfc);
+  color:#fff;
+  font-weight:800;
 }
 
-.section{margin-top:25px}
+/* GRID */
+
+.section{
+  margin-top:18px;
+}
 
 .section-head{
-display:flex;
-justify-content:space-between;
-align-items:end;
-gap:10px;
-margin-bottom:12px
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
 }
 
-.section-head h3{font-size:16px}
-.section-head p{
-font-size:9px;
-color:var(--muted);
-margin-top:4px
+.section-title{
+  font-size:18px;
+  font-weight:850;
 }
 
-.live{
-font-size:9px;
-color:var(--green);
-font-weight:800
+.section-sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
 }
 
-.radar-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px
+.grid{
+  display:grid;
+  gap:12px;
 }
 
-.radar-card{
-position:relative;
-overflow:hidden;
-min-height:130px;
-padding:15px;
-border:1px solid var(--border);
-border-radius:16px;
-background:var(--card)
+.grid-4{
+  grid-template-columns:repeat(4,1fr);
 }
 
-.radar-title{
-font-size:9px;
-letter-spacing:.7px;
-color:var(--muted)
+.grid-3{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.grid-2{
+  grid-template-columns:repeat(2,1fr);
+}
+
+/* CARD */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+
+.card-title{
+  font-size:13px;
+  font-weight:800;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.small{
+  font-size:11px;
+}
+
+.big{
+  font-size:26px;
+  font-weight:900;
+}
+
+/* RADAR */
+
+.radar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.radar-item{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px;
+  background:var(--card2);
+}
+
+.radar-icon{
+  font-size:22px;
+}
+
+.radar-name{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:8px;
 }
 
 .radar-value{
-font-size:24px;
-font-weight:800;
-margin:11px 0 4px
+  font-size:20px;
+  font-weight:900;
+  margin-top:3px;
 }
 
-.radar-desc{
-font-size:9px;
-color:var(--muted)
+/* SCORE */
+
+.score-card{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:18px;
+  align-items:center;
 }
 
-.green{color:var(--green)}
-.red{color:var(--red)}
-.yellow{color:var(--yellow)}
-.blue{color:var(--blue)}
-.purple{color:var(--purple)}
-.cyan{color:var(--cyan)}
-
-.alpha{
-display:grid;
-grid-template-columns:1.35fr 1fr;
-gap:11px
+.score-ring{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  position:relative;
+  background:conic-gradient(var(--accent) var(--score),var(--line) 0);
 }
 
-.alpha-main,.alpha-side{
-padding:17px;
-border:1px solid var(--border);
-border-radius:17px;
-background:var(--card)
-}
-
-.alpha-title{
-display:flex;
-justify-content:space-between;
-align-items:center
-}
-
-.alpha-title h3{font-size:14px}
-
-.badge{
-font-size:8px;
-padding:5px 8px;
-border-radius:999px;
-color:var(--green);
-border:1px solid rgba(34,197,94,.25);
-background:rgba(34,197,94,.08)
-}
-
-.alpha-score{
-font-size:41px;
-font-weight:800;
-margin:17px 0 6px
-}
-
-.score-bar{
-height:5px;
-overflow:hidden;
-border-radius:20px;
-background:#202632
-}
-
-.score-bar span{
-display:block;
-height:100%;
-border-radius:20px;
-background:linear-gradient(90deg,#ef4444,#eab308,#22c55e)
-}
-
-.signal{
-display:flex;
-justify-content:space-between;
-gap:10px;
-padding:10px 0;
-font-size:10px;
-border-bottom:1px solid var(--border)
-}
-
-.signal:last-child{border-bottom:0}
-.signal span{color:var(--muted)}
-
-.filters{
-display:flex;
-gap:7px;
-overflow:auto;
-padding-bottom:4px;
-margin-bottom:11px
-}
-
-.filter{
-white-space:nowrap;
-padding:8px 12px;
-font-size:10px;
-color:var(--muted);
-background:var(--card);
-border:1px solid var(--border);
-border-radius:9px
-}
-
-.filter.active{
-color:#031008;
-background:var(--green);
-border-color:var(--green);
-font-weight:800
-}
-
-.token-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:11px
-}
-
-.token{
-padding:15px;
-border:1px solid var(--border);
-border-radius:17px;
-background:var(--card);
-transition:.2s
-}
-
-.token:hover{
-transform:translateY(-2px);
-border-color:rgba(34,197,94,.3)
-}
-
-.token-top{
-display:flex;
-justify-content:space-between;
-align-items:start
-}
-
-.coin{
-display:flex;
-align-items:center;
-gap:9px
-}
-
-.coin img{
-width:38px;
-height:38px;
-border-radius:50%;
-background:#171c25
-}
-
-.coin-name{font-size:12px;font-weight:700}
-.coin-symbol{
-font-size:9px;
-color:var(--muted);
-text-transform:uppercase
-}
-
-.change{
-font-size:10px;
-font-weight:800
-}
-
-.price{
-font-size:20px;
-font-weight:800;
-margin:14px 0 11px
-}
-
-.metrics{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:6px
-}
-
-.metric{
-padding:8px;
-border:1px solid var(--border);
-border-radius:10px;
-background:rgba(0,0,0,.1)
-}
-
-.metric small{
-display:block;
-font-size:7px;
-color:var(--muted);
-margin-bottom:4px
-}
-
-.metric strong{font-size:9px}
-
-.score{
-display:flex;
-justify-content:space-between;
-align-items:end;
-gap:10px;
-margin-top:11px;
-padding-top:10px;
-border-top:1px solid var(--border)
-}
-
-.score-label{
-font-size:8px;
-color:var(--muted)
-}
-
-.score-bar-small{
-width:100px;
-height:4px;
-margin-top:6px;
-border-radius:20px;
-background:#202632;
-overflow:hidden
-}
-
-.score-bar-small span{
-display:block;
-height:100%;
-background:linear-gradient(90deg,#ef4444,#eab308,#22c55e)
+.score-ring:after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border-radius:50%;
+  background:var(--card);
 }
 
 .score-number{
-font-size:12px;
-font-weight:800
+  position:relative;
+  z-index:2;
+  font-size:28px;
+  font-weight:900;
 }
 
-.token-buttons{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:6px;
-margin-top:10px
+.progress-row{
+  margin-top:10px;
 }
 
-.small-btn{
-height:33px;
-border:1px solid var(--border);
-border-radius:9px;
-background:rgba(255,255,255,.025);
-color:var(--text);
-font-size:9px
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:5px;
 }
 
-.small-btn:hover{
-border-color:rgba(34,197,94,.35)
+.progress{
+  height:6px;
+  background:var(--line);
+  border-radius:999px;
+  overflow:hidden;
 }
 
-.pairs{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px
+.progress > span{
+  display:block;
+  height:100%;
+  width:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
 }
 
-.pair{
-padding:14px;
-border:1px solid var(--border);
-border-radius:16px;
-background:var(--card)
+/* FILTERS */
+
+.filters{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  padding-bottom:3px;
 }
 
-.pair-top{
-display:flex;
-justify-content:space-between;
-align-items:center
+.filter{
+  white-space:nowrap;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--muted);
+  border-radius:999px;
+  font-size:11px;
+}
+
+.filter.active{
+  color:#fff;
+  background:var(--accent);
+  border-color:var(--accent);
+}
+
+/* TOKEN */
+
+.token-card{
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.token-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(139,92,246,.45);
+}
+
+.token-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.token-id{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.coin-img{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--card2);
+  object-fit:cover;
+  border:1px solid var(--line);
+}
+
+.coin-fallback{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  font-weight:900;
+}
+
+.token-name{
+  font-weight:800;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.token-symbol{
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+}
+
+.change{
+  font-weight:800;
+  font-size:12px;
+}
+
+.up{
+  color:var(--green);
+}
+
+.down{
+  color:var(--red);
+}
+
+.token-price{
+  font-size:21px;
+  font-weight:900;
+  margin:16px 0 12px;
+}
+
+.token-metrics{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.metric{
+  background:var(--card2);
+  border-radius:12px;
+  padding:9px;
+}
+
+.metric-label{
+  font-size:9px;
+  color:var(--muted);
+}
+
+.metric-value{
+  font-size:12px;
+  font-weight:800;
+  margin-top:3px;
+}
+
+.signal{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.badge{
+  border:1px solid var(--line);
+  background:var(--card2);
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:9px;
+  color:var(--muted);
+}
+
+.badge.green{
+  color:var(--green);
+}
+
+.badge.red{
+  color:var(--red);
+}
+
+.badge.yellow{
+  color:var(--yellow);
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+th,td{
+  padding:11px 9px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:11px;
+}
+
+th{
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* CONTRACT */
+
+.contract{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:12px;
+  background:var(--card2);
+  margin-top:8px;
 }
 
 .chain{
-font-size:8px;
-padding:5px 7px;
-border-radius:999px;
-background:rgba(59,130,246,.1);
-color:var(--blue)
+  font-size:10px;
+  font-weight:900;
 }
 
-.pair h4{
-font-size:12px;
-margin-top:11px
+.address{
+  font-family:monospace;
+  color:var(--muted);
+  font-size:10px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.pair p{
-font-size:9px;
-color:var(--muted);
-margin-top:4px
+.contract a{
+  color:var(--accent2);
+  font-size:10px;
 }
 
-.pair-stats{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:6px;
-margin-top:11px
+/* EMPTY */
+
+.empty{
+  padding:28px;
+  text-align:center;
+  border:1px dashed var(--line);
+  border-radius:16px;
+  color:var(--muted);
 }
 
-.pair-stat{
-padding:8px;
-border-radius:9px;
-background:rgba(0,0,0,.1)
+/* LOADER */
+
+.loader{
+  width:20px;
+  height:20px;
+  border:2px solid var(--line);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
 }
 
-.pair-stat small{
-display:block;
-font-size:7px;
-color:var(--muted)
-}
-
-.pair-stat strong{font-size:9px}
-
-.risk-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px
-}
-
-.risk-card{
-padding:15px;
-border:1px solid var(--border);
-border-radius:16px;
-background:var(--card)
-}
-
-.risk-icon{font-size:19px}
-.risk-card h4{
-font-size:11px;
-margin:9px 0 5px
-}
-
-.risk-card p{
-font-size:9px;
-line-height:1.6;
-color:var(--muted)
-}
-
-.multi-chain{
-margin-top:12px;
-padding:14px;
-border:1px solid var(--border);
-border-radius:15px;
-background:var(--card)
-}
-
-.multi-chain-head{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:9px
-}
-
-.multi-chain-head strong{font-size:12px}
-
-.chain-list{
-display:grid;
-gap:6px
-}
-
-.chain-row{
-display:grid;
-grid-template-columns:120px 1fr auto auto;
-gap:8px;
-align-items:center;
-padding:9px;
-border:1px solid var(--border);
-border-radius:10px;
-background:rgba(0,0,0,.1)
-}
-
-.chain-name{
-font-size:9px;
-font-weight:700
-}
-
-.contract{
-font-family:monospace;
-font-size:9px;
-color:var(--muted);
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap
-}
-
-.copy-btn,.explorer-btn{
-border:1px solid var(--border);
-background:var(--card);
-color:var(--text);
-border-radius:7px;
-padding:6px 8px;
-font-size:8px
-}
-
-.copy-btn:hover,.explorer-btn:hover{
-border-color:rgba(34,197,94,.4)
-}
-
-.native{
-color:var(--cyan);
-font-size:8px;
-font-weight:700
-}
-
-.portfolio{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:11px
-}
-
-.panel{
-padding:17px;
-border:1px solid var(--border);
-border-radius:17px;
-background:var(--card)
-}
-
-.panel h3{
-font-size:14px;
-margin-bottom:13px
-}
-
-.form{
-display:grid;
-gap:7px
-}
-
-.form input,.form select{
-width:100%;
-height:41px;
-border:1px solid var(--border);
-border-radius:9px;
-outline:none;
-background:var(--input);
-color:var(--text);
-padding:0 10px
-}
-
-.form button{
-height:41px;
-border:0;
-border-radius:9px;
-background:var(--green);
-font-weight:800
-}
-
-.portfolio-value{
-font-size:28px;
-font-weight:800;
-margin:8px 0
-}
-
-.profit{font-size:10px}
-
-.alert-list{
-display:grid;
-gap:7px
-}
-
-.alert-item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-padding:10px;
-border:1px solid var(--border);
-border-radius:10px
-}
-
-.alert-item strong{font-size:10px}
-.alert-item small{
-display:block;
-font-size:8px;
-color:var(--muted);
-margin-top:3px
-}
-
-.delete{
-border:0;
-background:none;
-color:var(--red);
-font-size:15px
-}
-
-.modal{
-position:fixed;
-z-index:100;
-inset:0;
-display:none;
-align-items:center;
-justify-content:center;
-padding:13px;
-background:rgba(0,0,0,.74);
-backdrop-filter:blur(10px)
-}
-
-.modal.show{display:flex}
-
-.modal-box{
-width:min(950px,100%);
-max-height:93vh;
-overflow:auto;
-border:1px solid var(--border);
-border-radius:22px;
-background:var(--bg2);
-box-shadow:0 35px 120px rgba(0,0,0,.6)
-}
-
-.modal-head{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:17px;
-border-bottom:1px solid var(--border)
-}
-
-.modal-head strong{font-size:13px}
-
-.close{
-width:34px;
-height:34px;
-border:1px solid var(--border);
-border-radius:8px;
-background:var(--card);
-color:var(--text)
-}
-
-.modal-content{padding:17px}
-
-.detail-top{
-display:flex;
-justify-content:space-between;
-align-items:start;
-gap:12px
-}
-
-.detail-coin{
-display:flex;
-align-items:center;
-gap:11px
-}
-
-.detail-coin img{
-width:52px;
-height:52px;
-border-radius:50%
-}
-
-.detail-coin h2{font-size:20px}
-
-.detail-price{text-align:right}
-.detail-price strong{font-size:24px}
-
-.chart{
-height:270px;
-margin-top:17px;
-padding:10px;
-border:1px solid var(--border);
-border-radius:15px;
-background:rgba(0,0,0,.1)
-}
-
-canvas{width:100%;height:100%}
-
-.timeframes{
-display:flex;
-gap:5px;
-margin-top:8px
-}
-
-.timeframes button{
-padding:6px 9px;
-border:1px solid var(--border);
-border-radius:7px;
-background:var(--card);
-color:var(--muted);
-font-size:8px
-}
-
-.timeframes button.active{
-background:var(--green);
-color:#031008
-}
-
-.detail-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:7px;
-margin-top:10px
-}
-
-.detail-metric{
-padding:10px;
-border:1px solid var(--border);
-border-radius:10px;
-background:var(--card)
-}
-
-.detail-metric small{
-display:block;
-font-size:7px;
-color:var(--muted);
-margin-bottom:4px
-}
-
-.detail-metric strong{font-size:10px}
-
-.risk-engine{
-margin-top:11px;
-padding:14px;
-border:1px solid var(--border);
-border-radius:14px;
-background:var(--card)
-}
-
-.risk-engine h3{
-font-size:12px;
-margin-bottom:7px
-}
-
-.risk-row{
-display:flex;
-justify-content:space-between;
-padding:8px 0;
-font-size:9px;
-border-bottom:1px solid var(--border)
-}
-
-.risk-row:last-child{border-bottom:0}
-.risk-row span{color:var(--muted)}
-
-.toast{
-position:fixed;
-z-index:200;
-right:16px;
-bottom:86px;
-padding:12px 14px;
-border:1px solid var(--border);
-border-radius:11px;
-background:#121720;
-color:#fff;
-font-size:10px;
-opacity:0;
-transform:translateY(15px);
-pointer-events:none;
-transition:.25s
-}
-
-.toast.show{
-opacity:1;
-transform:translateY(0)
-}
-
-.bottom-nav{
-position:fixed;
-z-index:50;
-bottom:10px;
-left:50%;
-transform:translateX(-50%);
-width:min(670px,calc(100% - 20px));
-display:grid;
-grid-template-columns:repeat(5,1fr);
-padding:6px;
-border:1px solid var(--border);
-border-radius:17px;
-background:rgba(10,14,20,.91);
-backdrop-filter:blur(20px);
-box-shadow:0 20px 70px rgba(0,0,0,.45)
-}
-
-.bottom-nav button{
-height:47px;
-border:0;
-border-radius:11px;
-background:none;
-color:#7f8998;
-font-size:8px
-}
-
-.bottom-nav button span{
-display:block;
-font-size:16px;
-margin-bottom:2px
-}
-
-.bottom-nav button.active{
-color:var(--green);
-background:rgba(34,197,94,.08)
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
 .loading{
-min-height:160px;
-display:grid;
-place-items:center;
-color:var(--muted);
-font-size:10px
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:30px;
+  color:var(--muted);
 }
 
-.spinner{
-width:25px;
-height:25px;
-border:3px solid #29313d;
-border-top-color:var(--green);
-border-radius:50%;
-animation:spin .8s linear infinite
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+  z-index:1000;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  padding:10px;
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.rtl{direction:rtl}
-
-.rtl .status i{margin-right:0;margin-left:5px}
-.rtl .detail-price{text-align:left}
-.rtl .toast{
-right:auto;
-left:16px
+.modal.show{
+  display:flex;
 }
 
-@media(max-width:1050px){
-.hero-grid,.radar-grid,.risk-grid{
-grid-template-columns:repeat(2,1fr)
-}
-.token-grid{grid-template-columns:repeat(2,1fr)}
-.pairs{grid-template-columns:1fr 1fr}
-}
-
-@media(max-width:700px){
-.app{padding:12px 10px 105px}
-.hero{padding:20px}
-.hero-grid{grid-template-columns:1fr 1fr}
-.search-wrap{flex-direction:column}
-.primary{height:45px}
-.token-grid,.pairs,.portfolio,.alpha{
-grid-template-columns:1fr
-}
-.detail-grid{grid-template-columns:1fr 1fr}
-.chain-row{
-grid-template-columns:90px 1fr auto
-}
-.explorer-btn{display:none}
-.detail-top{flex-direction:column}
-.detail-price{text-align:left}
+.modal-box{
+  width:min(1000px,100%);
+  max-height:94vh;
+  overflow:auto;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:24px 24px 0 0;
+  padding:18px;
 }
 
-@media(max-width:430px){
-.radar-grid,.risk-grid{grid-template-columns:1fr 1fr}
-.chain-row{
-grid-template-columns:1fr auto
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+  margin-bottom:15px;
 }
-.contract{grid-column:1/-1}
+
+.close{
+  width:36px;
+  height:36px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--text);
+}
+
+/* CHART */
+
+.chart{
+  width:100%;
+  height:240px;
+  display:block;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+  width:min(700px,calc(100% - 20px));
+  z-index:900;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+  background:rgba(17,19,27,.88);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:6px;
+}
+
+[data-theme="light"] .bottom-nav{
+  background:rgba(255,255,255,.88);
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:9px 4px;
+  border-radius:13px;
+  font-size:10px;
+}
+
+.nav-btn.active{
+  background:var(--card2);
+  color:var(--text);
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:80px;
+  transform:translateX(-50%) translateY(15px);
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:13px;
+  padding:11px 15px;
+  font-size:11px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:2000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+  .grid-4{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .grid-3{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:680px){
+  .app{
+    padding:12px 12px 90px;
+  }
+
+  .hero{
+    padding:20px;
+  }
+
+  .hero-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .radar{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-4,
+  .grid-3,
+  .grid-2{
+    grid-template-columns:1fr;
+  }
+
+  .score-card{
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+  }
+
+  .score-card .score-details{
+    width:100%;
+    text-align:left;
+  }
+
+  .search-wrap{
+    flex-direction:column;
+  }
+
+  .primary-btn{
+    height:48px;
+  }
 }
 </style>
 </head>
@@ -1012,3042 +840,2992 @@ grid-template-columns:1fr auto
 
 <div class="app">
 
-<header>
+<header class="header">
+  <div class="brand">
+    <div class="logo">MQ</div>
+    <div>
+      <div class="brand-title">MEMQI</div>
+      <div class="brand-sub">Meme Coin Intelligence</div>
+    </div>
+  </div>
 
-<div class="brand">
-<div class="logo">M</div>
-<div>
-<h1>MEMQI</h1>
-<span>MULTI-CHAIN MEME INTELLIGENCE</span>
-</div>
-</div>
-
-<div class="header-actions">
-<button class="lang-btn" id="langBtn" onclick="toggleLanguage()">FA</button>
-<button class="icon-btn" onclick="toggleTheme()">◐</button>
-<button class="icon-btn" onclick="refreshAll()">↻</button>
-</div>
-
+  <div class="header-actions">
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☀️</button>
+    <button class="icon-btn" id="refreshBtn" aria-label="Refresh">↻</button>
+  </div>
 </header>
 
 <div class="status-row">
-<div class="status"><i></i>CoinGecko</div>
-<div class="status"><i></i>DEXScreener</div>
-<div class="status"><i></i><span id="lastUpdate">Connecting...</span></div>
-<div class="status"><i></i>Multi-Chain</div>
+  <div class="status" id="cgStatus">● CoinGecko</div>
+  <div class="status" id="dexStatus">● DEXScreener</div>
+  <div class="status" id="dataStatus">● Waiting</div>
+  <div class="status">● Multi-Chain</div>
 </div>
 
 <section class="hero">
+  <h1>Find the next meme before everyone sees it.</h1>
+  <p>
+    MEMQI combines market data, momentum, liquidity, volume behavior,
+    pair discovery and security signals into one meme-coin intelligence engine.
+  </p>
 
-<h2 data-i18n="heroTitle">
-Find the next <span>meme coin</span> before everyone else.
-</h2>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-label">Meme Market Cap</div>
+      <div class="stat-value" id="heroMC">—</div>
+    </div>
 
-<p data-i18n="heroText">
-MEMQI combines market momentum, liquidity, transaction pressure,
-risk intelligence, multi-chain contracts and DEX data into one
-professional meme-coin terminal.
-</p>
+    <div class="stat">
+      <div class="stat-label">24H Volume</div>
+      <div class="stat-value" id="heroVol">—</div>
+    </div>
 
-<div class="hero-grid">
+    <div class="stat">
+      <div class="stat-label">Fear & Greed</div>
+      <div class="stat-value" id="heroFng">—</div>
+    </div>
 
-<div class="stat">
-<small data-i18n="marketCap">Meme Market Cap</small>
-<strong id="marketCap">—</strong>
-</div>
-
-<div class="stat">
-<small data-i18n="volume">24H Volume</small>
-<strong id="volume">—</strong>
-</div>
-
-<div class="stat">
-<small data-i18n="fear">Fear & Greed</small>
-<strong id="fearGreed">—</strong>
-</div>
-
-<div class="stat">
-<small data-i18n="signals">Active Signals</small>
-<strong id="activeSignals">—</strong>
-</div>
-
-</div>
+    <div class="stat">
+      <div class="stat-label">Active Signals</div>
+      <div class="stat-value" id="heroSignals">—</div>
+    </div>
+  </div>
 </section>
 
 <div class="search-wrap">
-
-<div class="search">
-<input
-id="searchInput"
-data-placeholder-en="Search token, symbol or contract address..."
-data-placeholder-fa="نام، نماد یا آدرس قرارداد..."
-placeholder="Search token, symbol or contract address..."
-oninput="handleSearch()">
-</div>
-
-<button class="primary" onclick="runSearch">
-Scan
-</button>
-
+  <input
+    id="searchInput"
+    class="search"
+    autocomplete="off"
+    placeholder="Search meme, symbol or contract address..."
+  >
+  <button id="scanBtn" class="primary-btn">SCAN</button>
 </div>
 
 <section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-title">Meme Pulse Radar</div>
+      <div class="section-sub">Live market behavior signals</div>
+    </div>
+  </div>
 
-<div class="section-head">
-<div>
-<h3 data-i18n="radar">Meme Pulse Radar</h3>
-<p data-i18n="radarSub">
-Real market signals — no fabricated whale transactions.
-</p>
-</div>
-<span class="live">● LIVE</span>
-</div>
+  <div class="radar">
+    <div class="radar-item">
+      <div class="radar-icon">🚀</div>
+      <div class="radar-name">Early Opportunity</div>
+      <div class="radar-value" id="radarPump">—</div>
+    </div>
 
-<div class="radar-grid">
+    <div class="radar-item">
+      <div class="radar-icon">📊</div>
+      <div class="radar-name">Volume Acceleration</div>
+      <div class="radar-value" id="radarVolume">—</div>
+    </div>
 
-<div class="radar-card">
-<div class="radar-title">🔥 EARLY PUMP</div>
-<div class="radar-value green" id="earlyPump">—</div>
-<div class="radar-desc" id="earlyPumpDesc">Scanning...</div>
-</div>
+    <div class="radar-item">
+      <div class="radar-icon">💧</div>
+      <div class="radar-name">Liquidity Health</div>
+      <div class="radar-value" id="radarLiquidity">—</div>
+    </div>
 
-<div class="radar-card">
-<div class="radar-title">📊 BUY PRESSURE</div>
-<div class="radar-value blue" id="buyPressure">—</div>
-<div class="radar-desc">Market transaction pressure</div>
-</div>
-
-<div class="radar-card">
-<div class="radar-title">💧 LIQUIDITY</div>
-<div class="radar-value purple" id="liquidityRadar">—</div>
-<div class="radar-desc">Detected market liquidity</div>
-</div>
-
-<div class="radar-card">
-<div class="radar-title">⚠️ RISK</div>
-<div class="radar-value yellow" id="riskRadar">—</div>
-<div class="radar-desc">Heuristic risk model</div>
-</div>
-
-</div>
+    <div class="radar-item">
+      <div class="radar-icon">🛡️</div>
+      <div class="radar-name">Risk Watch</div>
+      <div class="radar-value" id="radarRisk">—</div>
+    </div>
+  </div>
 </section>
 
 <section class="section">
+  <div class="grid grid-2">
 
-<div class="section-head">
-<div>
-<h3>🎯 MEMQI Alpha</h3>
-<p>Early market-structure opportunities.</p>
-</div>
-</div>
+    <div class="card score-card">
+      <div
+        class="score-ring"
+        id="alphaRing"
+        style="--score:0%"
+      >
+        <div class="score-number" id="alphaScore">—</div>
+      </div>
 
-<div class="alpha">
+      <div class="score-details">
+        <div class="card-title">MEMQI Alpha Engine</div>
+        <div class="small muted">
+          Opportunity ranking based on available real market signals.
+        </div>
 
-<div class="alpha-main">
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Momentum</span>
+            <span id="alphaMomentum">—</span>
+          </div>
+          <div class="progress">
+            <span id="alphaMomentumBar"></span>
+          </div>
+        </div>
 
-<div class="alpha-title">
-<h3 id="alphaCoin">Scanning...</h3>
-<span class="badge">EARLY SIGNAL</span>
-</div>
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Volume / MC</span>
+            <span id="alphaVolume">—</span>
+          </div>
+          <div class="progress">
+            <span id="alphaVolumeBar"></span>
+          </div>
+        </div>
 
-<div class="alpha-score" id="alphaScore">—</div>
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Liquidity</span>
+            <span id="alphaLiquidity">—</span>
+          </div>
+          <div class="progress">
+            <span id="alphaLiquidityBar"></span>
+          </div>
+        </div>
 
-<div class="score-bar">
-<span id="alphaBar" style="width:0"></span>
-</div>
+      </div>
+    </div>
 
-<div class="signal">
-<span>Momentum</span>
-<strong id="alphaMomentum">—</strong>
-</div>
+    <div class="card">
+      <div class="card-title">MEMQI Intelligence Score</div>
+      <div class="small muted">
+        Composite score. Security signals remain conservative when unavailable.
+      </div>
 
-<div class="signal">
-<span>Volume / MC</span>
-<strong id="alphaVolume">—</strong>
-</div>
+      <div class="progress-row" style="margin-top:20px">
+        <div class="progress-head">
+          <span>Market Strength</span>
+          <span id="aiMarket">—</span>
+        </div>
+        <div class="progress"><span id="aiMarketBar"></span></div>
+      </div>
 
-<div class="signal">
-<span>Liquidity</span>
-<strong id="alphaLiquidity">—</strong>
-</div>
+      <div class="progress-row">
+        <div class="progress-head">
+          <span>Momentum</span>
+          <span id="aiMomentum">—</span>
+        </div>
+        <div class="progress"><span id="aiMomentumBar"></span></div>
+      </div>
 
-<div class="signal">
-<span>Risk</span>
-<strong id="alphaRisk">—</strong>
-</div>
+      <div class="progress-row">
+        <div class="progress-head">
+          <span>Liquidity Health</span>
+          <span id="aiLiquidity">—</span>
+        </div>
+        <div class="progress"><span id="aiLiquidityBar"></span></div>
+      </div>
 
-</div>
+      <div class="progress-row">
+        <div class="progress-head">
+          <span>Risk</span>
+          <span id="aiRisk">—</span>
+        </div>
+        <div class="progress"><span id="aiRiskBar"></span></div>
+      </div>
+    </div>
 
-<div class="alpha-side">
-
-<h3>🧠 MEMQI AI Score</h3>
-
-<div class="signal">
-<span>Market Strength</span>
-<strong id="aiMarket">—</strong>
-</div>
-
-<div class="signal">
-<span>Momentum</span>
-<strong id="aiMomentum">—</strong>
-</div>
-
-<div class="signal">
-<span>Liquidity Health</span>
-<strong id="aiLiquidity">—</strong>
-</div>
-
-<div class="signal">
-<span>Risk</span>
-<strong id="aiRisk">—</strong>
-</div>
-
-<div class="signal">
-<span>Overall</span>
-<strong class="green" id="aiOverall">—</strong>
-</div>
-
-</div>
-
-</div>
+  </div>
 </section>
 
 <section class="section" id="marketSection">
+  <div class="section-head">
+    <div>
+      <div class="section-title">Meme Market</div>
+      <div class="section-sub">Ranked by MEMQI intelligence signals</div>
+    </div>
+  </div>
 
-<div class="section-head">
-<div>
-<h3 data-i18n="market">Meme Market</h3>
-<p>Live meme-token market intelligence.</p>
-</div>
-</div>
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="gainers">Gainers</button>
+    <button class="filter" data-filter="losers">Losers</button>
+    <button class="filter" data-filter="momentum">Momentum</button>
+    <button class="filter" data-filter="volume">Volume</button>
+    <button class="filter" data-filter="score">Score</button>
+  </div>
 
-<div class="filters">
-
-<button class="filter active" onclick="setFilter('all',this)">
-All Memes
-</button>
-
-<button class="filter" onclick="setFilter('gainers',this)">
-🚀 Gainers
-</button>
-
-<button class="filter" onclick="setFilter('losers',this)">
-🔻 Losers
-</button>
-
-<button class="filter" onclick="setFilter('momentum',this)">
-⚡ Momentum
-</button>
-
-<button class="filter" onclick="setFilter('volume',this)">
-💰 Volume
-</button>
-
-<button class="filter" onclick="setFilter('score',this)">
-🧠 Score
-</button>
-
-</div>
-
-<div id="tokenGrid" class="token-grid">
-<div class="loading">
-<div class="spinner"></div>
-</div>
-</div>
-
+  <div id="marketGrid" class="grid grid-4" style="margin-top:10px">
+    <div class="loading">
+      <div class="loader"></div>
+      Loading meme market...
+    </div>
+  </div>
 </section>
 
 <section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-title">Opportunity Radar</div>
+      <div class="section-sub">
+        Tokens showing multiple positive market signals
+      </div>
+    </div>
+  </div>
 
-<div class="section-head">
-<div>
-<h3>🆕 New Pair Scanner</h3>
-<p>Fresh DEX pairs detected from live DEX data.</p>
-</div>
-</div>
-
-<div id="newPairs" class="pairs">
-<div class="loading">
-<div class="spinner"></div>
-</div>
-</div>
-
+  <div id="opportunityGrid" class="grid grid-3"></div>
 </section>
 
 <section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-title">New Pair Scanner</div>
+      <div class="section-sub">Recently discovered DEX pairs</div>
+    </div>
+  </div>
 
-<div class="section-head">
-<div>
-<h3>🛡️ Multi-Chain Security Intelligence</h3>
-<p>Contract and market signals across supported networks.</p>
-</div>
-</div>
-
-<div class="risk-grid">
-
-<div class="risk-card">
-<div class="risk-icon">🔐</div>
-<h4>Contract Risk</h4>
-<p>
-Contract metadata is analyzed when available.
-No fake security score is generated when data is missing.
-</p>
-</div>
-
-<div class="risk-card">
-<div class="risk-icon">💧</div>
-<h4>Liquidity Risk</h4>
-<p>
-Liquidity is compared against market size and trading activity.
-</p>
-</div>
-
-<div class="risk-card">
-<div class="risk-icon">🐋</div>
-<h4>Whale Intelligence</h4>
-<p>
-True wallet-level whale monitoring requires an on-chain provider.
-</p>
-</div>
-
-<div class="risk-card">
-<div class="risk-icon">🚨</div>
-<h4>Rug Detection</h4>
-<p>
-Market-structure warnings are shown without pretending they are guaranteed scam detection.
-</p>
-</div>
-
-</div>
-
+  <div id="pairsGrid" class="grid grid-3">
+    <div class="loading">
+      <div class="loader"></div>
+      Scanning pairs...
+    </div>
+  </div>
 </section>
 
-<section class="section" id="portfolioSection">
+<section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-title">Security Intelligence</div>
+      <div class="section-sub">No fabricated security verdicts</div>
+    </div>
+  </div>
 
-<div class="section-head">
-<div>
-<h3>👛 Portfolio Intelligence</h3>
-<p>Local portfolio tracking.</p>
-</div>
-</div>
+  <div class="grid grid-4">
+    <div class="card">
+      <div class="card-title">Contract Risk</div>
+      <div class="big" id="securityContract">—</div>
+      <div class="small muted">Verified data only</div>
+    </div>
 
-<div class="portfolio">
+    <div class="card">
+      <div class="card-title">Liquidity Risk</div>
+      <div class="big" id="securityLiquidity">—</div>
+      <div class="small muted">Based on available liquidity</div>
+    </div>
 
-<div class="panel">
+    <div class="card">
+      <div class="card-title">Whale Intelligence</div>
+      <div class="big" id="securityWhale">N/A</div>
+      <div class="small muted">On-chain provider required</div>
+    </div>
 
-<h3>Portfolio Value</h3>
-
-<div class="portfolio-value" id="portfolioValue">
-$0.00
-</div>
-
-<div class="profit" id="portfolioProfit">—</div>
-
-</div>
-
-<div class="panel">
-
-<h3>Add Position</h3>
-
-<div class="form">
-
-<input id="portfolioSymbol" placeholder="Symbol e.g. PEPE">
-
-<input
-id="portfolioAmount"
-type="number"
-placeholder="Token amount">
-
-<input
-id="portfolioCost"
-type="number"
-placeholder="Cost USD">
-
-<button onclick="addPortfolio()">
-Add Position
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="panel" style="margin-top:11px">
-<div id="portfolioList"></div>
-</div>
-
+    <div class="card">
+      <div class="card-title">Rug Detection</div>
+      <div class="big" id="securityRug">—</div>
+      <div class="small muted">Conservative engine</div>
+    </div>
+  </div>
 </section>
 
-<section class="section" id="alertsSection">
+<section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-title">Portfolio Intelligence</div>
+      <div class="section-sub">Local positions and live market valuation</div>
+    </div>
+  </div>
 
-<div class="section-head">
-<div>
-<h3>🔔 Smart Alerts</h3>
-<p>Above / below price alerts.</p>
-</div>
-</div>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Amount</th>
+            <th>Entry</th>
+            <th>Price</th>
+            <th>P/L</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="portfolioBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-<div class="portfolio">
+<section class="section">
+  <div class="section-head">
+    <div>
+      <div class="section-title">Smart Alerts</div>
+      <div class="section-sub">Alerts work while MEMQI is open</div>
+    </div>
+  </div>
 
-<div class="panel">
-
-<div class="form">
-
-<input
-id="alertSymbol"
-placeholder="Symbol e.g. DOGE">
-
-<select id="alertDirection">
-<option value="above">Price Above</option>
-<option value="below">Price Below</option>
-</select>
-
-<input
-id="alertPrice"
-type="number"
-step="any"
-placeholder="Target price">
-
-<button onclick="addAlert()">
-Create Alert
-</button>
-
-</div>
-
-</div>
-
-<div class="panel">
-<div id="alertList" class="alert-list"></div>
-</div>
-
-</div>
-
+  <div class="card">
+    <div id="alertsList"></div>
+  </div>
 </section>
 
 </div>
 
 <nav class="bottom-nav">
-
-<button class="active" onclick="scrollToTop(this)">
-<span>⌂</span>Home
-</button>
-
-<button onclick="scrollToSection('marketSection',this)">
-<span>📊</span>Market
-</button>
-
-<button onclick="scrollToSection('marketSection',this)">
-<span>🚀</span>Radar
-</button>
-
-<button onclick="scrollToSection('portfolioSection',this)">
-<span>👛</span>Portfolio
-</button>
-
-<button onclick="scrollToSection('alertsSection',this)">
-<span>🔔</span>Alerts
-</button>
-
+  <button class="nav-btn active" data-target="marketSection">⌂<br>Home</button>
+  <button class="nav-btn" data-target="marketSection">◈<br>Market</button>
+  <button class="nav-btn" data-target="opportunityGrid">◎<br>Radar</button>
+  <button class="nav-btn" data-target="portfolioBody">▣<br>Portfolio</button>
+  <button class="nav-btn" data-target="alertsList">◉<br>Alerts</button>
 </nav>
 
-<div class="modal" id="tokenModal">
+<div id="toast" class="toast"></div>
 
-<div class="modal-box">
+<div id="modal" class="modal">
+  <div class="modal-box">
 
-<div class="modal-head">
-<strong>Token Intelligence</strong>
-<button class="close" onclick="closeModal()">×</button>
+    <div class="modal-head">
+      <div>
+        <div id="modalTitle" class="section-title">Token Intelligence</div>
+        <div id="modalSubtitle" class="small muted"></div>
+      </div>
+
+      <button id="modalClose" class="close">×</button>
+    </div>
+
+    <div id="modalContent"></div>
+
+  </div>
 </div>
-
-<div class="modal-content">
-
-<div class="detail-top">
-
-<div class="detail-coin">
-
-<img id="modalImg" src="" alt="">
-
-<div>
-<h2 id="modalName">—</h2>
-<div class="coin-symbol" id="modalSymbol">—</div>
-</div>
-
-</div>
-
-<div class="detail-price">
-<strong id="modalPrice">—</strong>
-<div id="modalChange" class="change">—</div>
-</div>
-
-</div>
-
-<div class="chart">
-<canvas id="priceChart"></canvas>
-</div>
-
-<div class="timeframes">
-<button class="active" onclick="changeChart('1')">24H</button>
-<button onclick="changeChart('7')">7D</button>
-<button onclick="changeChart('30')">30D</button>
-</div>
-
-<div class="detail-grid">
-
-<div class="detail-metric">
-<small>Market Cap</small>
-<strong id="detailMC">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>24H Volume</small>
-<strong id="detailVolume">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>Liquidity</small>
-<strong id="detailLiquidity">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>FDV</small>
-<strong id="detailFDV">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>Buy Txns</small>
-<strong id="detailBuys">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>Sell Txns</small>
-<strong id="detailSells">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>MEMQI Score</small>
-<strong id="detailScore">—</strong>
-</div>
-
-<div class="detail-metric">
-<small>Pair Age</small>
-<strong id="detailAge">—</strong>
-</div>
-
-</div>
-
-<!-- MULTI CHAIN CONTRACTS -->
-
-<div class="multi-chain">
-
-<div class="multi-chain-head">
-<strong>🔗 Multi-Chain Contracts</strong>
-<span class="badge" id="contractCount">0 NETWORKS</span>
-</div>
-
-<div id="chainList" class="chain-list">
-
-<div style="font-size:9px;color:var(--muted)">
-Searching verified token addresses...
-</div>
-
-</div>
-
-</div>
-
-<div class="risk-engine">
-
-<h3>🧠 MEMQI Risk Engine</h3>
-
-<div class="risk-row">
-<span>Liquidity Health</span>
-<strong id="riskLiquidity">—</strong>
-</div>
-
-<div class="risk-row">
-<span>Volume Strength</span>
-<strong id="riskVolume">—</strong>
-</div>
-
-<div class="risk-row">
-<span>Price Momentum</span>
-<strong id="riskMomentum">—</strong>
-</div>
-
-<div class="risk-row">
-<span>Transaction Pressure</span>
-<strong id="riskTransactions">—</strong>
-</div>
-
-<div class="risk-row">
-<span>Overall Risk</span>
-<strong id="riskOverall">—</strong>
-</div>
-
-</div>
-
-<div class="token-buttons">
-
-<button class="small-btn" onclick="toggleWatchlist()">
-⭐ Watchlist
-</button>
-
-<button class="small-btn" onclick="openDex()">
-↗ DEXScreener
-</button>
-
-</div>
-
-</div>
-</div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
+"use strict";
 
 /* =========================================================
-MEMQI MULTI-CHAIN ENGINE
-========================================================= */
+   MEMQI ENGINE
+   ========================================================= */
 
-const API={
+const CONFIG = {
+  CG_MARKETS:
+    "https://api.coingecko.com/api/v3/coins/markets" +
+    "?vs_currency=usd" +
+    "&category=meme-token" +
+    "&order=market_cap_desc" +
+    "&per_page=100" +
+    "&page=1" +
+    "&sparkline=true" +
+    "&price_change_percentage=1h,24h,7d",
 
-CG_MARKETS:
-"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=meme-token&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h",
+  CG_GLOBAL:
+    "https://api.coingecko.com/api/v3/global",
 
-CG_DETAILS:
-"https://api.coingecko.com/api/v3/coins/",
+  CG_FNG:
+    "https://api.alternative.me/fng/?limit=1",
 
-FNG:
-"https://api.alternative.me/fng/?limit=1",
+  CG_DETAILS:
+    "https://api.coingecko.com/api/v3/coins/",
 
-DEX_SEARCH:
-"https://api.dexscreener.com/latest/dex/search?q=",
+  DEX_SEARCH:
+    "https://api.dexscreener.com/latest/dex/search?q=",
 
-DEX_TOKEN:
-"https://api.dexscreener.com/latest/dex/tokens/"
+  DEX_TOKEN:
+    "https://api.dexscreener.com/latest/dex/tokens/",
 
+  REQUEST_TIMEOUT: 10000,
+
+  MARKET_REFRESH: 45000,
+
+  PAIR_REFRESH: 90000
 };
 
-let coins=[];
-let currentFilter="all";
-let activeCoin=null;
-let language=localStorage.getItem("memqi_language")||"en";
-
-/* =========================================================
-SUPPORTED NETWORKS
-========================================================= */
-
-const NETWORKS={
-
-ethereum:{
-name:"Ethereum",
-type:"EVM",
-explorer:"https://etherscan.io/token/"
-},
-
-bsc:{
-name:"BNB Chain",
-type:"EVM",
-explorer:"https://bscscan.com/token/"
-},
-
-base:{
-name:"Base",
-type:"EVM",
-explorer:"https://basescan.org/token/"
-},
-
-arbitrum:{
-name:"Arbitrum",
-type:"EVM",
-explorer:"https://arbiscan.io/token/"
-},
-
-polygon:{
-name:"Polygon",
-type:"EVM",
-explorer:"https://polygonscan.com/token/"
-},
-
-avalanche:{
-name:"Avalanche",
-type:"EVM",
-explorer:"https://snowtrace.io/token/"
-},
-
-optimism:{
-name:"Optimism",
-type:"EVM",
-explorer:"https://optimistic.etherscan.io/token/"
-},
-
-solana:{
-name:"Solana",
-type:"SOL",
-explorer:"https://solscan.io/token/"
-},
-
-tron:{
-name:"TRON",
-type:"TRON",
-explorer:"https://tronscan.org/#/token20/"
-},
-
-sui:{
-name:"Sui",
-type:"SUI",
-explorer:"https://suiscan.xyz/mainnet/coin/"
-},
-
-ton:{
-name:"TON",
-type:"TON",
-explorer:"https://tonviewer.com/"
-},
-
-aptos:{
-name:"Aptos",
-type:"APTOS",
-explorer:"https://explorer.aptoslabs.com/coin/"
-}
-
+const state = {
+  coins: [],
+  pairs: [],
+  fng: null,
+  filter: "all",
+  busy: false,
+  pairBusy: false,
+  lastUpdate: 0,
+  controllers: new Set(),
+  theme: localStorage.getItem("memqi_theme") || "dark"
 };
 
 /* =========================================================
-TRANSLATIONS
-========================================================= */
-
-const T={
-
-en:{
-heroTitle:'Find the next <span>meme coin</span> before everyone else.',
-heroText:"MEMQI combines market momentum, liquidity, transaction pressure, risk intelligence, multi-chain contracts and DEX data into one professional meme-coin terminal.",
-marketCap:"Meme Market Cap",
-volume:"24H Volume",
-fear:"Fear & Greed",
-signals:"Active Signals",
-radar:"Meme Pulse Radar",
-radarSub:"Real market signals — no fabricated whale transactions.",
-market:"Meme Market"
-},
-
-fa:{
-heroTitle:'میم‌کوین بعدی را <span>قبل از بقیه</span> پیدا کن.',
-heroText:"MEMQI مومنتوم بازار، نقدینگی، فشار معاملات، ریسک، قراردادهای چندشبکه‌ای و داده‌های DEX را در یک ترمینال حرفه‌ای ترکیب می‌کند.",
-marketCap:"ارزش بازار میم‌کوین‌ها",
-volume:"حجم ۲۴ ساعته",
-fear:"ترس و طمع",
-signals:"سیگنال‌های فعال",
-radar:"رادار Meme Pulse",
-radarSub:"سیگنال‌های واقعی بازار، بدون تراکنش ساختگی نهنگ‌ها.",
-market:"بازار میم‌کوین"
-}
-
-};
-
-function applyLanguage(){
-
-document.documentElement.lang=language;
-
-document.body.classList.toggle(
-"rtl",
-language==="fa"
-);
-
-document.querySelectorAll("[data-i18n]")
-.forEach(el=>{
-
-const key=el.dataset.i18n;
-
-if(T[language][key])
-el.innerHTML=T[language][key];
-
-});
-
-const input=document.getElementById("searchInput");
-
-input.placeholder=
-language==="fa"
-?input.dataset.placeholderFa
-:input.dataset.placeholderEn;
-
-document.getElementById("langBtn").textContent=
-language==="fa"?"EN":"FA";
-
-}
-
-function toggleLanguage(){
-
-language=language==="en"?"fa":"en";
-
-localStorage.setItem(
-"memqi_language",
-language
-);
-
-applyLanguage();
-
-}
-
-/* =========================================================
-THEME
-========================================================= */
-
-function toggleTheme(){
-
-document.body.classList.toggle("light");
-
-localStorage.setItem(
-"memqi_theme",
-document.body.classList.contains("light")
-?"light":"dark"
-);
-
-}
-
-if(localStorage.getItem("memqi_theme")==="light")
-document.body.classList.add("light");
-
-/* =========================================================
-HELPERS
-========================================================= */
+   HELPERS
+   ========================================================= */
 
 function $(id){
-return document.getElementById(id);
+  return document.getElementById(id);
 }
 
-function money(v){
-
-if(v===null||v===undefined||isNaN(v))
-return "—";
-
-if(v>=1e12)
-return "$"+(v/1e12).toFixed(2)+"T";
-
-if(v>=1e9)
-return "$"+(v/1e9).toFixed(2)+"B";
-
-if(v>=1e6)
-return "$"+(v/1e6).toFixed(2)+"M";
-
-if(v>=1e3)
-return "$"+(v/1e3).toFixed(1)+"K";
-
-if(v<.000001)
-return "$"+v.toExponential(2);
-
-if(v<.01)
-return "$"+v.toFixed(8);
-
-return "$"+v.toLocaleString(
-undefined,
-{maximumFractionDigits:6}
-);
-
+function safeNumber(value, fallback = 0){
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
 }
 
-function num(v){
-
-if(v===null||v===undefined||isNaN(v))
-return "—";
-
-return Number(v).toLocaleString();
-
+function clamp(value,min,max){
+  return Math.min(max,Math.max(min,value));
 }
 
-function shortAddress(a){
-
-if(!a)
-return "—";
-
-if(a.length<=16)
-return a;
-
-return a.slice(0,8)+"..."+a.slice(-7);
-
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
-function timeAgo(ts){
-
-if(!ts)
-return "—";
-
-let diff=Date.now()-Number(ts);
-
-if(diff<60000)
-return "Just now";
-
-let m=Math.floor(diff/60000);
-
-if(m<60)
-return m+"m ago";
-
-let h=Math.floor(m/60);
-
-if(h<24)
-return h+"h ago";
-
-return Math.floor(h/24)+"d ago";
-
+function shorten(value){
+  const s = String(value || "");
+  if(s.length <= 14) return s;
+  return s.slice(0,7) + "…" + s.slice(-5);
 }
 
-function toast(msg){
+function formatMoney(value){
+  const n = safeNumber(value);
 
-const t=$("toast");
+  if(n === 0) return "$0";
 
-t.textContent=msg;
-t.classList.add("show");
+  if(Math.abs(n) >= 1e12) return "$" + (n/1e12).toFixed(2) + "T";
+  if(Math.abs(n) >= 1e9) return "$" + (n/1e9).toFixed(2) + "B";
+  if(Math.abs(n) >= 1e6) return "$" + (n/1e6).toFixed(2) + "M";
+  if(Math.abs(n) >= 1e3) return "$" + (n/1e3).toFixed(2) + "K";
 
-clearTimeout(window.toastTimer);
+  if(Math.abs(n) < .000001) return "$" + n.toExponential(2);
+  if(Math.abs(n) < .01) return "$" + n.toFixed(8);
 
-window.toastTimer=
-setTimeout(
-()=>t.classList.remove("show"),
-3000
-);
-
+  return "$" + n.toLocaleString("en-US",{
+    maximumFractionDigits:4
+  });
 }
 
-/* =========================================================
-MARKET DATA
-========================================================= */
-
-async function fetchCryptoData(){
-
-try{
-
-const r=await fetch(
-API.CG_MARKETS,
-{cache:"no-store"}
-);
-
-if(!r.ok)
-throw new Error();
-
-const data=await r.json();
-
-coins=data.map(c=>({
-
-id:c.id,
-name:c.name,
-symbol:c.symbol.toUpperCase(),
-image:c.image,
-price:c.current_price,
-change:c.price_change_percentage_24h||0,
-marketCap:c.market_cap||0,
-volume:c.total_volume||0,
-sparkline:c.sparkline_in_7d?.price||[],
-updated:c.last_updated,
-score:marketScore(c)
-
-}));
-
-updateOverview();
-renderTokens();
-calculateRadar();
-calculateAlpha();
-populatePortfolio();
-checkAlerts();
-
-$("lastUpdate").textContent=
-"Updated "+
-new Date().toLocaleTimeString();
-
-}catch(e){
-
-console.error(e);
-
-toast(
-language==="fa"
-?"دریافت اطلاعات بازار ناموفق بود"
-:"Market data update failed"
-);
-
+function formatPercent(value){
+  const n = Number(value);
+  if(!Number.isFinite(n)) return "—";
+  return (n >= 0 ? "+" : "") + n.toFixed(2) + "%";
 }
 
+function formatPrice(value){
+  const n = safeNumber(value);
+
+  if(n === 0) return "$0";
+
+  if(n < .000001) return "$" + n.toExponential(3);
+  if(n < .01) return "$" + n.toFixed(8);
+
+  if(n < 1) return "$" + n.toFixed(5);
+
+  return "$" + n.toLocaleString("en-US",{
+    maximumFractionDigits:4
+  });
 }
 
-function marketScore(c){
+function timeAgo(timestamp){
+  if(!timestamp) return "—";
 
-if(!c.marketCap||!c.volume)
-return 0;
+  const diff = Math.max(
+    0,
+    Math.floor((Date.now()-timestamp)/1000)
+  );
 
-let score=50;
+  if(diff < 10) return "just now";
+  if(diff < 60) return diff + "s ago";
 
-const vr=c.volume/c.marketCap;
+  const mins = Math.floor(diff/60);
 
-if(vr>.5)score+=18;
-else if(vr>.2)score+=12;
-else if(vr>.05)score+=6;
+  if(mins < 60) return mins + "m ago";
 
-if(c.change>3&&c.change<80)
-score+=10;
+  return Math.floor(mins/60) + "h ago";
+}
 
-if(c.marketCap>100000000)
-score+=8;
+function toast(message){
+  const el = $("toast");
 
-if(c.marketCap>1000000000)
-score+=7;
+  el.textContent = message;
+  el.classList.add("show");
 
-return Math.max(
-1,
-Math.min(100,Math.round(score))
-);
+  clearTimeout(toast.timer);
 
+  toast.timer = setTimeout(()=>{
+    el.classList.remove("show");
+  },2500);
+}
+
+function safeJSONParse(key,fallback){
+  try{
+    const value = JSON.parse(localStorage.getItem(key));
+    return value ?? fallback;
+  }catch{
+    return fallback;
+  }
+}
+
+function setJSON(key,value){
+  try{
+    localStorage.setItem(key,JSON.stringify(value));
+  }catch{}
 }
 
 /* =========================================================
-OVERVIEW
-========================================================= */
+   API
+   ========================================================= */
 
-function updateOverview(){
+async function fetchJSON(url,options={}){
+  const controller = new AbortController();
+  const timeout = setTimeout(
+    ()=>controller.abort(),
+    options.timeout || CONFIG.REQUEST_TIMEOUT
+  );
 
-const mc=coins.reduce(
-(a,c)=>a+c.marketCap,0
-);
+  state.controllers.add(controller);
 
-const vol=coins.reduce(
-(a,c)=>a+c.volume,0
-);
+  try{
 
-$("marketCap").textContent=money(mc);
-$("volume").textContent=money(vol);
+    const response = await fetch(url,{
+      ...options,
+      signal:controller.signal,
+      headers:{
+        Accept:"application/json",
+        ...(options.headers || {})
+      }
+    });
 
-$("activeSignals").textContent=
-coins.filter(c=>c.change>5).length;
+    if(!response.ok){
+      throw new Error(
+        "HTTP " + response.status
+      );
+    }
 
-fetchFearGreed();
+    return await response.json();
 
-}
+  }finally{
 
-async function fetchFearGreed(){
+    clearTimeout(timeout);
+    state.controllers.delete(controller);
 
-try{
-
-const r=await fetch(
-API.FNG,
-{cache:"no-store"}
-);
-
-const d=await r.json();
-
-if(d.data?.[0]){
-
-$("fearGreed").textContent=
-Number(d.data[0].value)+" "+
-d.data[0].value_classification;
-
-}
-
-}catch(e){
-
-$("fearGreed").textContent="N/A";
-
-}
-
+  }
 }
 
 /* =========================================================
-FILTERS
-========================================================= */
+   STATUS
+   ========================================================= */
 
-function setFilter(filter,btn){
+function setStatus(id,type,text){
 
-currentFilter=filter;
+  const el = $(id);
 
-document.querySelectorAll(".filter")
-.forEach(x=>x.classList.remove("active"));
+  if(!el) return;
 
-btn.classList.add("active");
-
-renderTokens();
-
-}
-
-function getFiltered(){
-
-let list=[...coins];
-
-if(currentFilter==="gainers")
-list.sort((a,b)=>b.change-a.change);
-
-if(currentFilter==="losers")
-list.sort((a,b)=>a.change-b.change);
-
-if(currentFilter==="momentum")
-list.sort(
-(a,b)=>
-(b.change*b.volume)-
-(a.change*a.volume)
-);
-
-if(currentFilter==="volume")
-list.sort((a,b)=>b.volume-a.volume);
-
-if(currentFilter==="score")
-list.sort((a,b)=>b.score-a.score);
-
-return list.slice(0,30);
-
+  el.className = "status " + type;
+  el.textContent = "● " + text;
 }
 
 /* =========================================================
-TOKEN RENDER
-========================================================= */
+   COINGECKO
+   ========================================================= */
 
-function renderTokens(list=null){
+async function loadMarket(){
 
-const grid=$("tokenGrid");
+  try{
 
-if(!coins.length)
-return;
+    const data = await fetchJSON(
+      CONFIG.CG_MARKETS
+    );
 
-const data=list||getFiltered();
+    if(!Array.isArray(data)){
+      throw new Error("Invalid market response");
+    }
 
-grid.innerHTML=data.map(tokenHTML).join("");
+    state.coins = data
+      .filter(Boolean)
+      .map(normalizeCoin);
 
+    setStatus(
+      "cgStatus",
+      "ok",
+      "CoinGecko Live"
+    );
+
+    return true;
+
+  }catch(error){
+
+    console.error("CoinGecko:",error);
+
+    setStatus(
+      "cgStatus",
+      "bad",
+      "CoinGecko Error"
+    );
+
+    return false;
+  }
 }
 
-function tokenHTML(c){
+function normalizeCoin(c){
 
-const cls=c.change>=0?"green":"red";
+  const marketCap = safeNumber(
+    c.market_cap
+  );
 
-return `
+  const volume = safeNumber(
+    c.total_volume
+  );
 
-<article class="token">
+  const change24 = safeNumber(
+    c.price_change_percentage_24h
+  );
 
-<div class="token-top">
+  const liquidityProxy =
+    marketCap > 0
+      ? clamp((volume / marketCap) * 100,0,100)
+      : 0;
 
-<div class="coin">
+  const momentum =
+    clamp(
+      50 +
+      change24 * 1.8 +
+      safeNumber(c.price_change_percentage_1h) * .8,
+      0,
+      100
+    );
 
-<img
-src="${c.image}"
-loading="lazy"
-onerror="this.style.display='none'"
->
+  const marketStrength =
+    marketCap > 0
+      ? clamp(
+          Math.log10(marketCap) * 7,
+          0,
+          100
+        )
+      : 0;
 
-<div>
-<div class="coin-name">
-${escapeHTML(c.name)}
-</div>
-<div class="coin-symbol">
-${c.symbol}
-</div>
-</div>
+  const volumeScore =
+    clamp(
+      liquidityProxy * 2,
+      0,
+      100
+    );
 
-</div>
+  const liquidityScore =
+    clamp(
+      30 + liquidityProxy * .7,
+      0,
+      100
+    );
 
-<div class="change ${cls}">
-${c.change>=0?"+":""}${Number(c.change).toFixed(2)}%
-</div>
+  const risk =
+    clamp(
+      100 -
+      (
+        liquidityScore * .45 +
+        marketStrength * .25 +
+        Math.max(0,momentum-20) * .30
+      ),
+      0,
+      100
+    );
 
-</div>
+  const score =
+    clamp(
+      marketStrength * .20 +
+      momentum * .35 +
+      volumeScore * .20 +
+      liquidityScore * .25 -
+      risk * .15,
+      0,
+      100
+    );
 
-<div class="price">
-${money(c.price)}
-</div>
+  const spark =
+    Array.isArray(c.sparkline_in_7d?.price)
+      ? c.sparkline_in_7d.price
+      : [];
 
-<div class="metrics">
+  const volumeMC =
+    marketCap > 0
+      ? volume / marketCap
+      : 0;
 
-<div class="metric">
-<small>Market Cap</small>
-<strong>${money(c.marketCap)}</strong>
-</div>
-
-<div class="metric">
-<small>24H Volume</small>
-<strong>${money(c.volume)}</strong>
-</div>
-
-<div class="metric">
-<small>Vol / MC</small>
-<strong>
-${((c.volume/c.marketCap)*100||0).toFixed(1)}%
-</strong>
-</div>
-
-</div>
-
-<div class="score">
-
-<div>
-<div class="score-label">
-MEMQI Market Score
-</div>
-<div class="score-bar-small">
-<span style="width:${c.score}%"></span>
-</div>
-</div>
-
-<div class="score-number ${
-c.score>=75?"green":
-c.score>=55?"yellow":"red"
-}">
-${c.score}/100
-</div>
-
-</div>
-
-<div class="token-buttons">
-
-<button
-class="small-btn"
-onclick="openModalById('${escapeAttr(c.id)}')">
-Intelligence
-</button>
-
-<button
-class="small-btn"
-onclick="searchDex('${escapeAttr(c.symbol)}')">
-Multi-Chain
-</button>
-
-</div>
-
-</article>
-
-`;
-
-}
-
-/* =========================================================
-SEARCH
-========================================================= */
-
-function escapeHTML(s){
-
-return String(s)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-
-}
-
-function escapeAttr(s){
-
-return String(s).replaceAll("'","\\'");
-
-}
-
-function isEVMAddress(q){
-
-return /^0x[a-fA-F0-9]{40}$/.test(q);
-
-}
-
-function isSolanaAddress(q){
-
-return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(q);
-
-}
-
-function handleSearch(){
-
-const q=$("searchInput")
-.value
-.trim()
-.toLowerCase();
-
-if(!q){
-
-renderTokens();
-return;
-
-}
-
-const local=coins.filter(c=>
-c.name.toLowerCase().includes(q)||
-c.symbol.toLowerCase().includes(q)||
-c.id.toLowerCase().includes(q)
-);
-
-renderTokens(local);
-
-}
-
-async function runSearch(){
-
-const q=$("searchInput")
-.value.trim();
-
-if(!q){
-
-toast(
-language==="fa"
-?"عبارت جست‌وجو را وارد کن"
-:"Enter a token or contract."
-);
-
-return;
-
-}
-
-const local=coins.find(c=>
-c.name.toLowerCase()===q.toLowerCase()||
-c.symbol.toLowerCase()===q.toLowerCase()||
-c.id.toLowerCase()===q.toLowerCase()
-);
-
-if(local){
-
-openModal(local);
-return;
-
-}
-
-await searchDex(q);
-
+  return {
+    id:c.id,
+    name:c.name || "Unknown",
+    symbol:(c.symbol || "?").toUpperCase(),
+    image:c.image || "",
+    price:safeNumber(c.current_price),
+    marketCap,
+    volume,
+    change1h:safeNumber(c.price_change_percentage_1h_in_currency),
+    change24,
+    change7d:safeNumber(c.price_change_percentage_7d_in_currency),
+    marketStrength,
+    momentum,
+    volumeScore,
+    liquidityScore,
+    risk,
+    score,
+    volumeMC,
+    spark
+  };
 }
 
 /* =========================================================
-DEX SEARCH
-========================================================= */
+   GLOBAL
+   ========================================================= */
+
+async function loadGlobal(){
+
+  try{
+
+    const data = await fetchJSON(
+      CONFIG.CG_GLOBAL
+    );
+
+    const total =
+      data?.data?.total_market_cap?.usd || 0;
+
+    const volume =
+      data?.data?.total_volume?.usd || 0;
+
+    $("heroMC").textContent =
+      formatMoney(total);
+
+    $("heroVol").textContent =
+      formatMoney(volume);
+
+  }catch(error){
+
+    console.warn("Global:",error);
+
+    $("heroMC").textContent = "—";
+    $("heroVol").textContent = "—";
+  }
+}
+
+/* =========================================================
+   FEAR GREED
+   ========================================================= */
+
+async function loadFearGreed(){
+
+  try{
+
+    const data = await fetchJSON(
+      CONFIG.CG_FNG
+    );
+
+    const item = data?.data?.[0];
+
+    if(!item){
+      throw new Error("No FNG");
+    }
+
+    state.fng = {
+      value:safeNumber(item.value),
+      classification:item.value_classification || "Unknown"
+    };
+
+    $("heroFng").textContent =
+      state.fng.value +
+      " · " +
+      state.fng.classification;
+
+  }catch(error){
+
+    $("heroFng").textContent = "N/A";
+  }
+}
+
+/* =========================================================
+   SCORING
+   ========================================================= */
+
+function calculateOpportunity(coins){
+
+  if(!coins.length){
+    return null;
+  }
+
+  return [...coins]
+    .sort((a,b)=>{
+
+      const aSignal =
+        a.momentum*.35 +
+        a.volumeScore*.25 +
+        a.liquidityScore*.20 +
+        a.score*.20;
+
+      const bSignal =
+        b.momentum*.35 +
+        b.volumeScore*.25 +
+        b.liquidityScore*.20 +
+        b.score*.20;
+
+      return bSignal-aSignal;
+
+    })[0];
+}
+
+function getRiskLabel(score){
+
+  const n = safeNumber(score);
+
+  if(n >= 70) return ["LOW","green"];
+  if(n >= 40) return ["MEDIUM","yellow"];
+
+  return ["HIGH","red"];
+}
+
+function getSignal(coin){
+
+  if(
+    coin.momentum >= 75 &&
+    coin.volumeScore >= 55 &&
+    coin.liquidityScore >= 45
+  ){
+    return ["EARLY OPPORTUNITY","green"];
+  }
+
+  if(coin.momentum >= 70){
+    return ["MOMENTUM","green"];
+  }
+
+  if(coin.volumeScore >= 70){
+    return ["VOLUME SPIKE","yellow"];
+  }
+
+  if(coin.risk < 35){
+    return ["RISK WATCH","red"];
+  }
+
+  return ["WATCH",""];
+}
+
+/* =========================================================
+   RADAR
+   ========================================================= */
+
+function updateRadar(){
+
+  if(!state.coins.length) return;
+
+  const pump =
+    [...state.coins]
+      .sort((a,b)=>b.momentum-a.momentum)[0];
+
+  const volume =
+    [...state.coins]
+      .sort((a,b)=>b.volumeScore-a.volumeScore)[0];
+
+  const liquidity =
+    [...state.coins]
+      .sort((a,b)=>b.liquidityScore-a.liquidityScore)[0];
+
+  const risk =
+    [...state.coins]
+      .sort((a,b)=>a.risk-b.risk)[0];
+
+  $("radarPump").textContent =
+    pump ? pump.symbol : "—";
+
+  $("radarVolume").textContent =
+    volume ? volume.symbol : "—";
+
+  $("radarLiquidity").textContent =
+    liquidity ? liquidity.symbol : "—";
+
+  $("radarRisk").textContent =
+    risk ? risk.symbol : "—";
+
+  const signals =
+    state.coins.filter(
+      c=>getSignal(c)[0] === "EARLY OPPORTUNITY"
+    ).length;
+
+  $("heroSignals").textContent =
+    String(signals);
+}
+
+/* =========================================================
+   ALPHA
+   ========================================================= */
+
+function updateAlpha(){
+
+  const coin =
+    calculateOpportunity(state.coins);
+
+  if(!coin) return;
+
+  const score =
+    Math.round(coin.score);
+
+  $("alphaScore").textContent =
+    score;
+
+  $("alphaRing").style
+    .setProperty("--score",score+"%");
+
+  $("alphaMomentum").textContent =
+    Math.round(coin.momentum);
+
+  $("alphaMomentumBar").style.width =
+    coin.momentum + "%";
+
+  $("alphaVolume").textContent =
+    Math.round(coin.volumeScore);
+
+  $("alphaVolumeBar").style.width =
+    coin.volumeScore + "%";
+
+  $("alphaLiquidity").textContent =
+    Math.round(coin.liquidityScore);
+
+  $("alphaLiquidityBar").style.width =
+    coin.liquidityScore + "%";
+
+  setAI(
+    "aiMarket",
+    "aiMarketBar",
+    coin.marketStrength
+  );
+
+  setAI(
+    "aiMomentum",
+    "aiMomentumBar",
+    coin.momentum
+  );
+
+  setAI(
+    "aiLiquidity",
+    "aiLiquidityBar",
+    coin.liquidityScore
+  );
+
+  const riskHealth =
+    100 - coin.risk;
+
+  setAI(
+    "aiRisk",
+    "aiRiskBar",
+    riskHealth
+  );
+
+  const [riskLabel,riskClass] =
+    getRiskLabel(coin.risk);
+
+  $("securityLiquidity").textContent =
+    riskLabel;
+
+  $("securityContract").textContent =
+    "N/A";
+
+  $("securityWhale").textContent =
+    "N/A";
+
+  $("securityRug").textContent =
+    coin.risk < 30
+      ? "WATCH"
+      : "N/A";
+}
+
+function setAI(labelId,barId,value){
+
+  const n =
+    Math.round(
+      clamp(
+        safeNumber(value),
+        0,
+        100
+      )
+    );
+
+  $(labelId).textContent = n;
+  $(barId).style.width = n + "%";
+}
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+function filteredCoins(){
+
+  const coins = [...state.coins];
+
+  switch(state.filter){
+
+    case "gainers":
+      return coins
+        .filter(c=>c.change24 > 0)
+        .sort((a,b)=>b.change24-a.change24);
+
+    case "losers":
+      return coins
+        .filter(c=>c.change24 < 0)
+        .sort((a,b)=>a.change24-b.change24);
+
+    case "momentum":
+      return coins
+        .sort((a,b)=>b.momentum-a.momentum);
+
+    case "volume":
+      return coins
+        .sort((a,b)=>b.volumeScore-a.volumeScore);
+
+    case "score":
+      return coins
+        .sort((a,b)=>b.score-a.score);
+
+    default:
+      return coins
+        .sort((a,b)=>b.marketCap-a.marketCap);
+  }
+}
+
+/* =========================================================
+   TOKEN CARD
+   ========================================================= */
+
+function tokenCard(coin){
+
+  const [signal,signalClass] =
+    getSignal(coin);
+
+  const changeClass =
+    coin.change24 >= 0
+      ? "up"
+      : "down";
+
+  const image =
+    coin.image
+      ? `<img class="coin-img"
+          src="${escapeHTML(coin.image)}"
+          alt=""
+          loading="lazy"
+          onerror="this.style.display='none'">`
+      : `<div class="coin-fallback">
+          ${escapeHTML(coin.symbol.slice(0,2))}
+         </div>`;
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "card token-card";
+
+  div.dataset.id =
+    coin.id;
+
+  div.innerHTML = `
+    <div class="token-top">
+
+      <div class="token-id">
+        ${image}
+
+        <div>
+          <div class="token-name">
+            ${escapeHTML(coin.name)}
+          </div>
+
+          <div class="token-symbol">
+            ${escapeHTML(coin.symbol)}
+          </div>
+        </div>
+      </div>
+
+      <div class="change ${changeClass}">
+        ${formatPercent(coin.change24)}
+      </div>
+
+    </div>
+
+    <div class="token-price">
+      ${formatPrice(coin.price)}
+    </div>
+
+    <div class="token-metrics">
+
+      <div class="metric">
+        <div class="metric-label">MARKET CAP</div>
+        <div class="metric-value">
+          ${formatMoney(coin.marketCap)}
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">24H VOLUME</div>
+        <div class="metric-value">
+          ${formatMoney(coin.volume)}
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">MOMENTUM</div>
+        <div class="metric-value">
+          ${Math.round(coin.momentum)}/100
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-label">MEMQI SCORE</div>
+        <div class="metric-value">
+          ${Math.round(coin.score)}/100
+        </div>
+      </div>
+
+    </div>
+
+    <div class="signal">
+      <span class="badge ${signalClass}">
+        ${escapeHTML(signal)}
+      </span>
+
+      <span class="small muted">
+        Risk ${Math.round(coin.risk)}
+      </span>
+    </div>
+  `;
+
+  div.addEventListener(
+    "click",
+    ()=>openToken(coin)
+  );
+
+  return div;
+}
+
+/* =========================================================
+   MARKET RENDER
+   ========================================================= */
+
+function renderMarket(){
+
+  const grid =
+    $("marketGrid");
+
+  grid.innerHTML = "";
+
+  const coins =
+    filteredCoins().slice(0,40);
+
+  if(!coins.length){
+
+    grid.innerHTML =
+      `<div class="empty">No market data available.</div>`;
+
+    return;
+  }
+
+  const fragment =
+    document.createDocumentFragment();
+
+  coins.forEach(coin=>{
+    fragment.appendChild(
+      tokenCard(coin)
+    );
+  });
+
+  grid.appendChild(fragment);
+}
+
+/* =========================================================
+   OPPORTUNITY
+   ========================================================= */
+
+function renderOpportunity(){
+
+  const grid =
+    $("opportunityGrid");
+
+  grid.innerHTML = "";
+
+  const coins =
+    [...state.coins]
+      .filter(c=>
+        c.momentum >= 60 &&
+        c.volumeScore >= 35 &&
+        c.liquidityScore >= 35
+      )
+      .sort((a,b)=>b.score-a.score)
+      .slice(0,6);
+
+  if(!coins.length){
+
+    grid.innerHTML =
+      `<div class="empty">
+        No strong multi-signal opportunities detected.
+       </div>`;
+
+    return;
+  }
+
+  coins.forEach(coin=>{
+    grid.appendChild(
+      tokenCard(coin)
+    );
+  });
+}
+
+/* =========================================================
+   DEX SCREENER
+   ========================================================= */
+
+function normalizeChain(chainId){
+
+  const map = {
+    ethereum:"Ethereum",
+    bsc:"BNB Chain",
+    base:"Base",
+    arbitrum:"Arbitrum",
+    polygon:"Polygon",
+    avalanche:"Avalanche",
+    optimism:"Optimism",
+    solana:"Solana",
+    tron:"TRON",
+    sui:"Sui",
+    ton:"TON",
+    aptos:"Aptos",
+    pulsechain:"PulseChain",
+    fantom:"Fantom",
+    cronos:"Cronos"
+  };
+
+  return map[
+    String(chainId || "").toLowerCase()
+  ] || String(chainId || "Unknown");
+}
+
+function explorerFor(chain,address){
+
+  const c =
+    String(chain || "").toLowerCase();
+
+  const a =
+    encodeURIComponent(address);
+
+  if(c === "ethereum")
+    return "https://etherscan.io/token/" + a;
+
+  if(c === "bsc")
+    return "https://bscscan.com/token/" + a;
+
+  if(c === "base")
+    return "https://basescan.org/token/" + a;
+
+  if(c === "arbitrum")
+    return "https://arbiscan.io/token/" + a;
+
+  if(c === "polygon")
+    return "https://polygonscan.com/token/" + a;
+
+  if(c === "avalanche")
+    return "https://snowtrace.io/token/" + a;
+
+  if(c === "optimism")
+    return "https://optimistic.etherscan.io/token/" + a;
+
+  if(c === "solana")
+    return "https://solscan.io/token/" + a;
+
+  if(c === "tron")
+    return "https://tronscan.org/#/token20/" + a;
+
+  return null;
+}
+
+/*
+  IMPORTANT:
+  A DEX pair address is NOT the token contract.
+
+  This function explicitly chooses the token address
+  from baseToken / quoteToken instead of pairAddress.
+*/
+
+function pairTokenAddress(pair){
+
+  return (
+    pair?.baseToken?.address ||
+    null
+  );
+}
+
+function pairKey(pair){
+
+  const chain =
+    String(pair?.chainId || "").toLowerCase();
+
+  const token =
+    String(pairTokenAddress(pair) || "").toLowerCase();
+
+  return chain + ":" + token;
+}
+
+function validTokenAddress(address){
+
+  if(!address) return false;
+
+  const a =
+    String(address).trim();
+
+  if(a.length < 20) return false;
+
+  return true;
+}
+
+function normalizePair(pair){
+
+  if(!pair) return null;
+
+  const tokenAddress =
+    pairTokenAddress(pair);
+
+  if(!validTokenAddress(tokenAddress)){
+    return null;
+  }
+
+  const chainId =
+    String(pair.chainId || "")
+      .toLowerCase();
+
+  const liquidity =
+    safeNumber(pair.liquidity?.usd);
+
+  const volume24 =
+    safeNumber(pair.volume?.h24);
+
+  const priceUsd =
+    safeNumber(pair.priceUsd);
+
+  const txns =
+    safeNumber(pair.txns?.h24?.buys) +
+    safeNumber(pair.txns?.h24?.sells);
+
+  return {
+    id:pairKey(pair),
+
+    chainId,
+
+    chain:normalizeChain(chainId),
+
+    tokenAddress,
+
+    pairAddress:
+      pair.pairAddress || "",
+
+    dex:
+      pair.dexId || "DEX",
+
+    name:
+      pair.baseToken?.name ||
+      "Unknown",
+
+    symbol:
+      String(
+        pair.baseToken?.symbol || "?"
+      ).toUpperCase(),
+
+    quote:
+      pair.quoteToken?.symbol || "",
+
+    price:priceUsd,
+
+    liquidity,
+
+    volume24,
+
+    buys:
+      safeNumber(pair.txns?.h24?.buys),
+
+    sells:
+      safeNumber(pair.txns?.h24?.sells),
+
+    txns,
+
+    priceChange24:
+      safeNumber(pair.priceChange?.h24),
+
+    createdAt:
+      safeNumber(pair.pairCreatedAt),
+
+    url:
+      pair.url || ""
+  };
+}
+
+/*
+  Keep the strongest pair for each:
+  CHAIN + TOKEN CONTRACT
+
+  This is the key fix for the contract duplication problem.
+*/
+
+function dedupePairs(rawPairs){
+
+  const map =
+    new Map();
+
+  rawPairs.forEach(pair=>{
+
+    const normalized =
+      normalizePair(pair);
+
+    if(!normalized) return;
+
+    const key =
+      normalized.chainId +
+      ":" +
+      normalized.tokenAddress.toLowerCase();
+
+    const old =
+      map.get(key);
+
+    if(
+      !old ||
+      normalized.liquidity > old.liquidity
+    ){
+      map.set(key,normalized);
+    }
+  });
+
+  return [...map.values()];
+}
 
 async function searchDex(query){
 
-try{
+  if(!query) return [];
 
-const r=await fetch(
-API.DEX_SEARCH+
-encodeURIComponent(query),
-{cache:"no-store"}
-);
+  try{
 
-if(!r.ok)
-throw new Error();
+    const data =
+      await fetchJSON(
+        CONFIG.DEX_SEARCH +
+        encodeURIComponent(query)
+      );
 
-const d=await r.json();
+    const pairs =
+      Array.isArray(data?.pairs)
+        ? data.pairs
+        : [];
 
-const pairs=d.pairs||[];
+    return dedupePairs(pairs);
 
-if(!pairs.length){
+  }catch(error){
 
-toast(
-language==="fa"
-?"نتیجه‌ای پیدا نشد"
-:"No DEX result found."
-);
+    console.error("DEX:",error);
 
-return;
+    setStatus(
+      "dexStatus",
+      "bad",
+      "DEXScreener Error"
+    );
 
-}
-
-const best=pairs[0];
-
-const token={
-id:"dex-"+best.baseToken.address,
-name:best.baseToken.name,
-symbol:best.baseToken.symbol,
-image:best.info?.imageUrl||"",
-price:Number(best.priceUsd)||0,
-change:Number(best.priceChange?.h24)||0,
-marketCap:Number(best.marketCap)||Number(best.fdv)||0,
-volume:Number(best.volume?.h24)||0,
-liquidity:Number(best.liquidity?.usd)||0,
-fdv:Number(best.fdv)||0,
-buys:Number(best.txns?.h24?.buys)||0,
-sells:Number(best.txns?.h24?.sells)||0,
-pairCreatedAt:best.pairCreatedAt,
-address:best.baseToken.address,
-chain:best.chainId,
-dexUrl:best.url,
-score:dexScore(best),
-pairs:pairs
-};
-
-openModal(token);
-
-}catch(e){
-
-console.error(e);
-
-toast(
-language==="fa"
-?"خطا در جست‌وجوی DEX"
-:"DEX search failed."
-);
-
-}
-
-}
-
-function dexScore(p){
-
-let score=45;
-
-const liq=Number(p.liquidity?.usd)||0;
-const mc=Number(p.marketCap)||Number(p.fdv)||0;
-const vol=Number(p.volume?.h24)||0;
-
-if(liq>1000000)score+=20;
-else if(liq>250000)score+=12;
-else if(liq>50000)score+=6;
-
-if(mc){
-
-const ratio=liq/mc;
-
-if(ratio>.15)score+=15;
-else if(ratio>.05)score+=8;
-
-}
-
-if(mc){
-
-const vr=vol/mc;
-
-if(vr>.5)score+=12;
-else if(vr>.2)score+=7;
-
-}
-
-return Math.max(
-1,
-Math.min(100,score)
-);
-
+    return [];
+  }
 }
 
 /* =========================================================
-MODAL
-========================================================= */
+   NEW PAIRS
+   ========================================================= */
 
-function openModalById(id){
+async function loadPairs(){
 
-const c=coins.find(x=>x.id===id);
+  if(state.pairBusy) return;
 
-if(c)
-openModal(c);
+  state.pairBusy = true;
 
+  try{
+
+    const queries = [
+      "meme",
+      "pepe",
+      "doge",
+      "bonk",
+      "shib",
+      "frog"
+    ];
+
+    const results =
+      await Promise.all(
+        queries.map(searchDex)
+      );
+
+    const all =
+      results.flat();
+
+    /*
+      Deduplicate by CHAIN + TOKEN CONTRACT.
+      Never treat pairAddress as token contract.
+    */
+
+    const unique =
+      dedupePairs(all);
+
+    state.pairs =
+      unique
+        .sort(
+          (a,b)=>
+            b.volume24-a.volume24
+        )
+        .slice(0,30);
+
+    renderPairs();
+
+    setStatus(
+      "dexStatus",
+      "ok",
+      "DEXScreener Live"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+  }finally{
+
+    state.pairBusy = false;
+
+  }
 }
 
-async function openModal(c){
-
-activeCoin=c;
-
-$("tokenModal")
-.classList.add("show");
-
-$("modalName").textContent=c.name;
-$("modalSymbol").textContent=c.symbol;
-$("modalImg").src=c.image||"";
-$("modalPrice").textContent=money(c.price);
-
-$("modalChange").textContent=
-(c.change>=0?"+":"")+
-Number(c.change||0).toFixed(2)+"%";
-
-$("modalChange").className=
-"change "+(c.change>=0?"green":"red");
-
-$("detailMC").textContent=
-money(c.marketCap);
-
-$("detailVolume").textContent=
-money(c.volume);
-
-$("detailLiquidity").textContent=
-money(c.liquidity);
-
-$("detailFDV").textContent=
-money(c.fdv);
-
-$("detailBuys").textContent=num(c.buys);
-$("detailSells").textContent=num(c.sells);
-
-$("detailScore").textContent=
-c.score?c.score+"/100":"—";
-
-$("detailAge").textContent=
-c.pairCreatedAt
-?timeAgo(c.pairCreatedAt)
-:"—";
-
-renderContracts([]);
-
-calculateRisk(c);
-
-drawChart(
-c.sparkline?.length
-?c.sparkline
-:generateChart(c),
-c.change
-);
-
-await enrichToken(c);
-
-}
-
-/* =========================================================
-TOKEN ENRICHMENT
-========================================================= */
-
-async function enrichToken(c){
-
-try{
-
-const r=await fetch(
-API.DEX_SEARCH+
-encodeURIComponent(c.symbol),
-{cache:"no-store"}
-);
-
-if(!r.ok)
-return;
-
-const d=await r.json();
-
-const pairs=d.pairs||[];
-
-const matching=pairs.filter(p=>
-p.baseToken.symbol?.toUpperCase()===
-c.symbol.toUpperCase()
-);
-
-const usable=
-matching.length?matching:pairs;
-
-if(!usable.length)
-return;
-
-const p=usable[0];
-
-c.liquidity=
-Number(p.liquidity?.usd)||c.liquidity||0;
-
-c.fdv=
-Number(p.fdv)||c.fdv||0;
-
-c.buys=
-Number(p.txns?.h24?.buys)||0;
-
-c.sells=
-Number(p.txns?.h24?.sells)||0;
-
-c.pairCreatedAt=
-p.pairCreatedAt||c.pairCreatedAt;
-
-c.address=
-p.baseToken.address||c.address;
-
-c.chain=
-p.chainId||c.chain;
-
-c.dexUrl=
-p.url||c.dexUrl;
-
-c.score=dexScore(p);
-
-$("detailLiquidity").textContent=
-money(c.liquidity);
-
-$("detailFDV").textContent=
-money(c.fdv);
-
-$("detailBuys").textContent=
-num(c.buys);
-
-$("detailSells").textContent=
-num(c.sells);
-
-$("detailScore").textContent=
-c.score+"/100";
-
-$("detailAge").textContent=
-c.pairCreatedAt
-?timeAgo(c.pairCreatedAt)
-:"—";
-
-calculateRisk(c);
-
-await loadMultiChainContracts(c);
-
-}catch(e){
-
-console.log("DEX enrichment unavailable");
-
-}
-
-}
-
-/* =========================================================
-MULTI-CHAIN CONTRACT ENGINE
-========================================================= */
-
-async function loadMultiChainContracts(c){
-
-let contracts=[];
-
-/*
-CoinGecko details contains a platforms object such as:
-
-{
- ethereum:"0x...",
- "binance-smart-chain":"0x...",
- base:"0x..."
-}
-
-We use it when available.
-*/
-
-if(!c.id.startsWith("dex-")){
-
-try{
-
-const r=await fetch(
-API.CG_DETAILS+
-encodeURIComponent(c.id)+
-"?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
-{cache:"no-store"}
-);
-
-if(r.ok){
-
-const d=await r.json();
-
-if(d.platforms){
-
-Object.entries(d.platforms)
-.forEach(([platform,address])=>{
-
-if(address)
-contracts.push({
-network:normalizeNetwork(platform),
-address:String(address),
-source:"CoinGecko"
-});
-
-});
-
-}
-
-if(d.detail_platforms){
-
-Object.entries(d.detail_platforms)
-.forEach(([platform,obj])=>{
-
-if(obj?.decimal_place!==undefined)
-return;
-
-});
-
-}
-
-}
-
-}catch(e){
-
-console.log("CoinGecko contract lookup unavailable");
-
-}
-
-}
-
-/*
-DEXScreener gives chain + token address for the
-active trading pair. Add it if not already present.
-*/
-
-if(c.address){
-
-contracts.push({
-network:normalizeNetwork(c.chain),
-address:c.address,
-source:"DEXScreener"
-});
-
-}
-
-/*
-Also inspect additional DEX pairs to discover the
-same token on additional chains.
-*/
-
-if(c.symbol){
-
-try{
-
-const r=await fetch(
-API.DEX_SEARCH+
-encodeURIComponent(c.symbol),
-{cache:"no-store"}
-);
-
-if(r.ok){
-
-const d=await r.json();
-
-(d.pairs||[])
-.forEach(p=>{
-
-if(
-p.baseToken?.symbol?.toUpperCase()===
-c.symbol.toUpperCase() &&
-p.baseToken?.address
-){
-
-contracts.push({
-
-network:normalizeNetwork(p.chainId),
-
-address:p.baseToken.address,
-
-source:"DEXScreener"
-
-});
-
-}
-
-});
-
-}
-
-}catch(e){}
-
-}
-
-contracts=dedupeContracts(contracts);
-
-renderContracts(contracts);
-
-}
-
-function normalizeNetwork(network){
-
-if(!network)
-return "Unknown";
-
-const n=String(network)
-.toLowerCase()
-.replaceAll("_","-")
-.replaceAll(" ","-");
-
-const map={
-
-ethereum:"ethereum",
-eth:"ethereum",
-
-"binance-smart-chain":"bsc",
-bsc:"bsc",
-
-base:"base",
-
-arbitrum:"arbitrum",
-"arbitrum-one":"arbitrum",
-
-polygon:"polygon",
-matic:"polygon",
-
-avalanche:"avalanche",
-avax:"avalanche",
-
-optimism:"optimism",
-
-solana:"solana",
-
-tron:"tron",
-
-sui:"sui",
-
-ton:"ton",
-
-aptos:"aptos"
-
-};
-
-return map[n]||network;
-
-}
-
-function dedupeContracts(list){
-
-const map=new Map();
-
-list.forEach(x=>{
-
-if(!x.address)
-return;
-
-const key=
-String(x.network).toLowerCase()+
-":"+
-String(x.address).toLowerCase();
-
-if(!map.has(key))
-map.set(key,x);
-
-});
-
-return [...map.values()];
-
+function renderPairs(){
+
+  const grid =
+    $("pairsGrid");
+
+  grid.innerHTML = "";
+
+  if(!state.pairs.length){
+
+    grid.innerHTML =
+      `<div class="empty">
+        No pair data available.
+       </div>`;
+
+    return;
+  }
+
+  state.pairs
+    .slice(0,12)
+    .forEach(pair=>{
+
+      const el =
+        document.createElement("div");
+
+      el.className = "card";
+
+      const buySell =
+        pair.buys + pair.sells > 0
+          ? Math.round(
+              pair.buys /
+              (pair.buys + pair.sells) *
+              100
+            )
+          : null;
+
+      el.innerHTML = `
+
+        <div class="token-top">
+
+          <div>
+            <div class="token-name">
+              ${escapeHTML(pair.name)}
+            </div>
+
+            <div class="token-symbol">
+              ${escapeHTML(pair.symbol)}
+              · ${escapeHTML(pair.chain)}
+            </div>
+          </div>
+
+          <span class="badge">
+            ${escapeHTML(pair.dex)}
+          </span>
+
+        </div>
+
+        <div class="token-price">
+          ${formatPrice(pair.price)}
+        </div>
+
+        <div class="token-metrics">
+
+          <div class="metric">
+            <div class="metric-label">LIQUIDITY</div>
+            <div class="metric-value">
+              ${formatMoney(pair.liquidity)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">24H VOLUME</div>
+            <div class="metric-value">
+              ${formatMoney(pair.volume24)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">BUYS</div>
+            <div class="metric-value">
+              ${pair.buys.toLocaleString()}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">SELLS</div>
+            <div class="metric-value">
+              ${pair.sells.toLocaleString()}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="signal">
+
+          <span class="badge ${
+            buySell !== null && buySell >= 55
+              ? "green"
+              : ""
+          }">
+            ${
+              buySell !== null
+                ? "Buy " + buySell + "%"
+                : "Buy/Sell N/A"
+            }
+          </span>
+
+          <span class="small muted">
+            ${shorten(pair.tokenAddress)}
+          </span>
+
+        </div>
+      `;
+
+      el.addEventListener(
+        "click",
+        ()=>openPair(pair)
+      );
+
+      grid.appendChild(el);
+    });
 }
 
 /* =========================================================
-CONTRACT UI
-========================================================= */
+   SEARCH
+   ========================================================= */
 
-function renderContracts(contracts){
+async function runSearch(){
 
-const list=$("chainList");
+  const input =
+    $("searchInput");
 
-$("contractCount").textContent=
-contracts.length+" NETWORK"+
-(contracts.length===1?"":"S");
+  const query =
+    input.value.trim();
 
-if(!contracts.length){
+  if(!query){
+    toast("Enter a token, symbol or contract.");
+    return;
+  }
 
-list.innerHTML=`
+  /*
+    First search CoinGecko locally.
+  */
 
-<div style="
-font-size:9px;
-color:var(--muted);
-line-height:1.7
-">
-No verified multi-chain contract data returned yet.
-Open the token again or search by contract address.
-</div>
+  const local =
+    state.coins.find(c=>
+      c.name.toLowerCase() === query.toLowerCase() ||
+      c.symbol.toLowerCase() === query.toLowerCase() ||
+      c.id.toLowerCase() === query.toLowerCase()
+    );
 
-`;
+  if(local){
 
-return;
+    openToken(local);
+    return;
+  }
 
-}
+  /*
+    Then DEXScreener.
+  */
 
-list.innerHTML=
-contracts.map((c,i)=>{
+  toast("Scanning DEXScreener...");
 
-const networkKey=
-normalizeNetwork(c.network);
+  const pairs =
+    await searchDex(query);
 
-const meta=
-NETWORKS[networkKey];
+  if(!pairs.length){
 
-const name=
-meta?.name||
-formatNetworkName(c.network);
+    toast("No token found.");
+    return;
+  }
 
-const isNative=
-!c.address||
-c.address==="native";
-
-const explorer=
-!isNative&&meta
-?meta.explorer+
-encodeURIComponent(c.address)
-:null;
-
-return `
-
-<div class="chain-row">
-
-<div class="chain-name">
-${escapeHTML(name)}
-</div>
-
-<div class="contract">
-${isNative
-?"Native Asset"
-:escapeHTML(c.address)}
-</div>
-
-${
-isNative
-?`<span class="native">NATIVE</span>`
-:`<button
-class="copy-btn"
-onclick="copyContract('${escapeAttr(c.address)}')">
-Copy
-</button>`
-}
-
-${
-explorer
-?`<button
-class="explorer-btn"
-onclick="window.open('${escapeAttr(explorer)}','_blank')">
-Explorer
-</button>`
-:""
-}
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-function formatNetworkName(n){
-
-return String(n||"Unknown")
-.replaceAll("-"," ")
-.replace(/\b\w/g,x=>x.toUpperCase());
-
-}
-
-async function copyContract(address){
-
-try{
-
-await navigator.clipboard.writeText(address);
-
-toast(
-language==="fa"
-?"آدرس قرارداد کپی شد"
-:"Contract copied"
-);
-
-}catch(e){
-
-toast(
-language==="fa"
-?"کپی انجام نشد"
-:"Copy failed"
-);
-
-}
-
+  openPair(pairs[0]);
 }
 
 /* =========================================================
-RISK ENGINE
-========================================================= */
+   TOKEN DETAILS
+   ========================================================= */
 
-function calculateRisk(c){
+async function openToken(coin){
 
-const liq=Number(c.liquidity)||0;
-const mc=
-Number(c.marketCap)||
-Number(c.fdv)||0;
+  $("modalTitle").textContent =
+    coin.name + " · " + coin.symbol;
 
-const vol=Number(c.volume)||0;
+  $("modalSubtitle").textContent =
+    "MEMQI Token Intelligence";
 
-const buys=Number(c.buys)||0;
-const sells=Number(c.sells)||0;
+  $("modalContent").innerHTML =
+    `<div class="loading">
+      <div class="loader"></div>
+      Loading intelligence...
+     </div>`;
 
-let liquidity="Unknown";
-let volume="Unknown";
-let momentum="Neutral";
-let tx="Unknown";
-let overall="Unknown";
+  $("modal").classList.add("show");
 
-if(liq){
+  const pairs =
+    await searchDex(
+      coin.symbol
+    );
 
-if(liq>1000000)
-liquidity="Strong";
+  const contracts =
+    dedupePairs(pairs)
+      .filter(
+        p =>
+          p.symbol.toLowerCase() ===
+          coin.symbol.toLowerCase()
+      );
 
-else if(liq>250000)
-liquidity="Healthy";
-
-else if(liq>50000)
-liquidity="Thin";
-
-else
-liquidity="Very Thin";
-
+  renderTokenModal(
+    coin,
+    contracts
+  );
 }
 
-if(mc&&vol){
+function renderTokenModal(coin,pairs){
+
+  const watchlist =
+    getWatchlist();
+
+  const isWatchlisted =
+    watchlist.includes(coin.id);
 
-const ratio=vol/mc;
+  const [riskLabel,riskClass] =
+    getRiskLabel(coin.risk);
+
+  $("modalContent").innerHTML = `
 
-if(ratio>.5)
-volume="Very Strong";
-
-else if(ratio>.2)
-volume="Strong";
-
-else if(ratio>.05)
-volume="Normal";
-
-else
-volume="Weak";
-
-}
-
-if(c.change>15)
-momentum="Hot";
-
-else if(c.change>5)
-momentum="Positive";
-
-else if(c.change<-15)
-momentum="Extreme Downside";
-
-else if(c.change<0)
-momentum="Negative";
-
-if(buys+sells){
-
-const r=buys/(buys+sells);
-
-if(r>.65)
-tx="Buy Heavy";
-
-else if(r>.55)
-tx="Buy Pressure";
-
-else if(r<.35)
-tx="Sell Heavy";
-
-else
-tx="Balanced";
-
-}
-
-let risk=0;
-
-if(liq&&liq<50000)
-risk+=35;
-
-else if(liq&&liq<250000)
-risk+=18;
-
-if(mc&&vol/mc<.02)
-risk+=15;
-
-if(c.change<-30)
-risk+=25;
-
-if(buys+sells&&sells>buys*1.8)
-risk+=20;
-
-if(risk>=50)
-overall="HIGH";
-
-else if(risk>=25)
-overall="MEDIUM";
-
-else
-overall="LOW";
-
-$("riskLiquidity").textContent=liquidity;
-$("riskVolume").textContent=volume;
-$("riskMomentum").textContent=momentum;
-$("riskTransactions").textContent=tx;
-$("riskOverall").textContent=overall;
-
-}
-
-/* =========================================================
-CHART
-========================================================= */
-
-async function changeChart(days){
-
-if(!activeCoin)
-return;
-
-try{
-
-if(activeCoin.id.startsWith("dex-")){
-
-drawChart(
-generateChart(activeCoin),
-activeCoin.change
-);
-
-return;
-
-}
-
-const r=await fetch(
-API.CG_DETAILS+
-encodeURIComponent(activeCoin.id)+
-`/market_chart?vs_currency=usd&days=${days}`,
-{cache:"no-store"}
-);
-
-if(!r.ok)
-throw new Error();
-
-const d=await r.json();
-
-drawChart(
-d.prices.map(x=>x[1]),
-activeCoin.change
-);
-
-}catch(e){
-
-drawChart(
-activeCoin.sparkline?.length
-?activeCoin.sparkline
-:generateChart(activeCoin),
-activeCoin.change
-);
-
-}
-
-}
-
-function generateChart(c){
-
-const arr=[];
-
-let v=c.price||1;
-
-for(let i=0;i<80;i++){
-
-v*=1+((Math.random()-.48)*.015);
-
-arr.push(v);
-
-}
-
-return arr;
-
-}
-
-function drawChart(values,change){
-
-const canvas=$("priceChart");
-
-const ctx=canvas.getContext("2d");
-
-const rect=canvas.getBoundingClientRect();
-
-const ratio=window.devicePixelRatio||1;
-
-canvas.width=rect.width*ratio;
-canvas.height=rect.height*ratio;
-
-ctx.scale(ratio,ratio);
-
-const w=rect.width;
-const h=rect.height;
-
-ctx.clearRect(0,0,w,h);
-
-if(!values||values.length<2)
-return;
-
-const min=Math.min(...values);
-const max=Math.max(...values);
-const range=max-min||1;
-
-ctx.beginPath();
-
-values.forEach((v,i)=>{
-
-const x=
-i/(values.length-1)*w;
-
-const y=
-h-
-((v-min)/range)*(h-20)-
-10;
-
-if(i===0)
-ctx.moveTo(x,y);
-else
-ctx.lineTo(x,y);
-
-});
-
-ctx.lineWidth=2.5;
-
-ctx.strokeStyle=
-change>=0
-?"#22c55e"
-:"#ef4444";
-
-ctx.stroke();
-
-}
-
-/* =========================================================
-RADAR
-========================================================= */
-
-function calculateRadar(){
-
-if(!coins.length)
-return;
-
-const pump=
-[...coins]
-.filter(c=>c.change>0)
-.sort((a,b)=>b.change-a.change)[0];
-
-if(pump){
-
-$("earlyPump").textContent=pump.symbol;
-
-$("earlyPumpDesc").textContent=
-"+"+
-pump.change.toFixed(2)+
-"% 24H";
-
-}
-
-const top=
-[...coins]
-.sort(
-(a,b)=>
-(b.volume/b.marketCap)-
-(a.volume/a.marketCap)
-)[0];
-
-if(top){
-
-$("buyPressure").textContent=
-(
-(top.volume/top.marketCap)*100
-).toFixed(1)+"%";
-
-$("liquidityRadar").textContent=
-money(top.marketCap);
-
-$("riskRadar").textContent=
-top.score>=75
-?"LOW"
-:top.score>=55
-?"MEDIUM"
-:"HIGH";
-
-}
-
+    <div class="grid grid-2">
+
+      <div class="card">
+
+        <div class="token-top">
+
+          <div class="token-id">
+
+            ${
+              coin.image
+                ? `<img class="coin-img"
+                    src="${escapeHTML(coin.image)}"
+                    alt="">`
+                : `<div class="coin-fallback">
+                    ${escapeHTML(coin.symbol.slice(0,2))}
+                   </div>`
+            }
+
+            <div>
+              <div class="token-name">
+                ${escapeHTML(coin.name)}
+              </div>
+
+              <div class="token-symbol">
+                ${escapeHTML(coin.symbol)}
+              </div>
+            </div>
+
+          </div>
+
+          <span class="badge ${riskClass}">
+            ${riskLabel} RISK
+          </span>
+
+        </div>
+
+        <div class="token-price">
+          ${formatPrice(coin.price)}
+        </div>
+
+        <div class="token-metrics">
+
+          <div class="metric">
+            <div class="metric-label">24H</div>
+            <div class="metric-value ${
+              coin.change24 >= 0 ? "up":"down"
+            }">
+              ${formatPercent(coin.change24)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">MARKET CAP</div>
+            <div class="metric-value">
+              ${formatMoney(coin.marketCap)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">VOLUME</div>
+            <div class="metric-value">
+              ${formatMoney(coin.volume)}
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">MEMQI SCORE</div>
+            <div class="metric-value">
+              ${Math.round(coin.score)}/100
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:12px">
+
+          <button
+            class="primary-btn"
+            id="watchBtn"
+            style="height:42px;flex:1"
+          >
+            ${
+              isWatchlisted
+                ? "★ WATCHLISTED"
+                : "☆ ADD WATCHLIST"
+            }
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+          MEMQI Signal Engine
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Momentum</span>
+            <span>${Math.round(coin.momentum)}</span>
+          </div>
+          <div class="progress">
+            <span style="width:${coin.momentum}%"></span>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Volume Strength</span>
+            <span>${Math.round(coin.volumeScore)}</span>
+          </div>
+          <div class="progress">
+            <span style="width:${coin.volumeScore}%"></span>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Liquidity Health</span>
+            <span>${Math.round(coin.liquidityScore)}</span>
+          </div>
+          <div class="progress">
+            <span style="width:${coin.liquidityScore}%"></span>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-head">
+            <span>Risk Health</span>
+            <span>${Math.round(100-coin.risk)}</span>
+          </div>
+          <div class="progress">
+            <span style="width:${100-coin.risk}%"></span>
+          </div>
+        </div>
+
+        <div class="small muted" style="margin-top:15px">
+          Whale and contract-security data are not
+          claimed unless an on-chain source confirms them.
+        </div>
+
+      </div>
+
+    </div>
+
+    <section class="section">
+
+      <div class="section-title">
+        Price History
+      </div>
+
+      <canvas id="priceChart" class="chart"></canvas>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-title">
+        Verified Token Contracts
+      </div>
+
+      <div class="small muted">
+        Contract addresses are taken from the token side
+        of DEX pairs. Pair addresses are never displayed
+        as token contracts.
+      </div>
+
+      <div id="contracts"></div>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-title">
+        Security Intelligence
+      </div>
+
+      <div class="grid grid-4">
+
+        <div class="card">
+          <div class="card-title">Contract</div>
+          <div class="big">N/A</div>
+          <div class="small muted">
+            On-chain scanner required
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Whales</div>
+          <div class="big">N/A</div>
+          <div class="small muted">
+            Wallet analytics required
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Rug</div>
+          <div class="big">
+            ${
+              coin.risk < 30
+                ? "WATCH"
+                : "N/A"
+            }
+          </div>
+          <div class="small muted">
+            Conservative
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Liquidity</div>
+          <div class="big">
+            ${riskLabel}
+          </div>
+          <div class="small muted">
+            Market-based
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  `;
+
+  renderContracts(contracts);
+  drawChart(coin);
+
+  $("watchBtn").addEventListener(
+    "click",
+    ()=>{
+      toggleWatchlist(coin.id);
+      renderTokenModal(
+        coin,
+        pairs
+      );
+    }
+  );
 }
 
 /* =========================================================
-ALPHA
-========================================================= */
+   CONTRACT ENGINE
+   ========================================================= */
 
-function calculateAlpha(){
+function renderContracts(pairs){
 
-if(!coins.length)
-return;
+  const container =
+    $("contracts");
 
-const ranked=
-coins.map(c=>{
+  if(!container) return;
 
-const vr=
-c.volume/c.marketCap||0;
+  container.innerHTML = "";
 
-const alpha=
-Math.min(
-100,
-Math.round(
-c.score+
-Math.min(20,Math.max(0,c.change))+
-Math.min(15,vr*20)
-)
-);
+  /*
+    Final protection:
+    chain + token address only.
+  */
 
-return {...c,alpha};
+  const map =
+    new Map();
 
-}).sort((a,b)=>b.alpha-a.alpha);
+  pairs.forEach(pair=>{
 
-const c=ranked[0];
+    if(
+      !pair.tokenAddress ||
+      !pair.chainId
+    ){
+      return;
+    }
 
-if(!c)
-return;
+    const key =
+      pair.chainId.toLowerCase() +
+      ":" +
+      pair.tokenAddress.toLowerCase();
 
-$("alphaCoin").textContent=
-c.name+" ("+c.symbol+")";
+    const old =
+      map.get(key);
 
-$("alphaScore").textContent=c.alpha;
-$("alphaBar").style.width=c.alpha+"%";
+    if(
+      !old ||
+      pair.liquidity > old.liquidity
+    ){
+      map.set(key,pair);
+    }
+  });
 
-$("alphaMomentum").textContent=
-(c.change>=0?"+":"")+
-c.change.toFixed(2)+"%";
+  const contracts =
+    [...map.values()];
 
-$("alphaVolume").textContent=
-((c.volume/c.marketCap)*100||0)
-.toFixed(1)+"%";
+  if(!contracts.length){
 
-$("alphaLiquidity").textContent=
-money(c.marketCap);
+    container.innerHTML =
+      `<div class="empty">
+        No verified token contract found from current sources.
+       </div>`;
 
-$("alphaRisk").textContent=
-c.score>=75
-?"Low"
-:c.score>=55
-?"Medium"
-:"High";
+    return;
+  }
 
-$("aiMarket").textContent=
-c.marketCap>100000000
-?"Strong"
-:"Developing";
+  contracts.forEach(pair=>{
 
-$("aiMomentum").textContent=
-c.change>10
-?"Explosive"
-:c.change>3
-?"Positive"
-:"Neutral";
+    const explorer =
+      explorerFor(
+        pair.chain,
+        pair.tokenAddress
+      );
 
-$("aiLiquidity").textContent=
-c.score>=75
-?"Healthy"
-:c.score>=55
-?"Moderate"
-:"Weak";
+    const div =
+      document.createElement("div");
 
-$("aiRisk").textContent=
-c.score>=75
-?"Low"
-:c.score>=55
-?"Medium"
-:"High";
+    div.className =
+      "contract";
 
-$("aiOverall").textContent=
-c.alpha+"/100";
+    div.innerHTML = `
 
+      <div style="min-width:0;flex:1">
+
+        <div class="chain">
+          ${escapeHTML(pair.chain)}
+        </div>
+
+        <div class="address">
+          ${escapeHTML(pair.tokenAddress)}
+        </div>
+
+      </div>
+
+      ${
+        explorer
+          ? `<a
+              href="${escapeHTML(explorer)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Explorer ↗
+             </a>`
+          : ""
+      }
+
+    `;
+
+    container.appendChild(div);
+  });
 }
 
 /* =========================================================
-NEW PAIRS
-========================================================= */
+   PAIR MODAL
+   ========================================================= */
 
-async function loadNewPairs(){
+function openPair(pair){
 
-const box=$("newPairs");
+  $("modalTitle").textContent =
+    pair.name + " · " + pair.symbol;
 
-try{
+  $("modalSubtitle").textContent =
+    pair.chain + " · " + pair.dex;
 
-const queries=[
-"pepe",
-"doge",
-"meme",
-"bonk"
-];
+  const buyTotal =
+    pair.buys + pair.sells;
 
-const all=[];
+  const buyPercent =
+    buyTotal > 0
+      ? Math.round(
+          pair.buys / buyTotal * 100
+        )
+      : null;
 
-for(const q of queries){
+  $("modalContent").innerHTML = `
 
-const r=await fetch(
-API.DEX_SEARCH+
-encodeURIComponent(q)
-);
+    <div class="grid grid-2">
 
-if(!r.ok)
-continue;
+      <div class="card">
 
-const d=await r.json();
+        <div class="card-title">
+          Pair Intelligence
+        </div>
 
-(d.pairs||[])
-.slice(0,4)
-.forEach(p=>{
+        <div class="token-price">
+          ${formatPrice(pair.price)}
+        </div>
 
-if(p.pairCreatedAt)
-all.push(p);
+        <div class="token-metrics">
 
-});
+          <div class="metric">
+            <div class="metric-label">LIQUIDITY</div>
+            <div class="metric-value">
+              ${formatMoney(pair.liquidity)}
+            </div>
+          </div>
 
-}
+          <div class="metric">
+            <div class="metric-label">24H VOLUME</div>
+            <div class="metric-value">
+              ${formatMoney(pair.volume24)}
+            </div>
+          </div>
 
-all.sort(
-(a,b)=>
-Number(b.pairCreatedAt)-
-Number(a.pairCreatedAt)
-);
+          <div class="metric">
+            <div class="metric-label">BUYS</div>
+            <div class="metric-value">
+              ${pair.buys}
+            </div>
+          </div>
 
-const seen=new Set();
-const unique=[];
+          <div class="metric">
+            <div class="metric-label">SELLS</div>
+            <div class="metric-value">
+              ${pair.sells}
+            </div>
+          </div>
 
-all.forEach(p=>{
+        </div>
 
-const key=
-p.chainId+
-":"+
-p.baseToken.address;
+      </div>
 
-if(!seen.has(key)){
+      <div class="card">
 
-seen.add(key);
-unique.push(p);
+        <div class="card-title">
+          Buy / Sell Pressure
+        </div>
 
-}
+        <div class="big">
+          ${
+            buyPercent !== null
+              ? buyPercent + "%"
+              : "N/A"
+          }
+        </div>
 
-});
+        <div class="small muted">
+          ${
+            buyPercent !== null
+              ? "Based on reported 24H transactions."
+              : "Transaction data unavailable."
+          }
+        </div>
 
-const data=unique.slice(0,6);
+        <div class="progress-row">
+          <div class="progress">
+            <span style="width:${
+              buyPercent ?? 0
+            }%"></span>
+          </div>
+        </div>
 
-if(!data.length){
+      </div>
 
-box.innerHTML=
-`<div class="loading">
-No new pair data available.
-</div>`;
+    </div>
 
-return;
+    <section class="section">
 
-}
+      <div class="section-title">
+        Token Contract
+      </div>
 
-box.innerHTML=
-data.map(pairHTML).join("");
+      <div class="contract">
 
-}catch(e){
+        <div style="min-width:0;flex:1">
 
-box.innerHTML=
-`<div class="loading">
-New pair scanner unavailable.
-</div>`;
+          <div class="chain">
+            ${escapeHTML(pair.chain)}
+          </div>
 
-}
+          <div class="address">
+            ${escapeHTML(pair.tokenAddress)}
+          </div>
 
-}
+        </div>
 
-function pairHTML(p){
+        ${
+          explorerFor(
+            pair.chain,
+            pair.tokenAddress
+          )
+          ? `<a
+              href="${escapeHTML(
+                explorerFor(
+                  pair.chain,
+                  pair.tokenAddress
+                )
+              )}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Explorer ↗
+             </a>`
+          : ""
+        }
 
-return `
+      </div>
 
-<div class="pair">
+    </section>
 
-<div class="pair-top">
+    <section class="section">
 
-<strong>
-${escapeHTML(p.baseToken.name)}
-</strong>
+      <div class="section-title">
+        Pair Address
+      </div>
 
-<span class="chain">
-${escapeHTML(p.chainId||"DEX")}
-</span>
+      <div class="small muted">
+        This is the DEX pair address, NOT the token contract.
+      </div>
 
-</div>
+      <div class="contract">
 
-<h4>
-${escapeHTML(p.baseToken.symbol)}
-</h4>
+        <div class="address">
+          ${escapeHTML(pair.pairAddress || "N/A")}
+        </div>
 
-<p>
-${timeAgo(p.pairCreatedAt)}
-•
-${escapeHTML(p.dexId||"DEX")}
-</p>
+        ${
+          pair.url
+            ? `<a
+                href="${escapeHTML(pair.url)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DEX ↗
+               </a>`
+            : ""
+        }
 
-<div class="pair-stats">
+      </div>
 
-<div class="pair-stat">
-<small>Liquidity</small>
-<strong>${money(p.liquidity?.usd)}</strong>
-</div>
-
-<div class="pair-stat">
-<small>24H Volume</small>
-<strong>${money(p.volume?.h24)}</strong>
-</div>
-
-<div class="pair-stat">
-<small>Buys</small>
-<strong>${num(p.txns?.h24?.buys)}</strong>
-</div>
-
-<div class="pair-stat">
-<small>Sells</small>
-<strong>${num(p.txns?.h24?.sells)}</strong>
-</div>
-
-</div>
-
-<div class="token-buttons">
-
-<button
-class="small-btn"
-onclick="window.open('${escapeAttr(p.url||"#")}','_blank')">
-Open
-</button>
-
-<button
-class="small-btn"
-onclick='analyzePair(${JSON.stringify(p).replaceAll("'","&#39;")})'>
-Analyze
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-function analyzePair(p){
-
-if(typeof p==="string"){
-
-try{
-p=JSON.parse(p);
-}catch(e){
-return;
-}
-
-}
-
-const c={
-
-id:"dex-"+p.baseToken.address,
-name:p.baseToken.name,
-symbol:p.baseToken.symbol,
-image:p.info?.imageUrl||"",
-price:Number(p.priceUsd)||0,
-change:Number(p.priceChange?.h24)||0,
-marketCap:Number(p.marketCap)||Number(p.fdv)||0,
-volume:Number(p.volume?.h24)||0,
-liquidity:Number(p.liquidity?.usd)||0,
-fdv:Number(p.fdv)||0,
-buys:Number(p.txns?.h24?.buys)||0,
-sells:Number(p.txns?.h24?.sells)||0,
-pairCreatedAt:p.pairCreatedAt,
-address:p.baseToken.address,
-chain:p.chainId,
-dexUrl:p.url,
-score:dexScore(p)
-};
-
-openModal(c);
-
+    </section>
+  `;
 }
 
 /* =========================================================
-DEX OPEN
-========================================================= */
+   CHART
+   ========================================================= */
 
-function openDex(){
+function drawChart(coin){
 
-if(!activeCoin)
-return;
+  const canvas =
+    $("priceChart");
 
-if(activeCoin.dexUrl){
+  if(!canvas) return;
 
-window.open(
-activeCoin.dexUrl,
-"_blank"
-);
+  const ctx =
+    canvas.getContext("2d");
 
-return;
+  const rect =
+    canvas.getBoundingClientRect();
 
-}
+  const dpr =
+    window.devicePixelRatio || 1;
 
-if(activeCoin.address){
+  canvas.width =
+    rect.width * dpr;
 
-window.open(
-"https://dexscreener.com/search?q="+
-encodeURIComponent(activeCoin.address),
-"_blank"
-);
+  canvas.height =
+    rect.height * dpr;
 
-return;
+  ctx.scale(dpr,dpr);
 
-}
+  const width =
+    rect.width;
 
-searchDex(activeCoin.symbol);
+  const height =
+    rect.height;
 
+  const points =
+    Array.isArray(coin.spark)
+      ? coin.spark.filter(Number.isFinite)
+      : [];
+
+  if(points.length < 2){
+
+    ctx.fillStyle =
+      getComputedStyle(
+        document.documentElement
+      ).getPropertyValue("--muted");
+
+    ctx.font = "12px system-ui";
+
+    ctx.fillText(
+      "Chart data unavailable",
+      20,
+      30
+    );
+
+    return;
+  }
+
+  const values =
+    points.slice(-120);
+
+  const min =
+    Math.min(...values);
+
+  const max =
+    Math.max(...values);
+
+  const range =
+    max-min || 1;
+
+  const styles =
+    getComputedStyle(
+      document.documentElement
+    );
+
+  const line =
+    styles.getPropertyValue(
+      "--accent"
+    );
+
+  ctx.strokeStyle =
+    line;
+
+  ctx.lineWidth = 2;
+
+  ctx.beginPath();
+
+  values.forEach((value,i)=>{
+
+    const x =
+      i/(values.length-1) *
+      (width-30) + 15;
+
+    const y =
+      height -
+      (
+        (value-min)/range *
+        (height-30)
+      ) - 15;
+
+    if(i === 0){
+      ctx.moveTo(x,y);
+    }else{
+      ctx.lineTo(x,y);
+    }
+  });
+
+  ctx.stroke();
 }
 
 /* =========================================================
-WATCHLIST
-========================================================= */
+   WATCHLIST
+   ========================================================= */
 
 function getWatchlist(){
 
-return JSON.parse(
-localStorage.getItem("memqi_watchlist")||"[]"
-);
-
+  return safeJSONParse(
+    "memqi_watchlist",
+    []
+  );
 }
 
-function toggleWatchlist(){
+function toggleWatchlist(id){
 
-if(!activeCoin)
-return;
+  const list =
+    getWatchlist();
 
-let list=getWatchlist();
+  const index =
+    list.indexOf(id);
 
-if(list.includes(activeCoin.symbol)){
+  if(index >= 0){
 
-list=list.filter(
-x=>x!==activeCoin.symbol
-);
+    list.splice(index,1);
 
-toast("Removed from watchlist.");
+    toast("Removed from watchlist.");
 
-}else{
+  }else{
 
-list.push(activeCoin.symbol);
+    list.push(id);
 
-toast("Added to watchlist.");
+    toast("Added to watchlist.");
+  }
 
-}
-
-localStorage.setItem(
-"memqi_watchlist",
-JSON.stringify(list)
-);
-
+  setJSON(
+    "memqi_watchlist",
+    list
+  );
 }
 
 /* =========================================================
-PORTFOLIO
-========================================================= */
+   PORTFOLIO
+   ========================================================= */
 
 function getPortfolio(){
 
-return JSON.parse(
-localStorage.getItem("memqi_portfolio")||"[]"
-);
-
+  return safeJSONParse(
+    "memqi_portfolio",
+    []
+  );
 }
 
-function addPortfolio(){
+function renderPortfolio(){
 
-const symbol=$("portfolioSymbol")
-.value.trim().toUpperCase();
+  const body =
+    $("portfolioBody");
 
-const amount=Number(
-$("portfolioAmount").value
-);
+  const positions =
+    getPortfolio();
 
-const cost=Number(
-$("portfolioCost").value
-);
+  body.innerHTML = "";
 
-if(!symbol||!amount){
+  if(!positions.length){
 
-toast("Enter symbol and amount.");
-return;
+    body.innerHTML =
+      `<tr>
+        <td colspan="6">
+          <div class="empty">
+            No portfolio positions yet.
+          </div>
+        </td>
+       </tr>`;
 
-}
+    return;
+  }
 
-const list=getPortfolio();
+  positions.forEach((position,index)=>{
 
-list.push({
-symbol,
-amount,
-cost
-});
+    const coin =
+      state.coins.find(
+        c=>c.id === position.id
+      );
 
-localStorage.setItem(
-"memqi_portfolio",
-JSON.stringify(list)
-);
+    const current =
+      coin
+        ? coin.price
+        : 0;
 
-$("portfolioSymbol").value="";
-$("portfolioAmount").value="";
-$("portfolioCost").value="";
+    const invested =
+      safeNumber(position.amount) *
+      safeNumber(position.entry);
 
-populatePortfolio();
+    const value =
+      safeNumber(position.amount) *
+      current;
 
-}
+    const pnl =
+      value-invested;
 
-function populatePortfolio(){
+    const tr =
+      document.createElement("tr");
 
-const list=getPortfolio();
+    tr.innerHTML = `
 
-let total=0;
-let cost=0;
+      <td>
+        ${escapeHTML(
+          coin?.symbol ||
+          position.symbol ||
+          position.id
+        )}
+      </td>
 
-const html=list.map((p,i)=>{
+      <td>
+        ${safeNumber(position.amount)}
+      </td>
 
-const c=
-coins.find(x=>x.symbol===p.symbol);
+      <td>
+        ${formatPrice(position.entry)}
+      </td>
 
-const value=c
-?c.price*p.amount
-:0;
+      <td>
+        ${
+          coin
+            ? formatPrice(current)
+            : "N/A"
+        }
+      </td>
 
-total+=value;
-cost+=p.cost||0;
+      <td class="${
+        pnl >= 0 ? "up":"down"
+      }">
+        ${
+          coin
+            ? formatMoney(pnl)
+            : "N/A"
+        }
+      </td>
 
-return `
+      <td>
+        <button
+          class="filter delete-position"
+          data-index="${index}"
+        >
+          Delete
+        </button>
+      </td>
+    `;
 
-<div class="alert-item">
+    body.appendChild(tr);
+  });
 
-<div>
-<strong>${p.symbol}</strong>
-<small>
-${num(p.amount)}
-tokens • ${money(value)}
-</small>
-</div>
+  body
+    .querySelectorAll(".delete-position")
+    .forEach(btn=>{
 
-<button
-class="delete"
-onclick="removePortfolio(${i})">
-×
-</button>
+      btn.addEventListener(
+        "click",
+        ()=>{
+          const positions =
+            getPortfolio();
 
-</div>
+          positions.splice(
+            Number(btn.dataset.index),
+            1
+          );
 
-`;
+          setJSON(
+            "memqi_portfolio",
+            positions
+          );
 
-}).join("");
+          renderPortfolio();
+        }
+      );
 
-$("portfolioValue").textContent=
-money(total);
-
-const profit=total-cost;
-
-$("portfolioProfit").textContent=
-"P/L: "+money(profit);
-
-$("portfolioProfit").className=
-"profit "+(profit>=0?"green":"red");
-
-$("portfolioList").innerHTML=
-html||
-`<div style="font-size:10px;color:var(--muted)">
-No positions yet.
-</div>`;
-
-}
-
-function removePortfolio(i){
-
-const list=getPortfolio();
-
-list.splice(i,1);
-
-localStorage.setItem(
-"memqi_portfolio",
-JSON.stringify(list)
-);
-
-populatePortfolio();
-
+    });
 }
 
 /* =========================================================
-ALERTS
-========================================================= */
+   ALERTS
+   ========================================================= */
 
 function getAlerts(){
 
-return JSON.parse(
-localStorage.getItem("memqi_alerts")||"[]"
-);
-
-}
-
-function addAlert(){
-
-const symbol=$("alertSymbol")
-.value.trim().toUpperCase();
-
-const direction=$("alertDirection").value;
-
-const target=Number(
-$("alertPrice").value
-);
-
-if(!symbol||!target){
-
-toast("Complete alert fields.");
-return;
-
-}
-
-const list=getAlerts();
-
-list.push({
-id:Date.now(),
-symbol,
-direction,
-target,
-triggered:false
-});
-
-localStorage.setItem(
-"memqi_alerts",
-JSON.stringify(list)
-);
-
-$("alertSymbol").value="";
-$("alertPrice").value="";
-
-renderAlerts();
-
-if("Notification" in window&&
-Notification.permission==="default"){
-
-Notification.requestPermission();
-
-}
-
+  return safeJSONParse(
+    "memqi_alerts",
+    []
+  );
 }
 
 function renderAlerts(){
 
-const list=getAlerts();
+  const container =
+    $("alertsList");
 
-$("alertList").innerHTML=
-list.length
-?list.map((a,i)=>`
+  const alerts =
+    getAlerts();
 
-<div class="alert-item">
+  container.innerHTML = "";
 
-<div>
+  if(!alerts.length){
 
-<strong>
-${a.symbol}
-${a.direction==="above"?"↑":"↓"}
-${a.target}
-</strong>
+    container.innerHTML =
+      `<div class="empty">
+        No smart alerts configured.
+       </div>`;
 
-<small>
-${a.triggered?"Triggered":"Active"}
-</small>
+    return;
+  }
 
-</div>
+  alerts.forEach((alert,index)=>{
 
-<button
-class="delete"
-onclick="deleteAlert(${i})">
-×
-</button>
+    const coin =
+      state.coins.find(
+        c=>c.id === alert.id
+      );
 
-</div>
+    const el =
+      document.createElement("div");
 
-`).join("")
-:`<div style="font-size:10px;color:var(--muted)">
-No active alerts.
-</div>`;
+    el.className =
+      "contract";
 
-}
+    el.innerHTML = `
 
-function deleteAlert(i){
+      <div>
 
-const list=getAlerts();
+        <div class="chain">
+          ${escapeHTML(
+            coin?.symbol ||
+            alert.symbol ||
+            alert.id
+          )}
+        </div>
 
-list.splice(i,1);
+        <div class="small muted">
+          Target:
+          ${formatPrice(alert.target)}
+        </div>
 
-localStorage.setItem(
-"memqi_alerts",
-JSON.stringify(list)
-);
+      </div>
 
-renderAlerts();
+      <button
+        class="filter"
+        data-index="${index}"
+      >
+        Delete
+      </button>
 
+    `;
+
+    el
+      .querySelector("button")
+      .addEventListener(
+        "click",
+        ()=>{
+          const alerts =
+            getAlerts();
+
+          alerts.splice(index,1);
+
+          setJSON(
+            "memqi_alerts",
+            alerts
+          );
+
+          renderAlerts();
+        }
+      );
+
+    container.appendChild(el);
+  });
 }
 
 function checkAlerts(){
 
-const list=getAlerts();
+  const alerts =
+    getAlerts();
 
-let changed=false;
+  if(!alerts.length) return;
 
-list.forEach(a=>{
+  let changed = false;
 
-if(a.triggered)
-return;
+  alerts.forEach(alert=>{
 
-const c=coins.find(
-x=>x.symbol===a.symbol
-);
+    const coin =
+      state.coins.find(
+        c=>c.id === alert.id
+      );
 
-if(!c)
-return;
+    if(!coin) return;
 
-const hit=
-a.direction==="above"
-?c.price>=a.target
-:c.price<=a.target;
+    const target =
+      safeNumber(alert.target);
 
-if(hit){
+    const direction =
+      alert.direction || "above";
 
-a.triggered=true;
-changed=true;
+    const hit =
+      direction === "above"
+        ? coin.price >= target
+        : coin.price <= target;
 
-const msg=
-`${c.symbol} reached ${money(c.price)}`;
+    if(hit){
 
-toast("🔔 "+msg);
+      toast(
+        coin.symbol +
+        " alert triggered."
+      );
 
-if(
-"Notification" in window&&
-Notification.permission==="granted"
-){
+      changed = true;
+    }
+  });
 
-new Notification(
-"MEMQI Price Alert",
-{
-body:msg
-}
-);
+  if(changed){
 
-}
-
-}
-
-});
-
-if(changed){
-
-localStorage.setItem(
-"memqi_alerts",
-JSON.stringify(list)
-);
-
-renderAlerts();
-
-}
-
+    /*
+      We deliberately do NOT delete alerts
+      automatically. User can inspect them.
+    */
+  }
 }
 
 /* =========================================================
-NAV
-========================================================= */
+   THEME
+   ========================================================= */
 
-function scrollToSection(id,btn){
+function applyTheme(){
 
-$(id)?.scrollIntoView({
-behavior:"smooth"
-});
+  document.documentElement
+    .setAttribute(
+      "data-theme",
+      state.theme
+    );
 
-document.querySelectorAll(
-".bottom-nav button"
-).forEach(b=>
-b.classList.remove("active")
-);
+  $("themeBtn").textContent =
+    state.theme === "dark"
+      ? "☀️"
+      : "🌙";
 
-btn.classList.add("active");
-
-}
-
-function scrollToTop(btn){
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-document.querySelectorAll(
-".bottom-nav button"
-).forEach(b=>
-b.classList.remove("active")
-);
-
-btn.classList.add("active");
-
+  localStorage.setItem(
+    "memqi_theme",
+    state.theme
+  );
 }
 
 /* =========================================================
-MODAL
-========================================================= */
-
-function closeModal(){
-
-$("tokenModal")
-.classList.remove("show");
-
-activeCoin=null;
-
-}
-
-$("tokenModal").addEventListener(
-"click",
-e=>{
-if(e.target.id==="tokenModal")
-closeModal();
-}
-);
-
-/* =========================================================
-REFRESH
-========================================================= */
+   REFRESH
+   ========================================================= */
 
 async function refreshAll(){
 
-toast(
-language==="fa"
-?"در حال به‌روزرسانی..."
-:"Refreshing MEMQI..."
-);
+  if(state.busy){
 
-await fetchCryptoData();
-await loadNewPairs();
+    toast("MEMQI is already updating.");
+    return;
+  }
 
-toast(
-language==="fa"
-?"به‌روزرسانی انجام شد"
-:"MEMQI updated"
-);
+  state.busy = true;
 
+  setStatus(
+    "dataStatus",
+    "warn",
+    "Updating..."
+  );
+
+  try{
+
+    const marketOK =
+      await loadMarket();
+
+    await Promise.all([
+      loadGlobal(),
+      loadFearGreed()
+    ]);
+
+    if(marketOK){
+
+      updateRadar();
+      updateAlpha();
+      renderMarket();
+      renderOpportunity();
+      renderPortfolio();
+      renderAlerts();
+      checkAlerts();
+    }
+
+    state.lastUpdate =
+      Date.now();
+
+    setStatus(
+      "dataStatus",
+      "ok",
+      "Updated " +
+      timeAgo(state.lastUpdate)
+    );
+
+  }catch(error){
+
+    console.error(
+      "MEMQI refresh:",
+      error
+    );
+
+    setStatus(
+      "dataStatus",
+      "bad",
+      "Update Failed"
+    );
+
+  }finally{
+
+    state.busy = false;
+  }
 }
 
 /* =========================================================
-INIT
-========================================================= */
+   EVENTS
+   ========================================================= */
 
-applyLanguage();
+$("themeBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+      state.theme =
+        state.theme === "dark"
+          ? "light"
+          : "dark";
 
-renderAlerts();
+      applyTheme();
+    }
+  );
 
-populatePortfolio();
+$("refreshBtn")
+  .addEventListener(
+    "click",
+    async ()=>{
+      await refreshAll();
+      await loadPairs();
+    }
+  );
 
-fetchCryptoData();
+$("scanBtn")
+  .addEventListener(
+    "click",
+    runSearch
+  );
 
-loadNewPairs();
+$("searchInput")
+  .addEventListener(
+    "keydown",
+    event=>{
+      if(event.key === "Enter"){
+        runSearch();
+      }
+    }
+  );
+
+$("modalClose")
+  .addEventListener(
+    "click",
+    ()=>{
+      $("modal")
+        .classList
+        .remove("show");
+    }
+  );
+
+$("modal")
+  .addEventListener(
+    "click",
+    event=>{
+      if(event.target === $("modal")){
+        $("modal")
+          .classList
+          .remove("show");
+      }
+    }
+  );
+
+document.addEventListener(
+  "keydown",
+  event=>{
+    if(
+      event.key === "Escape"
+    ){
+      $("modal")
+        .classList
+        .remove("show");
+    }
+  }
+);
+
+$("filters")
+  .addEventListener(
+    "click",
+    event=>{
+
+      const btn =
+        event.target.closest(
+          ".filter"
+        );
+
+      if(!btn) return;
+
+      const filter =
+        btn.dataset.filter;
+
+      if(!filter) return;
+
+      state.filter =
+        filter;
+
+      document
+        .querySelectorAll(
+          "#filters .filter"
+        )
+        .forEach(
+          x=>x.classList.remove("active")
+        );
+
+      btn.classList.add("active");
+
+      renderMarket();
+    }
+  );
+
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+        const target =
+          document.getElementById(
+            btn.dataset.target
+          );
+
+        if(target){
+          target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+        }
+      }
+    );
+
+  });
+
+/* =========================================================
+   AUTO REFRESH
+   ========================================================= */
 
 setInterval(
-fetchCryptoData,
-30000
+  refreshAll,
+  CONFIG.MARKET_REFRESH
 );
 
 setInterval(
-loadNewPairs,
-120000
+  loadPairs,
+  CONFIG.PAIR_REFRESH
 );
 
-window.addEventListener(
-"resize",
-()=>{
-if(activeCoin)
-drawChart(
-activeCoin.sparkline?.length
-?activeCoin.sparkline
-:generateChart(activeCoin),
-activeCoin.change
+setInterval(
+  ()=>{
+    if(state.lastUpdate){
+
+      setStatus(
+        "dataStatus",
+        "ok",
+        "Updated " +
+        timeAgo(state.lastUpdate)
+      );
+    }
+  },
+  1000
 );
-}
-);
 
-/*
-=========================================================
-IMPORTANT ARCHITECTURE NOTES
+/* =========================================================
+   START
+   ========================================================= */
 
-1. Multi-chain contract addresses:
-   CoinGecko platforms + DEXScreener pairs are merged.
+applyTheme();
 
-2. Supported network mappings currently include:
-   Ethereum
-   BNB Chain
-   Base
-   Arbitrum
-   Polygon
-   Avalanche
-   Optimism
-   Solana
-   TRON
-   Sui
-   TON
-   Aptos
-
-3. Unknown/new chains are NOT discarded.
-   They are displayed using their returned chain identifier.
-
-4. Native assets do not have smart-contract addresses.
-
-5. True whale wallet tracking, top holders, creator wallet,
-   liquidity-lock verification and bytecode-level contract
-   analysis require dedicated on-chain providers/RPC.
-
-6. This frontend deliberately does not fabricate those results.
-
-7. CoinMarketCap API keys must NOT be embedded in GitHub Pages.
-   Use a backend proxy for CMC.
-
-=========================================================
-*/
+refreshAll();
+loadPairs();
 
 </script>
 
